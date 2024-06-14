@@ -2,48 +2,51 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel = PromotionsViewModel()
-
+    
     var body: some View {
         VStack {
-            // Barra de Navegación de Días
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(viewModel.days) { day in
-                        Text(day.day)
-                            .fontWeight(viewModel.selectedDayIndex == viewModel.days.firstIndex(where: { $0.id == day.id }) ? .bold : .regular)
-                            .onTapGesture {
-                                viewModel.selectedDayIndex = viewModel.days.firstIndex(where: { $0.id == day.id }) ?? 0
-                            }
-                            .frame(maxWidth: .infinity)
+                        VStack {
+                            Text(day.formattedDate) // Utiliza la función formattedDate
+                                .fontWeight(viewModel.selectedDayIndex == viewModel.days.firstIndex(where: { $0.id == day.id }) ? .bold : .regular)
+                        }
+                        .onTapGesture {
+                            viewModel.selectedDayIndex = viewModel.days.firstIndex(where: { $0.id == day.id }) ?? 0
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
                     }
                 }
-                .padding()
                 .background(Color.gray.opacity(0.2))
             }
-
-            // Promociones del Día
-            TabView(selection: $viewModel.selectedDayIndex) {
-                ForEach(viewModel.days) { day in
-                    VStack {
-                        Text("Promociones para \(day.day)")
-                            .font(.title)
-                            .padding()
-                        
-                        List(day.promotions) { promotion in
-                            VStack(alignment: .leading) {
-                                Text(promotion.title)
-                                    .font(.headline)
-                                Text(promotion.description)
-                                    .font(.subheadline)
-                                Text("Válido hasta: \(promotion.validUntil)")
-                                    .font(.caption)
+            
+            // Promociones por Categoría
+            if viewModel.days.indices.contains(viewModel.selectedDayIndex) {
+                TabView {
+                    ForEach(viewModel.days[viewModel.selectedDayIndex].categories) { category in
+                        VStack {
+                            Text("\(category.category) Promotions")
+                                .font(.title)
+                                .padding()
+                            
+                            List(category.promotions) { promotion in
+                                VStack(alignment: .leading) {
+                                    Text(promotion.title)
+                                        .font(.headline)
+                                    Text(promotion.description)
+                                        .font(.subheadline)
+                                    Text("Válido hasta: \(promotion.validUntil)")
+                                        .font(.caption)
+                                }
                             }
                         }
+                        .tag(viewModel.days.firstIndex(where: { $0.id == category.id }) ?? 0)
                     }
-                    .tag(viewModel.days.firstIndex(where: { $0.id == day.id }) ?? 0)
                 }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
     }
 }

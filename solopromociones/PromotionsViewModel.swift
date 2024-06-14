@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 class PromotionsViewModel: ObservableObject {
-    @Published var days: [DayPromotions] = []
+    @Published var days: [DayPromotion] = []
     @Published var selectedDayIndex = 0
 
     init() {
@@ -18,7 +18,7 @@ class PromotionsViewModel: ObservableObject {
         }
 
         let decoder = JSONDecoder()
-        if let jsonData = try? decoder.decode([DayPromotions].self, from: data) {
+        if let jsonData = try? decoder.decode([DayPromotion].self, from: data) {
             self.days = jsonData
         }
     }
