@@ -1,0 +1,121 @@
+[
+    {
+        "day": "Lunes",
+        "promotions": [
+            {
+                "id": "1",
+                "title": "2x1 en Cocteles",
+                "description": "Disfruta de 2 cocteles por el precio de 1 en nuestro bar.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "2",
+                "title": "Descuento en Hamburguesas",
+                "description": "20% de descuento en todas las hamburguesas.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    },
+    {
+        "day": "Martes",
+        "promotions": [
+            {
+                "id": "3",
+                "title": "Promoción en Gimnasio",
+                "description": "Mitad de precio en membresías mensuales.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "4",
+                "title": "Oferta en Calzado",
+                "description": "30% de descuento en calzado para hombres.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    },
+    {
+        "day": "Miércoles",
+        "promotions": [
+            {
+                "id": "5",
+                "title": "Descuento en Spa",
+                "description": "40% de descuento en todos los tratamientos de spa.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "6",
+                "title": "Oferta en Librería",
+                "description": "Compra dos libros y obtén el tercero gratis.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    },
+    {
+        "day": "Jueves",
+        "promotions": [
+            {
+                "id": "7",
+                "title": "Noche de Sushi",
+                "description": "Todas las órdenes de sushi con un 25% de descuento.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "8",
+                "title": "Rebajas de Ropa",
+                "description": "Hasta un 50% de descuento en ropa seleccionada.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    },
+    {
+        "day": "Viernes",
+        "promotions": [
+            {
+                "id": "9",
+                "title": "Happy Hour Extendido",
+                "description": "Disfruta de nuestro happy hour extendido hasta las 9 PM.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "10",
+                "title": "Ofertas en Electrónica",
+                "description": "Grandes descuentos en artículos seleccionados de electrónica.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    },
+    {
+        "day": "Sábado",
+        "promotions": [
+            {
+                "id": "11",
+                "title": "Promo en Cervezas Artesanales",
+                "description": "Compra una y llévate la segunda al 50%.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "12",
+                "title": "Descuento en Joyería",
+                "description": "20% de descuento en todas las joyas.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    },
+    {
+        "day": "Domingo",
+        "promotions": [
+            {
+                "id": "13",
+                "title": "Brunch Especial",
+                "description": "Brunch con un 20% de descuento de 10 AM a 2 PM.",
+                "validUntil": "30/06/2024"
+            },
+            {
+                "id": "14",
+                "title": "Oferta en Muebles",
+                "description": "Descuentos de hasta el 40% en muebles seleccionados.",
+                "validUntil": "30/06/2024"
+            }
+        ]
+    }
+]

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */; };
+		79369D8D2C1A3DC200B7B7A6 /* promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 79369D8C2C1A3DC200B7B7A6 /* promotions.json */; };
+		79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */; };
+		79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */; };
 		795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97522C18E4C80097C7FC /* solopromocionesApp.swift */; };
 		795F97552C18E4C80097C7FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97542C18E4C80097C7FC /* ContentView.swift */; };
 		795F97572C18E4CA0097C7FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 795F97562C18E4CA0097C7FC /* Assets.xcassets */; };
@@ -36,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
+		79369D8C2C1A3DC200B7B7A6 /* promotions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = promotions.json; sourceTree = "<group>"; };
+		79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewModel.swift; sourceTree = "<group>"; };
 		795F974F2C18E4C80097C7FC /* solopromociones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solopromociones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795F97522C18E4C80097C7FC /* solopromocionesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solopromocionesApp.swift; sourceTree = "<group>"; };
 		795F97542C18E4C80097C7FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79369D892C1A3DA300B7B7A6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */,
+				79369D8C2C1A3DC200B7B7A6 /* promotions.json */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		795F97462C18E4C80097C7FC = {
 			isa = PBXGroup;
 			children = (
@@ -98,12 +115,14 @@
 		795F97512C18E4C80097C7FC /* solopromociones */ = {
 			isa = PBXGroup;
 			children = (
+				79369D892C1A3DA300B7B7A6 /* Model */,
 				795F97522C18E4C80097C7FC /* solopromocionesApp.swift */,
 				795F97542C18E4C80097C7FC /* ContentView.swift */,
 				795F97562C18E4CA0097C7FC /* Assets.xcassets */,
 				795F975B2C18E4CA0097C7FC /* Persistence.swift */,
 				795F975D2C18E4CA0097C7FC /* solopromociones.xcdatamodeld */,
 				795F97582C18E4CA0097C7FC /* Preview Content */,
+				79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */,
 			);
 			path = solopromociones;
 			sourceTree = "<group>";
@@ -149,6 +168,9 @@
 			dependencies = (
 			);
 			name = solopromociones;
+			packageProductDependencies = (
+				79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */,
+			);
 			productName = solopromociones;
 			productReference = 795F974F2C18E4C80097C7FC /* solopromociones.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +243,9 @@
 				Base,
 			);
 			mainGroup = 795F97462C18E4C80097C7FC;
+			packageReferences = (
+				79369D922C1A3E7F00B7B7A6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 795F97502C18E4C80097C7FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -239,6 +264,7 @@
 			files = (
 				795F975A2C18E4CA0097C7FC /* Preview Assets.xcassets in Resources */,
 				795F97572C18E4CA0097C7FC /* Assets.xcassets in Resources */,
+				79369D8D2C1A3DC200B7B7A6 /* promotions.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +291,8 @@
 			files = (
 				795F975C2C18E4CA0097C7FC /* Persistence.swift in Sources */,
 				795F97552C18E4C80097C7FC /* ContentView.swift in Sources */,
+				79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */,
+				79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */,
 				795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */,
 				795F975F2C18E4CA0097C7FC /* solopromociones.xcdatamodeld in Sources */,
 			);
@@ -591,6 +619,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		79369D922C1A3E7F00B7B7A6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79369D922C1A3E7F00B7B7A6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		795F975D2C18E4CA0097C7FC /* solopromociones.xcdatamodeld */ = {
