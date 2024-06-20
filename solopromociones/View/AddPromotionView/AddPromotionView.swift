@@ -2,6 +2,10 @@ import SwiftUI
 import PhotosUI
 import CachedAsyncImage
 
+import SwiftUI
+import PhotosUI
+import CachedAsyncImage
+
 struct AddPromotionView: View {
     @ObservedObject var viewModel: ProfileViewModel
     @State private var title = ""
@@ -13,131 +17,190 @@ struct AddPromotionView: View {
     @State private var showImagePicker = false
     @State private var selectedImage: UIImage? = nil
     @State private var showSelectLayoutView = false
+    @State private var startDate = Date()
+    @State private var endDate = Date()
     
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Nueva Promoción")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Título")
-                            .font(.headline)
-                        TextField("Título", text: $title)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(8)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Descripción")
-                            .font(.headline)
-                        TextEditor(text: $description)
-                            .frame(height: 100)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(8)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Válido hasta")
-                            .font(.headline)
-                        TextField("Válido hasta", text: $validUntil)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(8)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Condiciones")
-                            .font(.headline)
-                        TextEditor(text: $conditions)
-                            .frame(height: 100)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(8)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Imagen")
-                            .font(.headline)
-                        if let selectedImage = selectedImage {
-                            Image(uiImage: selectedImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(height: 200)
-                                .clipped()
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    showImagePicker.toggle()
-                                }
-                        } else {
-                            Button(action: {
-                                showImagePicker.toggle()
-                            }) {
-                                HStack {
-                                    Image(systemName: "photo.on.rectangle.angled")
-                                    Text("Subir Imagen")
-                                }
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                            }
-                        }
-                        
-                        Text("o")
-                            .font(.headline)
-                            .padding(.vertical, 10)
-                        
-                        TextField("URL de la imagen", text: $imageURL)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(8)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Recurrencia")
-                            .font(.headline)
-                        Picker("Recurrencia", selection: $recurrence) {
-                            ForEach(RecurrenceType.allCases) { recurrence in
-                                Text(recurrence.description).tag(recurrence)
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding()
-                    }
-                    
-                    Button(action: {
-                        showSelectLayoutView = true
-                    }) {
-                        Text("Siguiente")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(8)
-                    }
-                    .padding(.vertical)
-                    .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(image: $selectedImage)
-                    }
-                    .background(
-                        NavigationLink(destination: SelectLayoutView(viewModel: viewModel, title: $title, description: $description, validUntil: $validUntil, imageURL: $imageURL, conditions: $conditions, recurrence: $recurrence, selectedImage: $selectedImage, showSelectLayoutView: $showSelectLayoutView), isActive: $showSelectLayoutView) {
-                            EmptyView()
-                        }
-                    )
+                VStack(alignment: .leading, spacing: 24) {
+                    headerSection
+                    titleSection
+                    descriptionSection
+                    datesSection
+                    conditionsSection
+                    imageSection
+                    recurrenceSection
+                    nextButton
                 }
                 .padding()
             }
-            .background(Color(.systemGroupedBackground))
+            .background(Color(.systemGroupedBackground).edgesIgnoringSafeArea(.all))
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: cancelButton)
+        }
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(image: $selectedImage)
+        }
+        .background(navigationLink)
+    }
+    
+    private var headerSection: some View {
+        Text("Nueva Promoción")
+            .font(.system(size: 28, weight: .bold))
+            .padding(.top)
+    }
+    
+    private var titleSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Título")
+                .font(.headline)
+            TextField("Ej: 2x1 en Pizzas", text: $title)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+    }
+    
+    private var descriptionSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Descripción")
+                .font(.headline)
+            TextEditor(text: $description)
+                .frame(height: 100)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.secondary.opacity(0.2), lineWidth: 1))
+        }
+    }
+    
+    private var datesSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            datePickerView(title: "Fecha de inicio", selection: $startDate)
+            datePickerView(title: "Fecha de fin", selection: $endDate)
+        }
+    }
+    
+    private func datePickerView(title: String, selection: Binding<Date>) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.headline)
+            DatePicker(title, selection: selection, displayedComponents: .date)
+                .datePickerStyle(CompactDatePickerStyle())
+                .padding(8)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(8)
+        }
+    }
+    
+    private var conditionsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Condiciones")
+                .font(.headline)
+            TextEditor(text: $conditions)
+                .frame(height: 100)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.secondary.opacity(0.2), lineWidth: 1))
+        }
+    }
+    
+    private var imageSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Imagen")
+                .font(.headline)
+            
+            if let selectedImage = selectedImage {
+                Image(uiImage: selectedImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 200)
+                    .clipped()
+                    .cornerRadius(10)
+                    .overlay(
+                        Button(action: { showImagePicker.toggle() }) {
+                            Image(systemName: "pencil.circle.fill")
+                                .foregroundColor(.white)
+                                .padding(8)
+                                .background(Color.black.opacity(0.6))
+                                .clipShape(Circle())
+                        }
+                        .padding(8),
+                        alignment: .topTrailing
+                    )
+            } else {
+                Button(action: { showImagePicker.toggle() }) {
+                    VStack {
+                        Image(systemName: "photo.on.rectangle.angled")
+                            .font(.largeTitle)
+                        Text("Subir Imagen")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 150)
+                    .foregroundColor(.blue)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.blue, style: StrokeStyle(lineWidth: 2, dash: [5]))
+                    )
+                }
+            }
+            
+            Text("o")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .frame(maxWidth: .infinity, alignment: .center)
+            
+            TextField("URL de la imagen", text: $imageURL)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+    }
+    
+    private var recurrenceSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Recurrencia")
+                .font(.headline)
+            Picker("Recurrencia", selection: $recurrence) {
+                ForEach(RecurrenceType.allCases) { recurrence in
+                    Text(recurrence.description).tag(recurrence)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+        }
+    }
+    
+    private var nextButton: some View {
+        Button(action: { showSelectLayoutView = true }) {
+            Text("Siguiente")
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(10)
+        }
+        .padding(.top)
+    }
+    
+    private var cancelButton: some View {
+        Button("Cancelar") {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    private var navigationLink: some View {
+        NavigationLink(
+            destination: SelectLayoutView(
+                viewModel: viewModel,
+                title: $title,
+                description: $description,
+                validUntil: $validUntil,
+                imageURL: $imageURL,
+                conditions: $conditions,
+                recurrence: $recurrence,
+                selectedImage: $selectedImage,
+                showSelectLayoutView: $showSelectLayoutView,
+                startDate: $startDate,
+                endDate: $endDate
+            ),
+            isActive: $showSelectLayoutView
+        ) {
+            EmptyView()
         }
     }
 }

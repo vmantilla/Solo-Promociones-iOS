@@ -44,6 +44,8 @@
 		793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0882C24B2B2009F6516 /* ImagePicker.swift */; };
 		793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08A2C24B32B009F6516 /* PreviewCell.swift */; };
 		793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */; };
+		793FC08F2C24B930009F6516 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08E2C24B930009F6516 /* ConfirmationView.swift */; };
+		793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */; };
 		795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97522C18E4C80097C7FC /* solopromocionesApp.swift */; };
 		795F97552C18E4C80097C7FC /* DailyPromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97542C18E4C80097C7FC /* DailyPromotionsView.swift */; };
 		795F97572C18E4CA0097C7FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 795F97562C18E4CA0097C7FC /* Assets.xcassets */; };
@@ -108,6 +110,8 @@
 		793FC0882C24B2B2009F6516 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		793FC08A2C24B32B009F6516 /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLayoutView.swift; sourceTree = "<group>"; };
+		793FC08E2C24B930009F6516 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		795F974F2C18E4C80097C7FC /* solopromociones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solopromociones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795F97522C18E4C80097C7FC /* solopromocionesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solopromocionesApp.swift; sourceTree = "<group>"; };
 		795F97542C18E4C80097C7FC /* DailyPromotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPromotionsView.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */,
 				793FC06F2C248CFC009F6516 /* ProfileViewModel.swift */,
 				793FC0832C2494AF009F6516 /* PromotionDetailViewModel.swift */,
+				793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 			children = (
 				793FC0742C248D63009F6516 /* AddPromotionView.swift */,
 				793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */,
+				793FC08E2C24B930009F6516 /* ConfirmationView.swift */,
 			);
 			path = AddPromotionView;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				7913027E2C2230B300A68C7F /* HorizontalPromotionCell.swift in Sources */,
 				793FC0842C2494AF009F6516 /* PromotionDetailViewModel.swift in Sources */,
 				793FC0662C248ABA009F6516 /* SearchView.swift in Sources */,
+				793FC08F2C24B930009F6516 /* ConfirmationView.swift in Sources */,
 				79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */,
 				793FC0602C248A84009F6516 /* MainTabView.swift in Sources */,
 				791302802C2230EB00A68C7F /* HighlightedConditionsPromotionCell.swift in Sources */,
@@ -520,6 +527,7 @@
 				793FC06C2C248B17009F6516 /* ProfileView.swift in Sources */,
 				791302882C2232A500A68C7F /* CompactPromotionCell.swift in Sources */,
 				795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */,
+				793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */,
 				791302862C2231C500A68C7F /* ImageFirstPromotionCell.swift in Sources */,
 				791302782C22307F00A68C7F /* CardStylePromotionCell.swift in Sources */,
 				793FC0782C248D96009F6516 /* PromotionDetailView.swift in Sources */,

@@ -9,8 +9,11 @@ struct SelectLayoutView: View {
     @Binding var conditions: String
     @Binding var recurrence: RecurrenceType
     @Binding var selectedImage: UIImage?
-    @State private var selectedLayout: CellLayoutType = .standard
     @Binding var showSelectLayoutView: Bool
+    @Binding var startDate: Date
+    @Binding var endDate: Date
+    @State private var selectedLayout: CellLayoutType = .standard
+    @State private var showConfirmationView = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -47,18 +50,9 @@ struct SelectLayoutView: View {
             .padding()
             
             Button(action: {
-                let newPromotion = Promotion(
-                    id: UUID().uuidString,
-                    title: title,
-                    description: description,
-                    validUntil: validUntil,
-                    imageURL: imageURL,
-                    conditions: conditions
-                )
-                viewModel.addPromotion(newPromotion)
-                showSelectLayoutView = false
+                showConfirmationView = true
             }) {
-                Text("Finalizar")
+                Text("Siguiente")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -67,6 +61,11 @@ struct SelectLayoutView: View {
                     .cornerRadius(8)
             }
             .padding(.bottom)
+            .background(
+                NavigationLink(destination: ConfirmationView(viewModel: ConfirmationViewModel(title: title, description: description, validUntil: validUntil, imageURL: imageURL, conditions: conditions, recurrence: recurrence, selectedImage: selectedImage, selectedLayout: selectedLayout, startDate: startDate, endDate: endDate)), isActive: $showConfirmationView) {
+                    EmptyView()
+                }
+            )
         }
         .padding()
         .background(Color(.systemGroupedBackground))
@@ -91,7 +90,9 @@ struct SelectLayoutView_Previews: PreviewProvider {
                 conditions: .constant("Condiciones de Ejemplo"),
                 recurrence: .constant(.none),
                 selectedImage: .constant(nil),
-                showSelectLayoutView: .constant(true)
+                showSelectLayoutView: .constant(true),
+                startDate: .constant(Date()),
+                endDate: .constant(Date())
             )
         }
     }
