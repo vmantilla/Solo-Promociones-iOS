@@ -12,7 +12,7 @@
                         "title": "2x1 en Cocteles",
                         "description": "Disfruta de 2 cocteles por el precio de 1 en nuestro bar.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/cocktails.jpg",
+                        "imageURL": "https://www.saborusa.com/cr/wp-content/uploads/sites/14/2020/05/Sorprende-a-tus-invitados-con-estos-espectaculares-cocteles-Foto-destacada.png",
                         "conditions": "Solo en barra."
                     }
                 ]
@@ -26,7 +26,7 @@
                         "title": "Descuento en Hamburguesas",
                         "description": "20% de descuento en todas las hamburguesas.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/hamburgers.jpg",
+                        "imageURL": "https://www.recetasnestle.com.ec/sites/default/files/styles/recipe_detail_desktop/public/srh_recipes/4e4293857c03d819e4ae51de1e86d66a.webp?itok=A5BBV75V",
                         "conditions": "No incluye bebidas."
                     }
                 ]
@@ -46,7 +46,7 @@
                         "title": "Promoción en Gimnasio",
                         "description": "Mitad de precio en membresías mensuales.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/gym.jpg",
+                        "imageURL": "https://volantespublicitarios.info/wp-content/uploads/2018/09/publicidad-para-gimnasio-1.jpg",
                         "conditions": "Aplica solo para nuevos miembros."
                     }
                 ]
@@ -60,7 +60,7 @@
                         "title": "Oferta en Calzado",
                         "description": "30% de descuento en calzado para hombres.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/footwear.jpg",
+                        "imageURL": "https://scontent.fctg1-3.fna.fbcdn.net/v/t1.6435-9/157720913_3710252785738445_6461570420081539039_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SbvSPFdaE3EQ7kNvgGKZreL&_nc_ht=scontent.fctg1-3.fna&cb_e2o_trans=q&oh=00_AYAgaTY91bzgs89CmagRIF3bykViLVQgiA6qj8VpFWt-iQ&oe=669961C9",
                         "conditions": "Solo productos seleccionados."
                     }
                 ]
@@ -80,7 +80,7 @@
                         "title": "Descuento en Spa",
                         "description": "40% de descuento en todos los tratamientos de spa.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/spa.jpg",
+                        "imageURL": "https://dummyimage.com/600x400/000/fff",
                         "conditions": "Requiere reserva previa."
                     }
                 ]
@@ -94,7 +94,7 @@
                         "title": "Oferta en Librería",
                         "description": "Compra dos libros y obtén el tercero gratis.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/books.jpg",
+                        "imageURL": "https://dummyimage.com/600x400/000/fff",
                         "conditions": "Aplica en selecciones marcadas."
                     }
                 ]
@@ -114,7 +114,7 @@
                         "title": "Noche de Sushi",
                         "description": "Todas las órdenes de sushi con un 25% de descuento.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/sushi.jpg",
+                        "imageURL": "https://dummyimage.com/600x400/000/fff",
                         "conditions": "No válido para llevar."
                     }
                 ]
@@ -128,7 +128,7 @@
                         "title": "Rebajas de Ropa",
                         "description": "Hasta un 50% de descuento en ropa seleccionada.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/clothes.jpg",
+                        "imageURL": "https://dummyimage.com/600x400/000/fff",
                         "conditions": "Mientras duren las existencias."
                     }
                 ]
@@ -148,7 +148,7 @@
                         "title": "Happy Hour Extendido",
                         "description": "Disfruta de nuestro happy hour extendido hasta las 9 PM.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/happyhour.jpg",
+                        "imageURL": "https://dummyimage.com/600x400/000/fff",
                         "conditions": "Disponible en todo el local."
                     }
                 ]
@@ -162,7 +162,7 @@
                         "title": "Ofertas en Electrónica",
                         "description": "Grandes descuentos en artículos seleccionados de electrónica.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://example.com/electronics.jpg",
+                        "imageURL": "https://dummyimage.com/600x400/000/fff",
                         "conditions": "Ver términos en la tienda."
                     }
                 ]
