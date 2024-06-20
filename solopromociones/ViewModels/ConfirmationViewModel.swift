@@ -1,30 +1,23 @@
-import Foundation
+import SwiftUI
 import UIKit
 
 class ConfirmationViewModel: ObservableObject {
-    let title: String
-    let description: String
-    let validUntil: String
-    let imageURL: String
-    let conditions: String
-    let recurrence: RecurrenceType
-    let selectedImage: UIImage?
-    let selectedLayout: CellLayoutType
-    let startDate: Date
-    let endDate: Date
+    @ObservedObject var addPromotionViewModel: AddPromotionViewModel
     
-    init(title: String, description: String, validUntil: String, imageURL: String, conditions: String, recurrence: RecurrenceType, selectedImage: UIImage?, selectedLayout: CellLayoutType, startDate: Date, endDate: Date) {
-        self.title = title
-        self.description = description
-        self.validUntil = validUntil
-        self.imageURL = imageURL
-        self.conditions = conditions
-        self.recurrence = recurrence
-        self.selectedImage = selectedImage
-        self.selectedLayout = selectedLayout
-        self.startDate = startDate
-        self.endDate = endDate
+    init(addPromotionViewModel: AddPromotionViewModel) {
+        self.addPromotionViewModel = addPromotionViewModel
     }
+    
+    var title: String { addPromotionViewModel.title }
+    var description: String { addPromotionViewModel.description }
+    var validUntil: String { formatDate(date: addPromotionViewModel.endDate) }
+    var imageURL: String { addPromotionViewModel.imageURL }
+    var conditions: String { addPromotionViewModel.conditions }
+    var recurrence: RecurrenceType { addPromotionViewModel.recurrence }
+    var selectedImage: UIImage? { addPromotionViewModel.selectedImage }
+    var selectedLayout: CellLayoutType = .standard
+    var startDate: Date { addPromotionViewModel.startDate }
+    var endDate: Date { addPromotionViewModel.endDate }
     
     func generatePromotionDates() -> [Date] {
         var dates: [Date] = []
@@ -59,5 +52,21 @@ class ConfirmationViewModel: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter.string(from: date)
+    }
+    
+    func addPromotion() {
+        let newPromotion = Promotion(
+            id: UUID().uuidString,
+            title: title,
+            description: description,
+            validUntil: validUntil,
+            imageURL: selectedImage != nil ? saveImageToDocuments(image: selectedImage!)?.absoluteString ?? imageURL : imageURL,
+            conditions: conditions
+        )
+        addPromotionViewModel.profileViewModel.addPromotion(newPromotion)
+    }
+    
+    private func saveImageToDocuments(image: UIImage) -> URL? {
+        return addPromotionViewModel.saveImageToDocuments(image: image)
     }
 }

@@ -3,20 +3,12 @@ import PhotosUI
 import CachedAsyncImage
 
 struct AddPromotionView: View {
-    @ObservedObject var viewModel: ProfileViewModel
-    @State private var title = ""
-    @State private var description = ""
-    @State private var validUntil = ""
-    @State private var imageURL = ""
-    @State private var conditions = ""
-    @State private var recurrence = RecurrenceType.none
-    @State private var showImagePicker = false
-    @State private var selectedImage: UIImage? = nil
-    @State private var showSelectLayoutView = false
-    @State private var startDate = Date()
-    @State private var endDate = Date()
-    
+    @StateObject private var viewModel: AddPromotionViewModel
     @Environment(\.presentationMode) var presentationMode
+    
+    init(profileViewModel: ProfileViewModel) {
+        _viewModel = StateObject(wrappedValue: AddPromotionViewModel(profileViewModel: profileViewModel))
+    }
     
     var body: some View {
         NavigationView {
@@ -30,16 +22,19 @@ struct AddPromotionView: View {
                     imageSection
                     recurrenceSection
                     nextButton
+                    navigationLink
                 }
                 .padding()
             }
             .background(Color(.systemGroupedBackground).edgesIgnoringSafeArea(.all))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: cancelButton)
-            .sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $selectedImage)
-            }
-            .background(navigationLink)
+        }
+        .sheet(isPresented: $viewModel.showImagePicker) {
+            ImagePicker(image: $viewModel.selectedImage)
+        }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
         }
     }
     
@@ -53,7 +48,7 @@ struct AddPromotionView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Título")
                 .font(.headline)
-            TextField("Ej: 2x1 en Pizzas", text: $title)
+            TextField("Ej: 2x1 en Pizzas", text: $viewModel.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
         }
     }
@@ -62,7 +57,7 @@ struct AddPromotionView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Descripción")
                 .font(.headline)
-            TextEditor(text: $description)
+            TextEditor(text: $viewModel.description)
                 .frame(height: 100)
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.secondary.opacity(0.2), lineWidth: 1))
         }
@@ -70,8 +65,8 @@ struct AddPromotionView: View {
     
     private var datesSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            datePickerView(title: "Fecha de inicio", selection: $startDate)
-            datePickerView(title: "Fecha de fin", selection: $endDate)
+            datePickerView(title: "Fecha de inicio", selection: $viewModel.startDate)
+            datePickerView(title: "Fecha de fin", selection: $viewModel.endDate)
         }
     }
     
@@ -91,7 +86,7 @@ struct AddPromotionView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Condiciones")
                 .font(.headline)
-            TextEditor(text: $conditions)
+            TextEditor(text: $viewModel.conditions)
                 .frame(height: 100)
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.secondary.opacity(0.2), lineWidth: 1))
         }
@@ -102,7 +97,7 @@ struct AddPromotionView: View {
             Text("Imagen")
                 .font(.headline)
             
-            if let selectedImage = selectedImage {
+            if let selectedImage = viewModel.selectedImage {
                 Image(uiImage: selectedImage)
                     .resizable()
                     .scaledToFill()
@@ -110,7 +105,7 @@ struct AddPromotionView: View {
                     .clipped()
                     .cornerRadius(10)
                     .overlay(
-                        Button(action: { showImagePicker.toggle() }) {
+                        Button(action: { viewModel.showImagePicker.toggle() }) {
                             Image(systemName: "pencil.circle.fill")
                                 .foregroundColor(.white)
                                 .padding(8)
@@ -121,7 +116,7 @@ struct AddPromotionView: View {
                         alignment: .topTrailing
                     )
             } else {
-                Button(action: { showImagePicker.toggle() }) {
+                Button(action: { viewModel.showImagePicker.toggle() }) {
                     VStack {
                         Image(systemName: "photo.on.rectangle.angled")
                             .font(.largeTitle)
@@ -135,15 +130,15 @@ struct AddPromotionView: View {
                             .stroke(Color.blue, style: StrokeStyle(lineWidth: 2, dash: [5]))
                     )
                 }
+                
+                Text("o")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                
+                TextField("URL de la imagen", text: $viewModel.imageURL)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
-            
-            Text("o")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .frame(maxWidth: .infinity, alignment: .center)
-            
-            TextField("URL de la imagen", text: $imageURL)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
         }
     }
     
@@ -151,7 +146,7 @@ struct AddPromotionView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Recurrencia")
                 .font(.headline)
-            Picker("Recurrencia", selection: $recurrence) {
+            Picker("Recurrencia", selection: $viewModel.recurrence) {
                 ForEach(RecurrenceType.allCases) { recurrence in
                     Text(recurrence.description).tag(recurrence)
                 }
@@ -161,7 +156,7 @@ struct AddPromotionView: View {
     }
     
     private var nextButton: some View {
-        Button(action: { showSelectLayoutView = true }) {
+        Button(action: { viewModel.validateAndProceed() }) {
             Text("Siguiente")
                 .font(.headline)
                 .foregroundColor(.white)
@@ -181,20 +176,8 @@ struct AddPromotionView: View {
     
     private var navigationLink: some View {
         NavigationLink(
-            destination: SelectLayoutView(
-                viewModel: viewModel,
-                title: $title,
-                description: $description,
-                validUntil: $validUntil,
-                imageURL: $imageURL,
-                conditions: $conditions,
-                recurrence: $recurrence,
-                selectedImage: $selectedImage,
-                showSelectLayoutView: $showSelectLayoutView,
-                startDate: $startDate,
-                endDate: $endDate
-            ),
-            isActive: $showSelectLayoutView
+            destination: SelectLayoutView(viewModel: viewModel),
+            isActive: $viewModel.showSelectLayoutView
         ) {
             EmptyView()
         }
@@ -203,86 +186,6 @@ struct AddPromotionView: View {
 
 struct AddPromotionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPromotionView(viewModel: ProfileViewModel(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)))
-    }
-}
-
-enum RecurrenceType: String, CaseIterable, Identifiable {
-    case none = "None"
-    case daily = "Daily"
-    case weekly = "Weekly"
-    case monthly = "Monthly"
-    case yearly = "Yearly"
-    
-    var id: String { self.rawValue }
-    
-    var description: String {
-        switch self {
-        case .none:
-            return "Ninguna"
-        case .daily:
-            return "Diaria"
-        case .weekly:
-            return "Semanal"
-        case .monthly:
-            return "Mensual"
-        case .yearly:
-            return "Anual"
-        }
-    }
-}
-
-enum CellLayoutType: String, CaseIterable, Identifiable {
-    case standard
-    case minimalist
-    case boldTitle
-    case imageFirst
-    case overlayText
-    case cardStyle
-    case highlightedConditions
-    case bannerStyle
-    case splitView
-    case rounded
-    case detailed
-    case imageBackground
-    case circularImage
-    case horizontal
-    case compact
-    
-    var id: String { self.rawValue }
-    
-    var description: String {
-        switch self {
-        case .standard:
-            return "Standard"
-        case .minimalist:
-            return "Minimalista"
-        case .boldTitle:
-            return "Título Negrita"
-        case .imageFirst:
-            return "Imagen Primero"
-        case .overlayText:
-            return "Texto Superpuesto"
-        case .cardStyle:
-            return "Estilo Tarjeta"
-        case .highlightedConditions:
-            return "Condiciones Resaltadas"
-        case .bannerStyle:
-            return "Estilo Banner"
-        case .splitView:
-            return "Vista Dividida"
-        case .rounded:
-            return "Redondeada"
-        case .detailed:
-            return "Detallada"
-        case .imageBackground:
-            return "Fondo de Imagen"
-        case .circularImage:
-            return "Imagen Circular"
-        case .horizontal:
-            return "Horizontal"
-        case .compact:
-            return "Compacta"
-        }
+        AddPromotionView(profileViewModel: ProfileViewModel(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)))
     }
 }

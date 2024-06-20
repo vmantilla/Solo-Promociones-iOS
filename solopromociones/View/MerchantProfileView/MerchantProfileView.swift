@@ -43,7 +43,7 @@ struct MerchantProfileView: View {
             .navigationBarItems(trailing: Image(systemName: "briefcase"))
         }
         .sheet(isPresented: $showingAddPromotion) {
-            AddPromotionView(viewModel: viewModel)
+            AddPromotionView(profileViewModel: viewModel)
         }
     }
 }

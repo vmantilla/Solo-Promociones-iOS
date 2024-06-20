@@ -1,19 +1,10 @@
 import SwiftUI
 
 struct SelectLayoutView: View {
-    @ObservedObject var viewModel: ProfileViewModel
-    @Binding var title: String
-    @Binding var description: String
-    @Binding var validUntil: String
-    @Binding var imageURL: String
-    @Binding var conditions: String
-    @Binding var recurrence: RecurrenceType
-    @Binding var selectedImage: UIImage?
-    @Binding var showSelectLayoutView: Bool
-    @Binding var startDate: Date
-    @Binding var endDate: Date
+    @ObservedObject var viewModel: AddPromotionViewModel
     @State private var selectedLayout: CellLayoutType = .standard
     @State private var showConfirmationView = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -25,11 +16,11 @@ struct SelectLayoutView: View {
             PreviewCell(
                 promotion: Promotion(
                     id: UUID().uuidString,
-                    title: title,
-                    description: description,
-                    validUntil: validUntil,
-                    imageURL: imageURL,
-                    conditions: conditions
+                    title: viewModel.title,
+                    description: viewModel.description,
+                    validUntil: viewModel.endDate.formatted(date: .abbreviated, time: .omitted),
+                    imageURL: viewModel.imageURL,
+                    conditions: viewModel.conditions
                 ),
                 layout: selectedLayout
             )
@@ -62,7 +53,10 @@ struct SelectLayoutView: View {
             }
             .padding(.bottom)
             .background(
-                NavigationLink(destination: ConfirmationView(viewModel: ConfirmationViewModel(title: title, description: description, validUntil: validUntil, imageURL: imageURL, conditions: conditions, recurrence: recurrence, selectedImage: selectedImage, selectedLayout: selectedLayout, startDate: startDate, endDate: endDate)), isActive: $showConfirmationView) {
+                NavigationLink(
+                    destination: ConfirmationView(viewModel: ConfirmationViewModel(addPromotionViewModel: viewModel)),
+                    isActive: $showConfirmationView
+                ) {
                     EmptyView()
                 }
             )
@@ -71,7 +65,7 @@ struct SelectLayoutView: View {
         .background(Color(.systemGroupedBackground))
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: Button(action: {
-            showSelectLayoutView = false
+            presentationMode.wrappedValue.dismiss()
         }) {
             Text("Back")
         })
@@ -82,17 +76,11 @@ struct SelectLayoutView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SelectLayoutView(
-                viewModel: ProfileViewModel(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)),
-                title: .constant("Título de Ejemplo"),
-                description: .constant("Descripción de Ejemplo"),
-                validUntil: .constant("30/06/2024"),
-                imageURL: .constant("https://dummyimage.com/600x400/000/fff"),
-                conditions: .constant("Condiciones de Ejemplo"),
-                recurrence: .constant(.none),
-                selectedImage: .constant(nil),
-                showSelectLayoutView: .constant(true),
-                startDate: .constant(Date()),
-                endDate: .constant(Date())
+                viewModel: AddPromotionViewModel(
+                    profileViewModel: ProfileViewModel(
+                        user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)
+                    )
+                )
             )
         }
     }

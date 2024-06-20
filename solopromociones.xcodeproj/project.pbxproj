@@ -46,6 +46,7 @@
 		793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */; };
 		793FC08F2C24B930009F6516 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08E2C24B930009F6516 /* ConfirmationView.swift */; };
 		793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */; };
+		793FC0972C24D2D3009F6516 /* AddPromotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0962C24D2D3009F6516 /* AddPromotionViewModel.swift */; };
 		795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97522C18E4C80097C7FC /* solopromocionesApp.swift */; };
 		795F97552C18E4C80097C7FC /* DailyPromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97542C18E4C80097C7FC /* DailyPromotionsView.swift */; };
 		795F97572C18E4CA0097C7FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 795F97562C18E4CA0097C7FC /* Assets.xcassets */; };
@@ -112,6 +113,7 @@
 		793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLayoutView.swift; sourceTree = "<group>"; };
 		793FC08E2C24B930009F6516 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
+		793FC0962C24D2D3009F6516 /* AddPromotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionViewModel.swift; sourceTree = "<group>"; };
 		795F974F2C18E4C80097C7FC /* solopromociones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solopromociones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795F97522C18E4C80097C7FC /* solopromocionesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solopromocionesApp.swift; sourceTree = "<group>"; };
 		795F97542C18E4C80097C7FC /* DailyPromotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPromotionsView.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				793FC06F2C248CFC009F6516 /* ProfileViewModel.swift */,
 				793FC0832C2494AF009F6516 /* PromotionDetailViewModel.swift */,
 				793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */,
+				793FC0962C24D2D3009F6516 /* AddPromotionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				791302762C22306900A68C7F /* ImageBackgroundPromotionCell.swift in Sources */,
 				791302742C22303500A68C7F /* BoldTitlePromotionCell.swift in Sources */,
 				791302842C22310B00A68C7F /* SplitViewPromotionCell.swift in Sources */,
+				793FC0972C24D2D3009F6516 /* AddPromotionViewModel.swift in Sources */,
 				793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */,
 				793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */,
 				793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */,
