@@ -41,6 +41,9 @@
 		793FC0822C249195009F6516 /* merchant_promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 793FC0812C249195009F6516 /* merchant_promotions.json */; };
 		793FC0842C2494AF009F6516 /* PromotionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0832C2494AF009F6516 /* PromotionDetailViewModel.swift */; };
 		793FC0862C249877009F6516 /* SimplePromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0852C249876009F6516 /* SimplePromotionCell.swift */; };
+		793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0882C24B2B2009F6516 /* ImagePicker.swift */; };
+		793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08A2C24B32B009F6516 /* PreviewCell.swift */; };
+		793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */; };
 		795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97522C18E4C80097C7FC /* solopromocionesApp.swift */; };
 		795F97552C18E4C80097C7FC /* DailyPromotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97542C18E4C80097C7FC /* DailyPromotionsView.swift */; };
 		795F97572C18E4CA0097C7FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 795F97562C18E4CA0097C7FC /* Assets.xcassets */; };
@@ -102,6 +105,9 @@
 		793FC0812C249195009F6516 /* merchant_promotions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = merchant_promotions.json; sourceTree = "<group>"; };
 		793FC0832C2494AF009F6516 /* PromotionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailViewModel.swift; sourceTree = "<group>"; };
 		793FC0852C249876009F6516 /* SimplePromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePromotionCell.swift; sourceTree = "<group>"; };
+		793FC0882C24B2B2009F6516 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		793FC08A2C24B32B009F6516 /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
+		793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLayoutView.swift; sourceTree = "<group>"; };
 		795F974F2C18E4C80097C7FC /* solopromociones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solopromociones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795F97522C18E4C80097C7FC /* solopromocionesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solopromocionesApp.swift; sourceTree = "<group>"; };
 		795F97542C18E4C80097C7FC /* DailyPromotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPromotionsView.swift; sourceTree = "<group>"; };
@@ -146,6 +152,7 @@
 		7913026D2C222F1200A68C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				793FC0872C24B2A2009F6516 /* Common */,
 				793FC07C2C248F20009F6516 /* RegularProfileView */,
 				793FC0792C248EC6009F6516 /* MerchantProfileView */,
 				793FC0762C248D8F009F6516 /* PromotionDetailView */,
@@ -180,6 +187,7 @@
 				791302892C2232B700A68C7F /* DetailedPromotionCell.swift */,
 				7913028B2C2232CD00A68C7F /* RoundedPromotionCell.swift */,
 				793FC0852C249876009F6516 /* SimplePromotionCell.swift */,
+				793FC08A2C24B32B009F6516 /* PreviewCell.swift */,
 			);
 			path = PromotionCells;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				793FC0742C248D63009F6516 /* AddPromotionView.swift */,
+				793FC08C2C24B48A009F6516 /* SelectLayoutView.swift */,
 			);
 			path = AddPromotionView;
 			sourceTree = "<group>";
@@ -275,6 +284,14 @@
 				793FC07D2C248F28009F6516 /* RegularProfileView.swift */,
 			);
 			path = RegularProfileView;
+			sourceTree = "<group>";
+		};
+		793FC0872C24B2A2009F6516 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				793FC0882C24B2B2009F6516 /* ImagePicker.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		795F97462C18E4C80097C7FC = {
@@ -494,6 +511,9 @@
 				791302762C22306900A68C7F /* ImageBackgroundPromotionCell.swift in Sources */,
 				791302742C22303500A68C7F /* BoldTitlePromotionCell.swift in Sources */,
 				791302842C22310B00A68C7F /* SplitViewPromotionCell.swift in Sources */,
+				793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */,
+				793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */,
+				793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */,
 				7913028C2C2232CD00A68C7F /* RoundedPromotionCell.swift in Sources */,
 				793FC07E2C248F28009F6516 /* RegularProfileView.swift in Sources */,
 				793FC0862C249877009F6516 /* SimplePromotionCell.swift in Sources */,
