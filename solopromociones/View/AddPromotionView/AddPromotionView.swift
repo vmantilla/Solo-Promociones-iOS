@@ -2,10 +2,6 @@ import SwiftUI
 import PhotosUI
 import CachedAsyncImage
 
-import SwiftUI
-import PhotosUI
-import CachedAsyncImage
-
 struct AddPromotionView: View {
     @ObservedObject var viewModel: ProfileViewModel
     @State private var title = ""
@@ -40,11 +36,11 @@ struct AddPromotionView: View {
             .background(Color(.systemGroupedBackground).edgesIgnoringSafeArea(.all))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: cancelButton)
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $selectedImage)
+            }
+            .background(navigationLink)
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(image: $selectedImage)
-        }
-        .background(navigationLink)
     }
     
     private var headerSection: some View {
