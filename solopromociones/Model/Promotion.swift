@@ -35,3 +35,8 @@ struct Promotion: Identifiable, Codable {
     var imageURL: String
     var conditions: String
 }
+
+struct City: Identifiable, Codable {
+    var id: String { name }
+    var name: String
+}

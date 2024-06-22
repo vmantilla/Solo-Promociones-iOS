@@ -1,23 +1,20 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
     @State private var searchText = ""
+    @State private var selectedCategories: Set<String> = []
+    @State private var showCityPicker = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
                     headerSection
-                    
                     searchSection
-                    
                     filterSection
-                    
                     featuredSection
-                    
-                    inspirationSection
-                    
-                    attractionsSection
+                    allPromotionsSection
                 }
                 .padding()
             }
@@ -30,134 +27,171 @@ struct HomeView: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Buscar atracciones en")
+                Text("Buscar promociones en")
                     .font(.headline)
                     .foregroundColor(.secondary)
-                HStack {
-                    Text("Ámsterdam")
-                        .font(.largeTitle)
-                        .bold()
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(.secondary)
+                Button(action: { showCityPicker = true }) {
+                    HStack {
+                        Text(viewModel.selectedCity)
+                            .font(.largeTitle)
+                            .bold()
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .sheet(isPresented: $showCityPicker) {
+                    CityPickerView(selectedCity: $viewModel.selectedCity, cities: viewModel.cities)
                 }
             }
             Spacer()
-            Button(action: {}) {
-                Text("Comprar")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(8)
-            }
         }
     }
     
     private var searchSection: some View {
         VStack {
-            TextField("Buscar en Ámsterdam", text: $searchText)
+            TextField("Buscar promociones", text: $searchText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.vertical, 10)
         }
     }
     
     private var filterSection: some View {
-        HStack {
-            filterButton(title: "Abierto hasta tarde")
-            filterButton(title: "Al aire libre")
-            filterButton(title: "Cerca de ti")
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(viewModel.categories, id: \.self) { category in
+                    filterButton(title: category)
+                }
+            }
         }
         .padding(.vertical)
     }
     
     private func filterButton(title: String) -> some View {
-        Button(action: {}) {
+        Button(action: {
+            if selectedCategories.contains(title) {
+                selectedCategories.remove(title)
+            } else {
+                selectedCategories.insert(title)
+            }
+        }) {
             Text(title)
                 .font(.subheadline)
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
+                .background(selectedCategories.contains(title) ? Color.blue : Color(.systemGray6))
+                .foregroundColor(selectedCategories.contains(title) ? .white : .primary)
+                .cornerRadius(20)
         }
     }
     
     private var featuredSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Image("61D9BDE0-406D-490A-82C3-47416F58A898") // Replace with your actual image asset
-                .resizable()
-                .scaledToFill()
-                .frame(height: 200)
-                .clipped()
-                .cornerRadius(10)
-            Text("¿No sabes por dónde empezar?")
+            Text("Promoción destacada")
                 .font(.title2)
                 .bold()
-            Text("Descubre las atracciones más populares de Ámsterdam")
-                .foregroundColor(.secondary)
+            if let featuredPromotion = viewModel.promotions.first {
+                PromotionCard(promotion: featuredPromotion)
+            }
         }
         .padding(.vertical)
     }
     
-    private var inspirationSection: some View {
+    private var allPromotionsSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("Déjate inspirar")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-            }
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text("¿Todavía no tienes un pase?")
-                        .font(.headline)
-                    Spacer()
-                    Button(action: {}) {
-                        Text("Comprar un pase")
-                            .foregroundColor(.blue)
-                    }
-                }
-                Text("No te pierdas todas las ventajas de nuestros pases, más información en GoCity.com")
-                    .foregroundColor(.secondary)
-            }
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(10)
-        }
-        .padding(.vertical)
-    }
-    
-    private var attractionsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("Todas las atracciones")
+                Text("Todas las promociones")
                     .font(.title2)
                     .bold()
                 Spacer()
                 Button(action: {}) {
-                    Text("Ver todas (46)")
+                    Text("Ver todas (\(viewModel.promotions.count))")
                         .foregroundColor(.blue)
                 }
             }
-            ForEach(0..<5) { _ in
-                HStack {
-                    Image("61D9BDE0-406D-490A-82C3-47416F58A898") // Replace with your actual image asset
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 80, height: 80)
-                        .clipped()
-                        .cornerRadius(10)
-                    VStack(alignment: .leading) {
-                        Text("Experiencia Heineken")
-                            .font(.headline)
-                        Text("Reserva obligatoria")
-                            .foregroundColor(.orange)
-                            .font(.subheadline)
-                    }
-                    Spacer()
-                }
-                .padding(.vertical, 5)
+            ForEach(viewModel.promotions) { promotion in
+                PromotionRow(promotion: promotion)
             }
         }
         .padding(.vertical)
+    }
+}
+
+struct CityPickerView: View {
+    @Binding var selectedCity: String
+    let cities: [City]
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        NavigationView {
+            List(cities) { city in
+                Button(action: {
+                    selectedCity = city.name
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text(city.name)
+                }
+            }
+            .navigationTitle("Seleccionar ciudad")
+            .navigationBarItems(trailing: Button("Cerrar") {
+                presentationMode.wrappedValue.dismiss()
+            })
+        }
+    }
+}
+
+struct PromotionCard: View {
+    let promotion: Promotion
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            AsyncImage(url: URL(string: promotion.imageURL)) { image in
+                image.resizable()
+            } placeholder: {
+                Color.gray
+            }
+            .aspectRatio(contentMode: .fill)
+            .frame(height: 200)
+            .clipped()
+            .cornerRadius(10)
+            
+            Text(promotion.title)
+                .font(.title2)
+                .bold()
+            Text(promotion.description)
+                .foregroundColor(.secondary)
+            Text("Válido hasta: \(promotion.validUntil)")
+                .font(.caption)
+                .foregroundColor(.blue)
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(15)
+        .shadow(radius: 5)
+    }
+}
+
+struct PromotionRow: View {
+    let promotion: Promotion
+    
+    var body: some View {
+        HStack {
+            AsyncImage(url: URL(string: promotion.imageURL)) { image in
+                image.resizable()
+            } placeholder: {
+                Color.gray
+            }
+            .frame(width: 80, height: 80)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            VStack(alignment: .leading) {
+                Text(promotion.title)
+                    .font(.headline)
+                Text("promotion.category")
+                    .foregroundColor(.blue)
+                    .font(.subheadline)
+            }
+            Spacer()
+        }
+        .padding(.vertical, 5)
     }
 }
 
