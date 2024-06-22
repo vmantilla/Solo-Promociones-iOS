@@ -46,6 +46,12 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func searchPromotions(query: String) -> [Promotion] {
+            // Implementa la lógica de búsqueda aquí
+            // Devuelve un array de Promotion basado en el query
+        return promotions
+        }
 }
 
 struct PromotionData: Codable {

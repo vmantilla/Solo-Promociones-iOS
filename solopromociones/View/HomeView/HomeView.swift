@@ -1,11 +1,15 @@
 import SwiftUI
+import Combine
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
-    @State private var searchText = ""
-    @State private var selectedCategories: Set<String> = []
-    @State private var showCityPicker = false
-    @State private var currentFeaturedPage = 0
+    @ObservedObject var viewModel: HomeViewModel
+        @State private var searchText = ""
+        @State private var selectedCategories: Set<String> = []
+        @State private var showCityPicker = false
+        @State private var currentFeaturedPage = 0
+        
+        let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    @Binding var selectedTab: Int
     
     var body: some View {
         NavigationView {
@@ -89,41 +93,48 @@ struct HomeView: View {
     }
     
     private var featuredSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("Promociones destacadas")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-                Button(action: {
-                    // Acción para ver todas las promociones destacadas
-                }) {
-                    Text("Ver todas")
-                        .foregroundColor(.blue)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text("Promociones destacadas")
+                        .font(.title2)
+                        .bold()
+                    Spacer()
+                    Button(action: {
+                        // Acción para ver todas las promociones destacadas
+                    }) {
+                        Text("Ver todas")
+                            .foregroundColor(.blue)
+                    }
                 }
-            }
-            
-            TabView(selection: $currentFeaturedPage) {
-                ForEach(viewModel.featuredPromotions.indices, id: \.self) { index in
-                    PromotionCard(promotion: viewModel.featuredPromotions[index])
-                        .tag(index)
+                
+                TabView(selection: $currentFeaturedPage) {
+                    ForEach(viewModel.featuredPromotions.indices, id: \.self) { index in
+                        PromotionCard(promotion: viewModel.featuredPromotions[index])
+                            .tag(index)
+                    }
                 }
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-            .frame(height: 300)
-            
-            HStack {
-                ForEach(0..<viewModel.featuredPromotions.count, id: \.self) { index in
-                    Circle()
-                        .fill(currentFeaturedPage == index ? Color.blue : Color.gray)
-                        .frame(width: 8, height: 8)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .frame(height: 300)
+                .onReceive(timer) { _ in
+                    withAnimation {
+                        currentFeaturedPage = (currentFeaturedPage + 1) % viewModel.featuredPromotions.count
+                    }
                 }
+                
+                HStack {
+                    Spacer()
+                    ForEach(0..<viewModel.featuredPromotions.count, id: \.self) { index in
+                        Circle()
+                            .fill(currentFeaturedPage == index ? Color.blue : Color.gray)
+                            .frame(width: 8, height: 8)
+                    }
+                    Spacer()
+                }
+                .padding(.top, 8)
             }
-            .padding(.top, 8)
+            .padding(.vertical)
         }
-        .padding(.vertical)
-    }
-    
+        
     private var dailyDealsSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Ofertas del día")
@@ -131,13 +142,16 @@ struct HomeView: View {
                 .bold()
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
+                LazyHStack(spacing: 16) {
                     ForEach(viewModel.dailyDeals) { promotion in
                         PromotionCard(promotion: promotion)
                             .frame(width: 280)
+                            .frame(height: 350)  // Ajusta esta altura según sea necesario
                     }
                 }
+                .padding(.horizontal)
             }
+            .frame(height: 370)  // Ajusta esta altura según sea necesario
         }
         .padding(.vertical)
     }
@@ -258,19 +272,23 @@ struct PromotionCard: View {
         VStack(alignment: .leading, spacing: 10) {
             AsyncImage(url: URL(string: promotion.imageURL)) { image in
                 image.resizable()
+                    .aspectRatio(contentMode: .fill)
             } placeholder: {
                 Color.gray
             }
-            .aspectRatio(contentMode: .fill)
-            .frame(height: 200)
+            .frame(height: 180)
             .clipped()
             .cornerRadius(10)
             
             Text(promotion.title)
-                .font(.title2)
-                .bold()
+                .font(.headline)
+                .lineLimit(2)
+            
             Text(promotion.description)
+                .font(.subheadline)
                 .foregroundColor(.secondary)
+                .lineLimit(2)
+            
             Text("Válido hasta: \(promotion.validUntil)")
                 .font(.caption)
                 .foregroundColor(.blue)
@@ -305,12 +323,6 @@ struct PromotionRow: View {
             Spacer()
         }
         .padding(.vertical, 5)
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
     }
 }
 
