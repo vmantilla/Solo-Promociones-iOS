@@ -5,6 +5,7 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var selectedCategories: Set<String> = []
     @State private var showCityPicker = false
+    @State private var currentFeaturedPage = 0
     
     var body: some View {
         NavigationView {
@@ -14,6 +15,10 @@ struct HomeView: View {
                     searchSection
                     filterSection
                     featuredSection
+                    dailyDealsSection
+                    categoriesSection
+                    nearbyPromotionsSection
+                    popularPromotionsSection
                     allPromotionsSection
                 }
                 .padding()
@@ -85,11 +90,99 @@ struct HomeView: View {
     
     private var featuredSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Promoción destacada")
+            HStack {
+                Text("Promociones destacadas")
+                    .font(.title2)
+                    .bold()
+                Spacer()
+                Button(action: {
+                    // Acción para ver todas las promociones destacadas
+                }) {
+                    Text("Ver todas")
+                        .foregroundColor(.blue)
+                }
+            }
+            
+            TabView(selection: $currentFeaturedPage) {
+                ForEach(viewModel.featuredPromotions.indices, id: \.self) { index in
+                    PromotionCard(promotion: viewModel.featuredPromotions[index])
+                        .tag(index)
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+            .frame(height: 300)
+            
+            HStack {
+                ForEach(0..<viewModel.featuredPromotions.count, id: \.self) { index in
+                    Circle()
+                        .fill(currentFeaturedPage == index ? Color.blue : Color.gray)
+                        .frame(width: 8, height: 8)
+                }
+            }
+            .padding(.top, 8)
+        }
+        .padding(.vertical)
+    }
+    
+    private var dailyDealsSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Ofertas del día")
                 .font(.title2)
                 .bold()
-            if let featuredPromotion = viewModel.promotions.first {
-                PromotionCard(promotion: featuredPromotion)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(viewModel.dailyDeals) { promotion in
+                        PromotionCard(promotion: promotion)
+                            .frame(width: 280)
+                    }
+                }
+            }
+        }
+        .padding(.vertical)
+    }
+    
+    private var categoriesSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Explora por categorías")
+                .font(.title2)
+                .bold()
+            
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                ForEach(viewModel.categories, id: \.self) { category in
+                    CategoryButton(title: category)
+                }
+            }
+        }
+        .padding(.vertical)
+    }
+    
+    private var nearbyPromotionsSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Cerca de ti")
+                .font(.title2)
+                .bold()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(viewModel.nearbyPromotions) { promotion in
+                        PromotionRow(promotion: promotion)
+                            .frame(width: 280)
+                    }
+                }
+            }
+        }
+        .padding(.vertical)
+    }
+    
+    private var popularPromotionsSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Promociones populares")
+                .font(.title2)
+                .bold()
+            
+            ForEach(viewModel.popularPromotions) { promotion in
+                PromotionRow(promotion: promotion)
             }
         }
         .padding(.vertical)
@@ -102,16 +195,36 @@ struct HomeView: View {
                     .font(.title2)
                     .bold()
                 Spacer()
-                Button(action: {}) {
+                Button(action: {
+                    // Acción para ver todas las promociones
+                }) {
                     Text("Ver todas (\(viewModel.promotions.count))")
                         .foregroundColor(.blue)
                 }
             }
-            ForEach(viewModel.promotions) { promotion in
+            ForEach(viewModel.promotions.prefix(5)) { promotion in
                 PromotionRow(promotion: promotion)
             }
         }
         .padding(.vertical)
+    }
+}
+
+struct CategoryButton: View {
+    let title: String
+    
+    var body: some View {
+        Button(action: {
+            // Acción para seleccionar categoría
+        }) {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(height: 100)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .cornerRadius(10)
+        }
     }
 }
 
@@ -200,3 +313,4 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
