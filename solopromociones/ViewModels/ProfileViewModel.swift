@@ -22,8 +22,8 @@ class ProfileViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            let users = try decoder.decode([User].self, from: data)
-            if let merchant = users.first(where: { $0.id == user.id }) {
+            let usersContainer = try decoder.decode(UsersContainer.self, from: data)
+            if let merchant = usersContainer.users.first(where: { $0.id == user.id }) {
                 self.merchantPromotions = merchant.promotions ?? []
             }
         } catch {

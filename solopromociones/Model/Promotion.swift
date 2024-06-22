@@ -7,7 +7,6 @@ struct DayPromotion: Identifiable, Codable {
     var categories: [DayCategory]
     
     var formattedDay: String {
-        // Asume que 'day' ya es el nombre del día
         return day
     }
     
