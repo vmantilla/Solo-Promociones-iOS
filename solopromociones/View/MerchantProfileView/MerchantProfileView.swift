@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUI
 
 struct MerchantProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel

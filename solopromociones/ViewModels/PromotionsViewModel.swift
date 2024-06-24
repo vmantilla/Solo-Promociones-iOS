@@ -53,7 +53,7 @@ class PromotionsViewModel: ObservableObject {
             return dayPromotion.categories.contains { !$0.promotions.isEmpty }
         }
     }
-
+    
     func loadPromotionsForDate(_ date: Date) {
         let dateString = dateFormatter.string(from: date)
         if let index = days.firstIndex(where: { $0.date == dateString }) {
@@ -63,6 +63,15 @@ class PromotionsViewModel: ObservableObject {
             // Si no hay promociones para esta fecha, podrías cargar datos adicionales aquí
             // Por ahora, simplemente actualizamos la fecha seleccionada
             selectedDate = date
+        }
+    }
+}
+
+extension PromotionsViewModel {
+    func resetToCurrentDay() {
+        if let today = days.firstIndex(where: { Calendar.current.isDateInToday(dateFormatter.date(from: $0.date)!) }) {
+            selectedDayIndex = today
+            selectedDate = Date()
         }
     }
 }

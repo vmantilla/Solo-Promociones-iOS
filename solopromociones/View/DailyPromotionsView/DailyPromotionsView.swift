@@ -5,35 +5,61 @@ struct DailyPromotionsView: View {
     @ObservedObject var viewModel = PromotionsViewModel()
     @State private var selectedCategoryIndex = 0
     @State private var showingCalendar = false
+    @State private var isCustomDateSelected = false
     
     var body: some View {
         VStack(spacing: 0) {
-            // Barra de Navegación de Días
-            ScrollViewReader { scrollProxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) {
-                        ForEach(viewModel.days.indices, id: \.self) { index in
-                            DayButton(day: viewModel.days[index],
-                                      isSelected: viewModel.selectedDayIndex == index,
-                                      action: {
-                                viewModel.selectedDayIndex = index
-                                selectedCategoryIndex = 0
-                            })
-                            .id(index)
-                        }
-                        
-                        Button(action: {
-                            showingCalendar = true
-                        }) {
-                            Image(systemName: "calendar")
-                                .padding()
-                                .background(Color.blue.opacity(0.1))
-                                .cornerRadius(10)
-                        }
+            if isCustomDateSelected {
+                // Vista para fecha seleccionada del calendario
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Fecha seleccionada:")
+                            .font(.subheadline)
+                        Text(viewModel.selectedDate, style: .date)
+                            .font(.headline)
+                    }
+                    Spacer()
+                    Button(action: {
+                        isCustomDateSelected = false
+                        viewModel.resetToCurrentDay()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.blue)
                     }
                 }
-                .padding(.vertical, 8)
-                .background(Color.gray.opacity(0.1))
+                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .padding(.top, 8)
+            } else {
+                // Barra de Navegación de Días original
+                ScrollViewReader { scrollProxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 0) {
+                            ForEach(viewModel.days.indices, id: \.self) { index in
+                                DayButton(day: viewModel.days[index],
+                                          isSelected: viewModel.selectedDayIndex == index,
+                                          action: {
+                                    viewModel.selectedDayIndex = index
+                                    selectedCategoryIndex = 0
+                                })
+                                .id(index)
+                            }
+                            
+                            Button(action: {
+                                showingCalendar = true
+                            }) {
+                                Image(systemName: "calendar")
+                                    .padding()
+                                    .background(Color.blue.opacity(0.1))
+                                    .cornerRadius(10)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 8)
+                    .background(Color.gray.opacity(0.1))
+                }
             }
             
             // Categorías
@@ -42,13 +68,15 @@ struct DailyPromotionsView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
                         ForEach(categories.indices, id: \.self) { index in
-                            CategoryButton(category: categories[index].category,
-                                           isSelected: selectedCategoryIndex == index,
-                                           action: {
-                                withAnimation {
-                                    selectedCategoryIndex = index
+                            CategoryFilterButton(
+                                category: categories[index].category,
+                                isSelected: selectedCategoryIndex == index, useIcons: true,
+                                action: {
+                                    withAnimation {
+                                        selectedCategoryIndex = index
+                                    }
                                 }
-                            })
+                            )
                         }
                     }
                     .padding(.horizontal)
@@ -79,6 +107,7 @@ struct DailyPromotionsView: View {
         }
         .onChange(of: viewModel.selectedDate) { newDate in
             viewModel.loadPromotionsForDate(newDate)
+            isCustomDateSelected = true
         }
     }
     
