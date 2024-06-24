@@ -4,6 +4,8 @@ class ProfileViewModel: ObservableObject {
     @Published var user: User
     @Published var isMerchant: Bool
     @Published var merchantPromotions: [Promotion] = []
+    @Published var profileImage: UIImage?
+    @Published var backgroundImage: UIImage?
     
     init(user: User) {
         self.user = user
@@ -44,4 +46,11 @@ class ProfileViewModel: ObservableObject {
     func addPromotion(_ promotion: Promotion) {
         merchantPromotions.append(promotion)
     }
+    
+    func updateProfile(name: String, profileImage: UIImage?, backgroundImage: UIImage?) {
+            self.user.name = name
+            self.profileImage = profileImage
+            self.backgroundImage = backgroundImage
+            // Implement actual update logic here (e.g., API calls)
+        }
 }

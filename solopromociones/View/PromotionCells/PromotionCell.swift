@@ -3,48 +3,26 @@ import CachedAsyncImage
 
 struct PromotionCell: View {
     let promotion: Promotion
-
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            CachedAsyncImage(url: URL(string: promotion.imageURL), transaction: .init(animation: .default)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 150)
-                        .clipped()
-                case .failure:
-                    Image(systemName: "photo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 150)
-                @unknown default:
-                    EmptyView()
-                }
+        VStack {
+            AsyncImage(url: URL(string: promotion.imageURL)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Color.gray
             }
-            .cornerRadius(10)
-            .shadow(radius: 5)
-
+            .frame(width: 150, height: 150)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
             Text(promotion.title)
-                .font(.headline)
-                .padding(.top, 5)
-            Text(promotion.description)
-                .font(.subheadline)
-            Text("Válido hasta: \(promotion.validUntil)")
                 .font(.caption)
-            Text("Condiciones: \(promotion.conditions)")
-                .font(.footnote)
-                .foregroundColor(.gray)
+                .lineLimit(2)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(8)
-        .shadow(radius: 4)
     }
 }
+
 
 struct PromotionCell_Previews: PreviewProvider {
     static var previews: some View {
