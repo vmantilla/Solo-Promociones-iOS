@@ -12,26 +12,52 @@ struct Product: Identifiable {
     let category: String
     let storeName: String
     let storeLogoURL: String
-    let distance: Double // en kilómetros
+    let distance: Double
 }
 
 class ProductViewModel: ObservableObject {
     @Published var products: [Product] = [
-        Product(id: "1", title: "Pan fresco", description: "Baguette recién horneada", expirationDate: Date().addingTimeInterval(3600), originalPrice: 2.0, discountedPrice: 1.0, imageURL: "https://example.com/bread.jpg", category: "Panadería", storeName: "Panadería Central", storeLogoURL: "https://example.com/bakery-logo.jpg", distance: 0.5),
-        Product(id: "2", title: "Ensalada César", description: "Ensalada fresca con pollo", expirationDate: Date().addingTimeInterval(7200), originalPrice: 8.0, discountedPrice: 5.0, imageURL: "https://example.com/salad.jpg", category: "Comida preparada", storeName: "Deli Express", storeLogoURL: "https://example.com/deli-logo.jpg", distance: 1.2)
+        Product(id: "1", title: "Pan Artesanal", description: "Baguette recién horneada", expirationDate: Date().addingTimeInterval(3600), originalPrice: 2.50, discountedPrice: 1.25, imageURL: "https://example.com/bread.jpg", category: "Panadería", storeName: "Panadería Aurora", storeLogoURL: "https://example.com/aurora-logo.jpg", distance: 0.5),
+        Product(id: "2", title: "Ensalada César", description: "Ensalada fresca con pollo y aderezo", expirationDate: Date().addingTimeInterval(7200), originalPrice: 8.99, discountedPrice: 4.50, imageURL: "https://example.com/salad.jpg", category: "Comida Preparada", storeName: "Deli Express", storeLogoURL: "https://example.com/deli-logo.jpg", distance: 1.2),
+        Product(id: "3", title: "Yogur Griego", description: "Pack de 4 yogures naturales", expirationDate: Date().addingTimeInterval(86400), originalPrice: 3.99, discountedPrice: 2.00, imageURL: "https://example.com/yogurt.jpg", category: "Lácteos", storeName: "Supermercado Fresco", storeLogoURL: "https://example.com/fresco-logo.jpg", distance: 0.8),
+        Product(id: "4", title: "Sushi Variado", description: "Bandeja de 12 piezas variadas", expirationDate: Date().addingTimeInterval(10800), originalPrice: 15.99, discountedPrice: 8.00, imageURL: "https://example.com/sushi.jpg", category: "Comida Preparada", storeName: "Sushi Fusion", storeLogoURL: "https://example.com/sushi-logo.jpg", distance: 2.5),
+        Product(id: "5", title: "Manzanas Orgánicas", description: "Bolsa de 1kg de manzanas frescas", expirationDate: Date().addingTimeInterval(172800), originalPrice: 4.50, discountedPrice: 2.25, imageURL: "https://example.com/apples.jpg", category: "Frutas y Verduras", storeName: "Mercado Ecológico", storeLogoURL: "https://example.com/eco-logo.jpg", distance: 1.7),
+        Product(id: "6", title: "Pizza Margarita", description: "Pizza mediana recién horneada", expirationDate: Date().addingTimeInterval(5400), originalPrice: 10.99, discountedPrice: 5.50, imageURL: "https://example.com/pizza.jpg", category: "Comida Preparada", storeName: "Pizzería Bella", storeLogoURL: "https://example.com/bella-logo.jpg", distance: 1.0),
+        Product(id: "7", title: "Croissants", description: "Pack de 3 croissants de mantequilla", expirationDate: Date().addingTimeInterval(21600), originalPrice: 3.75, discountedPrice: 1.90, imageURL: "https://example.com/croissants.jpg", category: "Panadería", storeName: "Panadería Aurora", storeLogoURL: "https://example.com/aurora-logo.jpg", distance: 0.5),
+        Product(id: "8", title: "Leche Desnatada", description: "Botella de 1L de leche fresca", expirationDate: Date().addingTimeInterval(259200), originalPrice: 1.20, discountedPrice: 0.80, imageURL: "https://example.com/milk.jpg", category: "Lácteos", storeName: "Supermercado Fresco", storeLogoURL: "https://example.com/fresco-logo.jpg", distance: 0.8),
+        Product(id: "9", title: "Hamburguesa Vegana", description: "Hamburguesa de soja con pan integral", expirationDate: Date().addingTimeInterval(14400), originalPrice: 7.50, discountedPrice: 3.75, imageURL: "https://example.com/vegan-burger.jpg", category: "Comida Preparada", storeName: "Veggie Delight", storeLogoURL: "https://example.com/veggie-logo.jpg", distance: 3.0),
+        Product(id: "10", title: "Tomates Cherry", description: "Bandeja de 250g de tomates cherry", expirationDate: Date().addingTimeInterval(129600), originalPrice: 2.99, discountedPrice: 1.50, imageURL: "https://example.com/tomatoes.jpg", category: "Frutas y Verduras", storeName: "Mercado Ecológico", storeLogoURL: "https://example.com/eco-logo.jpg", distance: 1.7)
     ]
+    
+    var categories: [String] {
+        Array(Set(products.map { $0.category })).sorted()
+    }
 }
 
 struct TooGoodToGoView: View {
     @StateObject private var viewModel = ProductViewModel()
     @State private var searchText = ""
-
+    @State private var selectedCategory: String?
+    @State private var showHeader = true
+    @State private var lastScrollPosition: CGFloat = 0
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                SearchBar(text: $searchText)
+                if showHeader {
+                    VStack {
+                        SearchBar(text: $searchText)
+                        CategoryScrollView(categories: viewModel.categories, selectedCategory: $selectedCategory)
+                    }
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                }
                 
                 ScrollView {
+                    GeometryReader { geometry in
+                        Color.clear.preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin.y)
+                    }
+                    .frame(height: 0)
+                    
                     LazyVStack(spacing: 16) {
                         ForEach(filteredProducts()) { product in
                             ProductCard(product: product)
@@ -39,14 +65,27 @@ struct TooGoodToGoView: View {
                     }
                     .padding()
                 }
+                .coordinateSpace(name: "scroll")
+                .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                    withAnimation {
+                        if value < lastScrollPosition {
+                            showHeader = false
+                        } else if value > lastScrollPosition || value >= 0 {
+                            showHeader = true
+                        }
+                        lastScrollPosition = value
+                    }
+                }
             }
             .navigationTitle("Eco Ofertas")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
     private func filteredProducts() -> [Product] {
         viewModel.products.filter { product in
-            searchText.isEmpty || product.title.localizedCaseInsensitiveContains(searchText)
+            (searchText.isEmpty || product.title.localizedCaseInsensitiveContains(searchText)) &&
+            (selectedCategory == nil || product.category == selectedCategory)
         }
     }
 }
@@ -68,6 +107,31 @@ struct SearchBar: View {
         .background(Color(.systemGray6))
         .cornerRadius(10)
         .padding(.horizontal)
+    }
+}
+
+struct CategoryScrollView: View {
+    let categories: [String]
+    @Binding var selectedCategory: String?
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(categories, id: \.self) { category in
+                    Button(action: {
+                        selectedCategory = selectedCategory == category ? nil : category
+                    }) {
+                        Text(category)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.2))
+                            .foregroundColor(selectedCategory == category ? .white : .primary)
+                            .cornerRadius(20)
+                    }
+                }
+            }
+            .padding(.horizontal)
+        }
     }
 }
 
@@ -133,6 +197,13 @@ struct ProductCard: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+    }
+}
+
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 
