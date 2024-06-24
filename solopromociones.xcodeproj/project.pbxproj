@@ -60,6 +60,7 @@
 		79E068572C29C1FC00B2656E /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E068562C29C1FC00B2656E /* EditProfileView.swift */; };
 		79E068592C29CD1C00B2656E /* MonthlyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E068582C29CD1C00B2656E /* MonthlyCalendarView.swift */; };
 		79E0685B2C29D89700B2656E /* CategoryFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E0685A2C29D89700B2656E /* CategoryFilterButton.swift */; };
+		79E0685D2C29E86900B2656E /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E0685C2C29E86900B2656E /* CategoryButton.swift */; };
 		79E1D77B2C27248F0093723D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E1D77A2C27248F0093723D /* HomeViewModel.swift */; };
 		79E1D77D2C2724E00093723D /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E1D77C2C2724E00093723D /* cities.json */; };
 		79E1D77F2C2727440093723D /* home.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E1D77E2C2727440093723D /* home.json */; };
@@ -137,6 +138,7 @@
 		79E068562C29C1FC00B2656E /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		79E068582C29CD1C00B2656E /* MonthlyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalendarView.swift; sourceTree = "<group>"; };
 		79E0685A2C29D89700B2656E /* CategoryFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterButton.swift; sourceTree = "<group>"; };
+		79E0685C2C29E86900B2656E /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		79E1D77A2C27248F0093723D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		79E1D77C2C2724E00093723D /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
 		79E1D77E2C2727440093723D /* home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home.json; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				793FC0622C248AA8009F6516 /* HomeView.swift */,
+				79E0685C2C29E86900B2656E /* CategoryButton.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				7913027C2C2230A300A68C7F /* OverlayTextPromotionCell.swift in Sources */,
 				793FC0632C248AA8009F6516 /* HomeView.swift in Sources */,
 				7913026F2C222F1D00A68C7F /* PromotionCell.swift in Sources */,
+				79E0685D2C29E86900B2656E /* CategoryButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

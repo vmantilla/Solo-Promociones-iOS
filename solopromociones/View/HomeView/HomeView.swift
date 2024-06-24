@@ -162,7 +162,7 @@ struct HomeView: View {
                 .font(.title2)
                 .bold()
             
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 0) {
                 ForEach(viewModel.categories, id: \.self) { category in
                     CategoryButton(category: category, isSelected: false, useIcons: true, action: {})
                 }
@@ -170,6 +170,7 @@ struct HomeView: View {
         }
         .padding(.vertical)
     }
+
     
     private var nearbyPromotionsSection: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -223,95 +224,6 @@ struct HomeView: View {
         .padding(.vertical)
     }
 }
-
-import SwiftUI
-import CachedAsyncImage
-
-struct CategoryButton: View {
-    let category: String
-    let isSelected: Bool
-    let useIcons: Bool // Flag to toggle between icons and web images
-    let action: () -> Void
-    
-    private func colorForCategory(_ category: String) -> Color {
-        let colors: [Color] = [.red, .blue, .green, .orange, .purple, .pink]
-        let index = abs(category.hashValue) % colors.count
-        return colors[index]
-    }
-    
-    var body: some View {
-        Button(action: action) {
-            VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(isSelected ? Color.blue.opacity(0.2) : Color.white)
-                        .frame(width: isSelected ? 100 : 80, height: isSelected ? 100 : 80)
-                    
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(isSelected ? Color.blue : colorForCategory(category), lineWidth: 2)
-                        .frame(width: isSelected ? 104 : 84, height: isSelected ? 104 : 84)
-                    
-                    if useIcons {
-                        Image(systemName: iconForCategory(category))
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(isSelected ? .blue : colorForCategory(category))
-                    } else {
-                        CachedAsyncImage(url: URL(string: getRandomImageURL())) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(isSelected ? .blue : colorForCategory(category))
-                            case .failure:
-                                Image(systemName: "xmark.circle")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.red)
-                            @unknown default:
-                                EmptyView()
-                            }
-                        }
-                    }
-                }
-                
-                Text(category)
-                    .font(.caption2)
-                    .foregroundColor(.primary)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: 80)
-            }
-            .frame(height: 120)
-        }
-    }
-    
-    private func iconForCategory(_ category: String) -> String {
-        let icons = [
-            "fork.knife", "cup.and.saucer.fill", "ticket.fill", "bag.fill",
-            "sportscourt.fill", "desktopcomputer", "airplane", "book.fill",
-            "heart.fill", "house.fill", "music.note", "paintpalette.fill",
-            "scissors", "pawprint.fill", "dollarsign.circle.fill",
-            "gamecontroller.fill", "baby.carriage.fill", "figure.dance"
-        ]
-        return icons.randomElement() ?? "star.fill"
-    }
-    
-    private func getRandomImageURL() -> String {
-        let imageSize = 100
-        let randomInt = Int.random(in: 1...10)
-        return "https://dummyimage.com/\(imageSize)x\(imageSize)/000/fff&text=\(randomInt)"
-    }
-}
-
-
 
 struct CityPickerView: View {
     @Binding var selectedCity: String

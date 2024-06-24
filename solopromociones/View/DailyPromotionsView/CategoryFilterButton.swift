@@ -1,10 +1,3 @@
-//
-//  CategoryFilterButton.swift
-//  solopromociones
-//
-//  Created by RAVIT Admin on 24/06/24.
-//
-
 import SwiftUI
 import CachedAsyncImage
 
@@ -24,11 +17,11 @@ struct CategoryFilterButton: View {
         Button(action: action) {
             VStack {
                 ZStack {
-                    Circle()
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(isSelected ? Color.blue.opacity(0.2) : Color.white)
                         .frame(width: 50, height: 50) // Fixed size
                     
-                    Circle()
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(isSelected ? Color.blue : colorForCategory(category), lineWidth: 2)
                         .frame(width: 54, height: 54) // Fixed size
                     
@@ -67,9 +60,9 @@ struct CategoryFilterButton: View {
                     .foregroundColor(.primary)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .frame(width: 60, height: 30) // Height adjusted to ensure text wraps
+                    .frame(width: 70, height: 30) // Fixed width and height to ensure text wraps properly
             }
-            .frame(height: 100) // Increased height to accommodate text wrapping
+            .frame(height: 100) // Fixed height to align properly
         }
     }
     
@@ -89,7 +82,6 @@ struct CategoryFilterButton: View {
         return icons.randomElement() ?? "star.fill"
     }
 
-    
     private func getRandomImageURL() -> String {
         let imageSize = 100
         let randomInt = Int.random(in: 1...10)
