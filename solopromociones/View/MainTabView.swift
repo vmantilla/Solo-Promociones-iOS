@@ -25,11 +25,13 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            FavoritesView()
+            TooGoodToGoView()
                 .tabItem {
-                    Label("Favoritos", systemImage: "heart")
+                    Label("Remate", systemImage: "leaf.arrow.circlepath")
                 }
                 .tag(3)
+
+
             
             ProfileView(user: user)
                 .tabItem {
