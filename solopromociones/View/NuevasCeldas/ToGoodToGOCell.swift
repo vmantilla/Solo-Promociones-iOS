@@ -1,7 +1,16 @@
+//
+//  ToGoodToGOCell.swift
+//  solopromociones
+//
+//  Created by RAVIT Admin on 24/06/24.
+//
+
+import SwiftUI
+
 import SwiftUI
 import CachedAsyncImage
 
-struct BoldTitlePromotionCell: View {
+struct ToGoodToGOCell: View {
     let promotion: Promotion
 
     var body: some View {
@@ -81,5 +90,12 @@ struct BoldTitlePromotionCell: View {
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+    }
+}
+
+
+struct ToGoodToGOCell_Previews: PreviewProvider {
+    static var previews: some View {
+        ToGoodToGOCell(promotion: Promotion(id: "1", title: "2x1 en Cocteles", description: "Disfruta de 2 cocteles por el precio de 1 en nuestro bar.", validUntil: "30/06/2024", imageURL: "https://dummyimage.com/600x400/000/fff", conditions: "Solo en barra."))
     }
 }

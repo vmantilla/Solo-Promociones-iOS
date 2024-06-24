@@ -113,42 +113,30 @@ struct DailyPromotionsView: View {
     
     @ViewBuilder
     func getRandomPromotionCell(promotion: Promotion) -> some View {
-        let randomInt = Int.random(in: 1...16)
+        let randomInt = Int.random(in: 1...10)
         switch randomInt {
         case 1:
-            PromotionCell(promotion: promotion)
+            StandardPromotionCell(promotion: promotion)
         case 2:
-            MinimalistPromotionCell(promotion: promotion)
+            CarouselPromotionCell(promotions: [promotion, promotion]) // Asumiendo que necesitas más de una promoción
         case 3:
-            BoldTitlePromotionCell(promotion: promotion)
+            CompactHorizontalPromotionCell(promotion: promotion)
         case 4:
-            ImageFirstPromotionCell(promotion: promotion)
+            GridPromotionCell(promotions: [promotion, promotion, promotion, promotion]) // Asumiendo que necesitas 4 promociones
         case 5:
-            OverlayTextPromotionCell(promotion: promotion)
+            FeaturedPromotionCell(promotion: promotion)
         case 6:
-            CardStylePromotionCell(promotion: promotion)
+            CollapsiblePromotionCell(promotion: promotion)
         case 7:
-            HighlightedConditionsPromotionCell(promotion: promotion)
+            TimelinePromotionCell(promotions: [promotion, promotion, promotion]) // Asumiendo que necesitas varias promociones
         case 8:
-            BannerStylePromotionCell(promotion: promotion)
+            ComparativePromotionCell(promotion1: promotion, promotion2: promotion) // Asumiendo que necesitas dos promociones
         case 9:
-            SplitViewPromotionCell(promotion: promotion)
+            CategoryPromotionCell(category: "Ejemplo", promotions: [promotion, promotion, promotion]) // Asumiendo que necesitas varias promociones
         case 10:
-            BoldTitlePromotionCell(promotion: promotion)
-        case 11:
-            RoundedPromotionCell(promotion: promotion)
-        case 12:
-            DetailedPromotionCell(promotion: promotion)
-        case 13:
-            ImageBackgroundPromotionCell(promotion: promotion)
-        case 14:
-            CircularImagePromotionCell(promotion: promotion)
-        case 15:
-            HorizontalPromotionCell(promotion: promotion)
-        case 16:
-            CompactPromotionCell(promotion: promotion)
+            CountdownPromotionCell(promotion: promotion)
         default:
-            PromotionCell(promotion: promotion)
+            StandardPromotionCell(promotion: promotion)
         }
     }
 }

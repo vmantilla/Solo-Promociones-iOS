@@ -45,11 +45,13 @@ struct TooGoodToGoView: View {
         NavigationView {
             VStack(spacing: 0) {
                 if showHeader {
-                    VStack {
+                    VStack(spacing: 12) {
                         SearchBar(text: $searchText)
                         CategoryScrollView(categories: viewModel.categories, selectedCategory: $selectedCategory)
+                        ExplanationText()
                     }
                     .transition(.move(edge: .top).combined(with: .opacity))
+                    .padding(.bottom, 8)
                 }
                 
                 ScrollView {
@@ -90,6 +92,41 @@ struct TooGoodToGoView: View {
     }
 }
 
+struct ExplanationText: View {
+    var body: some View {
+        Text("Estos productos están cerca de su fecha de caducidad o son considerados demasiado valiosos para desechar. ¡Aprovecha estas ofertas y ayuda a reducir el desperdicio!")
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal)
+    }
+}
+
+struct CategoryScrollView: View {
+    let categories: [String]
+    @Binding var selectedCategory: String?
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 12) {
+                ForEach(categories, id: \.self) { category in
+                    Button(action: {
+                        selectedCategory = selectedCategory == category ? nil : category
+                    }) {
+                        Text(category)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.2))
+                            .foregroundColor(selectedCategory == category ? .white : .primary)
+                            .cornerRadius(20)
+                    }
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+}
+
 struct SearchBar: View {
     @Binding var text: String
 
@@ -110,30 +147,6 @@ struct SearchBar: View {
     }
 }
 
-struct CategoryScrollView: View {
-    let categories: [String]
-    @Binding var selectedCategory: String?
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                ForEach(categories, id: \.self) { category in
-                    Button(action: {
-                        selectedCategory = selectedCategory == category ? nil : category
-                    }) {
-                        Text(category)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.2))
-                            .foregroundColor(selectedCategory == category ? .white : .primary)
-                            .cornerRadius(20)
-                    }
-                }
-            }
-            .padding(.horizontal)
-        }
-    }
-}
 
 struct ProductCard: View {
     let product: Product

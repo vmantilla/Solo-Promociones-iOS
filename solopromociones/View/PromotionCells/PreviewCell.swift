@@ -14,6 +14,7 @@ struct PreviewCell: View {
     let layout: CellLayoutType
 
     var body: some View {
+        return BoldTitlePromotionCell(promotion: promotion)
         switch layout {
         case .standard:
             PromotionCell(promotion: promotion)
