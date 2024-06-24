@@ -59,7 +59,7 @@ struct SearchView: View {
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(viewModel.categories.prefix(4), id: \.self) { category in
-                    CategoryButton(title: category)
+                    CategoryButton(category: category, isSelected: false, action: {})
                 }
             }
         }

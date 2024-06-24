@@ -164,7 +164,7 @@ struct HomeView: View {
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(viewModel.categories, id: \.self) { category in
-                    CategoryButton(title: category)
+                    CategoryButton(category: category, isSelected: false, action: {})
                 }
             }
         }
@@ -225,19 +225,18 @@ struct HomeView: View {
 }
 
 struct CategoryButton: View {
-    let title: String
+    let category: String
+    let isSelected: Bool
+    let action: () -> Void
     
     var body: some View {
-        Button(action: {
-            // Acción para seleccionar categoría
-        }) {
-            Text(title)
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(height: 100)
-                .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .cornerRadius(10)
+        Button(action: action) {
+            Text(category)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .background(isSelected ? Color.blue : Color.gray.opacity(0.2))
+                .foregroundColor(isSelected ? .white : .primary)
+                .cornerRadius(20)
         }
     }
 }
