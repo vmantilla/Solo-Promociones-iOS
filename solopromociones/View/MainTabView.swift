@@ -7,7 +7,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView( viewModel: viewModel, selectedTab: $selectedTab)
+            HomeView(viewModel: viewModel, selectedTab: $selectedTab)
                 .tabItem {
                     Label("Inicio", systemImage: "house")
                 }
@@ -27,11 +27,14 @@ struct MainTabView: View {
             
             TooGoodToGoView()
                 .tabItem {
-                    Label("EcoOfertas", systemImage: "leaf.arrow.circlepath")
+                    Label {
+                        Text("EcoOfertas")
+                    } icon: {
+                        Image(systemName: "leaf.arrow.circlepath")
+                            .foregroundColor(.green)
+                    }
                 }
                 .tag(3)
-
-
             
             ProfileView(user: user)
                 .tabItem {
