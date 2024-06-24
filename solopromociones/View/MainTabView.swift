@@ -27,7 +27,7 @@ struct MainTabView: View {
             
             TooGoodToGoView()
                 .tabItem {
-                    Label("Remate", systemImage: "leaf.arrow.circlepath")
+                    Label("EcoOfertas", systemImage: "leaf.arrow.circlepath")
                 }
                 .tag(3)
 

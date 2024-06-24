@@ -57,7 +57,7 @@ struct TooGoodToGoView: View {
                     .padding(.horizontal)
                 }
             }
-            .navigationTitle("Too Good To Go")
+            .navigationTitle("Eco Ofertas")
         }
     }
     
