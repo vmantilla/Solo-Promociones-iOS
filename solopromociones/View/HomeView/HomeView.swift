@@ -3,20 +3,21 @@ import Combine
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
-        @State private var searchText = ""
-        @State private var selectedCategories: Set<String> = []
-        @State private var showCityPicker = false
-        @State private var currentFeaturedPage = 0
-        
-        let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    @State private var searchText = ""
+    @State private var selectedCategories: Set<String> = []
+    @State private var showCityPicker = false
+    @State private var currentFeaturedPage = 0
+    
+    let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @Binding var selectedTab: Int
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 20) {
                     headerSection
                     searchSection
+                    searchSection2
                     filterSection
                     featuredSection
                     dailyDealsSection
@@ -57,84 +58,43 @@ struct HomeView: View {
     }
     
     private var searchSection: some View {
-        VStack {
-            TextField("Buscar promociones", text: $searchText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.vertical, 10)
+            VStack {
+                TextField("Buscar promociones", text: $searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.vertical, 10)
+            }
         }
+    
+    private var searchSection2: some View {
+        CompactHorizontalPromotionCell(promotion: viewModel.featuredPromotions.first ?? Promotion(id: "", title: "Buscar promociones", description: "", validUntil: "", imageURL: "", conditions: ""))
     }
     
     private var filterSection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(viewModel.categories, id: \.self) { category in
-                    filterButton(title: category)
+                    CategoryButton(category: category, isSelected: selectedCategories.contains(category), useIcons: true) {
+                        if selectedCategories.contains(category) {
+                            selectedCategories.remove(category)
+                        } else {
+                            selectedCategories.insert(category)
+                        }
+                    }
                 }
             }
-        }
-        .padding(.vertical)
-    }
-    
-    private func filterButton(title: String) -> some View {
-        Button(action: {
-            if selectedCategories.contains(title) {
-                selectedCategories.remove(title)
-            } else {
-                selectedCategories.insert(title)
-            }
-        }) {
-            Text(title)
-                .font(.subheadline)
-                .padding()
-                .background(selectedCategories.contains(title) ? Color.blue : Color(.systemGray6))
-                .foregroundColor(selectedCategories.contains(title) ? .white : .primary)
-                .cornerRadius(20)
         }
     }
     
     private var featuredSection: some View {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text("Promociones destacadas")
-                        .font(.title2)
-                        .bold()
-                    Spacer()
-                    Button(action: {
-                        // Acción para ver todas las promociones destacadas
-                    }) {
-                        Text("Ver todas")
-                            .foregroundColor(.blue)
-                    }
-                }
-                
-                TabView(selection: $currentFeaturedPage) {
-                    ForEach(viewModel.featuredPromotions.indices, id: \.self) { index in
-                        PromotionCard(promotion: viewModel.featuredPromotions[index])
-                            .tag(index)
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .frame(height: 300)
-                .onReceive(timer) { _ in
-                    withAnimation {
-                        currentFeaturedPage = (currentFeaturedPage + 1) % viewModel.featuredPromotions.count
-                    }
-                }
-                
-                HStack {
-                    Spacer()
-                    ForEach(0..<viewModel.featuredPromotions.count, id: \.self) { index in
-                        Circle()
-                            .fill(currentFeaturedPage == index ? Color.blue : Color.gray)
-                            .frame(width: 8, height: 8)
-                    }
-                    Spacer()
-                }
-                .padding(.top, 8)
-            }
-            .padding(.vertical)
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Promociones destacadas")
+                .font(.title2)
+                .bold()
+            
+            CarouselPromotionCell(promotions: viewModel.featuredPromotions)
         }
-        
+    }
+    
     private var dailyDealsSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Ofertas del día")
@@ -142,18 +102,13 @@ struct HomeView: View {
                 .bold()
             
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 16) {
+                HStack(spacing: 16) {
                     ForEach(viewModel.dailyDeals) { promotion in
-                        PromotionCard(promotion: promotion)
-                            .frame(width: 280)
-                            .frame(height: 350)  // Ajusta esta altura según sea necesario
+                        StandardPromotionCell(promotion: promotion)
                     }
                 }
-                .padding(.horizontal)
             }
-            .frame(height: 370)  // Ajusta esta altura según sea necesario
         }
-        .padding(.vertical)
     }
     
     private var categoriesSection: some View {
@@ -162,15 +117,9 @@ struct HomeView: View {
                 .font(.title2)
                 .bold()
             
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 0) {
-                ForEach(viewModel.categories, id: \.self) { category in
-                    CategoryButton(category: category, isSelected: false, useIcons: true, action: {})
-                }
-            }
+            GridPromotionCell(promotions: viewModel.popularPromotions)
         }
-        .padding(.vertical)
     }
-
     
     private var nearbyPromotionsSection: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -178,16 +127,10 @@ struct HomeView: View {
                 .font(.title2)
                 .bold()
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(viewModel.nearbyPromotions) { promotion in
-                        PromotionRow(promotion: promotion)
-                            .frame(width: 280)
-                    }
-                }
+            ForEach(viewModel.nearbyPromotions) { promotion in
+                PromotionRow(promotion: promotion)
             }
         }
-        .padding(.vertical)
     }
     
     private var popularPromotionsSection: some View {
@@ -197,10 +140,9 @@ struct HomeView: View {
                 .bold()
             
             ForEach(viewModel.popularPromotions) { promotion in
-                PromotionRow(promotion: promotion)
+                CollapsiblePromotionCell(promotion: promotion)
             }
         }
-        .padding(.vertical)
     }
     
     private var allPromotionsSection: some View {
@@ -218,11 +160,8 @@ struct HomeView: View {
                 }
             }
             ForEach(viewModel.promotions.prefix(5)) { promotion in
-                PromotionRow(promotion: promotion)
+                PromotionCard(promotion: promotion)
             }
         }
-        .padding(.vertical)
     }
 }
-
-

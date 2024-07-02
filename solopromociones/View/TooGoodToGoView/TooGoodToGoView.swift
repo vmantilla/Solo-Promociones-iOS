@@ -55,10 +55,6 @@ struct TooGoodToGoView: View {
                 }
                 
                 ScrollView {
-                    GeometryReader { geometry in
-                        Color.clear.preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin.y)
-                    }
-                    .frame(height: 0)
                     
                     LazyVStack(spacing: 16) {
                         ForEach(filteredProducts()) { product in
