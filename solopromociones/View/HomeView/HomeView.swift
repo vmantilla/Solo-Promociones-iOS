@@ -4,7 +4,7 @@ import Combine
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @State private var searchText = ""
-    @State private var selectedCategories: Set<String> = []
+    @State private var selectedCategory: String?
     @State private var showCityPicker = false
     @State private var currentFeaturedPage = 0
     
@@ -17,11 +17,9 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     headerSection
                     searchSection
-                    searchSection2
-                    filterSection
+                    categorySection
                     featuredSection
                     dailyDealsSection
-                    categoriesSection
                     nearbyPromotionsSection
                     popularPromotionsSection
                     allPromotionsSection
@@ -58,30 +56,26 @@ struct HomeView: View {
     }
     
     private var searchSection: some View {
-            VStack {
-                TextField("Buscar promociones", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.vertical, 10)
-            }
-        }
-    
-    private var searchSection2: some View {
-        CompactHorizontalPromotionCell(promotion: viewModel.featuredPromotions.first ?? Promotion(id: "", title: "Buscar promociones", description: "", validUntil: "", imageURL: "", conditions: ""))
+        SearchBar(text: $searchText)
     }
     
-    private var filterSection: some View {
+    private var categorySection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            HStack(spacing: 12) {
                 ForEach(viewModel.categories, id: \.self) { category in
-                    CategoryButton(category: category, isSelected: selectedCategories.contains(category), useIcons: true) {
-                        if selectedCategories.contains(category) {
-                            selectedCategories.remove(category)
-                        } else {
-                            selectedCategories.insert(category)
-                        }
+                    Button(action: {
+                        selectedCategory = selectedCategory == category ? nil : category
+                    }) {
+                        Text(category)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.2))
+                            .foregroundColor(selectedCategory == category ? .white : .primary)
+                            .cornerRadius(20)
                     }
                 }
             }
+            .padding(.horizontal)
         }
     }
     
@@ -91,7 +85,7 @@ struct HomeView: View {
                 .font(.title2)
                 .bold()
             
-            CarouselPromotionCell(promotions: viewModel.featuredPromotions)
+            CarouselPromotionCell(promotions: filteredPromotions(viewModel.featuredPromotions))
         }
     }
     
@@ -103,21 +97,11 @@ struct HomeView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(viewModel.dailyDeals) { promotion in
+                    ForEach(filteredPromotions(viewModel.dailyDeals)) { promotion in
                         StandardPromotionCell(promotion: promotion)
                     }
                 }
             }
-        }
-    }
-    
-    private var categoriesSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Explora por categorías")
-                .font(.title2)
-                .bold()
-            
-            GridPromotionCell(promotions: viewModel.popularPromotions)
         }
     }
     
@@ -127,7 +111,7 @@ struct HomeView: View {
                 .font(.title2)
                 .bold()
             
-            ForEach(viewModel.nearbyPromotions) { promotion in
+            ForEach(filteredPromotions(viewModel.nearbyPromotions)) { promotion in
                 PromotionRow(promotion: promotion)
             }
         }
@@ -139,7 +123,7 @@ struct HomeView: View {
                 .font(.title2)
                 .bold()
             
-            ForEach(viewModel.popularPromotions) { promotion in
+            ForEach(filteredPromotions(viewModel.popularPromotions)) { promotion in
                 CollapsiblePromotionCell(promotion: promotion)
             }
         }
@@ -155,13 +139,20 @@ struct HomeView: View {
                 Button(action: {
                     // Acción para ver todas las promociones
                 }) {
-                    Text("Ver todas (\(viewModel.promotions.count))")
+                    Text("Ver todas (\(filteredPromotions(viewModel.promotions).count))")
                         .foregroundColor(.blue)
                 }
             }
-            ForEach(viewModel.promotions.prefix(5)) { promotion in
+            ForEach(filteredPromotions(viewModel.promotions).prefix(5)) { promotion in
                 PromotionCard(promotion: promotion)
             }
+        }
+    }
+    
+    private func filteredPromotions(_ promotions: [Promotion]) -> [Promotion] {
+        promotions.filter { promotion in
+            (searchText.isEmpty || promotion.title.localizedCaseInsensitiveContains(searchText)) &&
+            (selectedCategory == nil || promotion.category == selectedCategory)
         }
     }
 }
