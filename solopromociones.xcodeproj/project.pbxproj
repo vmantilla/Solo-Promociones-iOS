@@ -79,6 +79,8 @@
 		79F236502C344339002F489D /* PromotionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2364F2C344339002F489D /* PromotionRow.swift */; };
 		79F236522C34436A002F489D /* CityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236512C34436A002F489D /* CityPickerView.swift */; };
 		79F236542C3443B7002F489D /* PromotionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236532C3443B7002F489D /* PromotionCard.swift */; };
+		79F236572C347666002F489D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236562C347666002F489D /* SettingsView.swift */; };
+		79F236592C348008002F489D /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236582C348008002F489D /* StatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +174,8 @@
 		79F2364F2C344339002F489D /* PromotionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionRow.swift; sourceTree = "<group>"; };
 		79F236512C34436A002F489D /* CityPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPickerView.swift; sourceTree = "<group>"; };
 		79F236532C3443B7002F489D /* PromotionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCard.swift; sourceTree = "<group>"; };
+		79F236562C347666002F489D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		79F236582C348008002F489D /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,7 @@
 		7913026D2C222F1200A68C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				79F236552C34765F002F489D /* SettingsView */,
 				79E068612C2A08A300B2656E /* NuevasCeldas */,
 				79E0685E2C29ECD700B2656E /* TooGoodToGoView */,
 				79E068552C29C1F400B2656E /* EditProfileView */,
@@ -340,6 +345,7 @@
 			children = (
 				793FC07A2C248ECD009F6516 /* MerchantProfileView.swift */,
 				79E068532C29C0DB00B2656E /* AddPromotionCell.swift */,
+				79F236582C348008002F489D /* StatView.swift */,
 			);
 			path = MerchantProfileView;
 			sourceTree = "<group>";
@@ -454,6 +460,14 @@
 				79F236532C3443B7002F489D /* PromotionCard.swift */,
 			);
 			path = NuevasCeldas;
+			sourceTree = "<group>";
+		};
+		79F236552C34765F002F489D /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				79F236562C347666002F489D /* SettingsView.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -627,6 +641,7 @@
 				793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */,
 				793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */,
 				79E068572C29C1FC00B2656E /* EditProfileView.swift in Sources */,
+				79F236572C347666002F489D /* SettingsView.swift in Sources */,
 				793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */,
 				79E1D77B2C27248F0093723D /* HomeViewModel.swift in Sources */,
 				7913028C2C2232CD00A68C7F /* RoundedPromotionCell.swift in Sources */,
@@ -654,6 +669,7 @@
 				7913028A2C2232B700A68C7F /* DetailedPromotionCell.swift in Sources */,
 				7913027C2C2230A300A68C7F /* OverlayTextPromotionCell.swift in Sources */,
 				793FC0632C248AA8009F6516 /* HomeView.swift in Sources */,
+				79F236592C348008002F489D /* StatView.swift in Sources */,
 				7913026F2C222F1D00A68C7F /* PromotionCell.swift in Sources */,
 				79F236542C3443B7002F489D /* PromotionCard.swift in Sources */,
 				79E068692C2A0A3B00B2656E /* GridPromotionCell.swift in Sources */,

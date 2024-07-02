@@ -6,6 +6,7 @@ class ProfileViewModel: ObservableObject {
     @Published var merchantPromotions: [Promotion] = []
     @Published var profileImage: UIImage?
     @Published var backgroundImage: UIImage?
+    @Published var availableSpots: Int = 0
     
     init(user: User) {
         self.user = user
@@ -43,9 +44,18 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func addPromotion(_ promotion: Promotion) {
-        merchantPromotions.append(promotion)
-    }
+    func convertToMerchant(with spots: Int) {
+            self.isMerchant = true
+            self.user.isMerchant = true
+            self.availableSpots = spots
+            loadPromotions()
+        }
+
+        func addPromotion(_ promotion: Promotion) {
+            if merchantPromotions.count < availableSpots {
+                merchantPromotions.append(promotion)
+            }
+        }
     
     func updateProfile(name: String, profileImage: UIImage?, backgroundImage: UIImage?) {
             self.user.name = name

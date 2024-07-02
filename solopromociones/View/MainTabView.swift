@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var user = User(id: "2", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)
+    @State private var user = User(id: "2", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: false)
     @State private var selectedTab = 0
     @StateObject private var viewModel = HomeViewModel()
     

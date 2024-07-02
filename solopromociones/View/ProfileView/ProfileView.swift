@@ -9,12 +9,14 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        if viewModel.isMerchant {
-            MerchantProfileView(viewModel: viewModel)
-        } else {
-            RegularProfileView(viewModel: viewModel)
+            NavigationView {
+                if viewModel.isMerchant {
+                    MerchantProfileView(viewModel: viewModel)
+                } else {
+                    RegularProfileView(viewModel: viewModel)
+                }
+            }
         }
-    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
