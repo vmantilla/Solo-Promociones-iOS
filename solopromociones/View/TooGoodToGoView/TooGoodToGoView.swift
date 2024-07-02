@@ -38,45 +38,28 @@ struct TooGoodToGoView: View {
     @StateObject private var viewModel = ProductViewModel()
     @State private var searchText = ""
     @State private var selectedCategory: String?
-    @State private var showHeader = true
-    @State private var lastScrollPosition: CGFloat = 0
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                if showHeader {
-                    VStack(spacing: 12) {
-                        SearchBar(text: $searchText)
-                        CategoryScrollView(categories: viewModel.categories, selectedCategory: $selectedCategory)
-                        ExplanationText()
-                    }
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    .padding(.bottom, 8)
-                }
-                
-                ScrollView {
+            ScrollView {
+                VStack(spacing: 20) {
+                    SearchBar(text: $searchText)
+                    
+                    CategoryScrollView(categories: viewModel.categories, selectedCategory: $selectedCategory)
+                    
+                    ExplanationText()
                     
                     LazyVStack(spacing: 16) {
                         ForEach(filteredProducts()) { product in
                             ProductCard(product: product)
                         }
                     }
-                    .padding()
                 }
-                .coordinateSpace(name: "scroll")
-                .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                    withAnimation {
-                        if value < lastScrollPosition {
-                            showHeader = false
-                        } else if value > lastScrollPosition || value >= 0 {
-                            showHeader = true
-                        }
-                        lastScrollPosition = value
-                    }
-                }
+                .padding()
             }
             .navigationTitle("Eco Ofertas")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
+            .background(Color(.systemBackground))
         }
     }
     
@@ -88,13 +71,22 @@ struct TooGoodToGoView: View {
     }
 }
 
-struct ExplanationText: View {
+struct SearchBar: View {
+    @Binding var text: String
+
     var body: some View {
-        Text("Estos productos están cerca de su fecha de caducidad o son considerados demasiado valiosos para desechar. ¡Aprovecha estas ofertas y ayuda a reducir el desperdicio!")
-            .font(.caption)
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
-            .padding(.horizontal)
+        HStack {
+            Image(systemName: "magnifyingglass")
+            TextField("Buscar productos", text: $text)
+            if !text.isEmpty {
+                Button(action: { text = "" }) {
+                    Image(systemName: "xmark.circle.fill")
+                }
+            }
+        }
+        .padding(8)
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
     }
 }
 
@@ -118,31 +110,20 @@ struct CategoryScrollView: View {
                     }
                 }
             }
-            .padding(.horizontal)
         }
     }
 }
 
-struct SearchBar: View {
-    @Binding var text: String
-
+struct ExplanationText: View {
     var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-            TextField("Buscar productos", text: $text)
-            if !text.isEmpty {
-                Button(action: { text = "" }) {
-                    Image(systemName: "xmark.circle.fill")
-                }
-            }
-        }
-        .padding(8)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
-        .padding(.horizontal)
+        Text("Estos productos están cerca de su fecha de caducidad o son considerados demasiado valiosos para desechar. ¡Aprovecha estas ofertas y ayuda a reducir el desperdicio!")
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.center)
     }
 }
 
+// El ProductCard permanece igual
 
 struct ProductCard: View {
     let product: Product

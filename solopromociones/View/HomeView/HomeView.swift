@@ -18,17 +18,27 @@ struct HomeView: View {
                     headerSection
                     searchSection
                     categorySection
-                    featuredSection
-                    dailyDealsSection
-                    nearbyPromotionsSection
-                    popularPromotionsSection
-                    allPromotionsSection
+                    if !filteredPromotions(viewModel.featuredPromotions).isEmpty {
+                        featuredSection
+                    }
+                    if !filteredPromotions(viewModel.dailyDeals).isEmpty {
+                        dailyDealsSection
+                    }
+                    if !filteredPromotions(viewModel.nearbyPromotions).isEmpty {
+                        nearbyPromotionsSection
+                    }
+                    if !filteredPromotions(viewModel.popularPromotions).isEmpty {
+                        popularPromotionsSection
+                    }
+                    if !filteredPromotions(viewModel.promotions).isEmpty {
+                        allPromotionsSection
+                    }
                 }
                 .padding()
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
-            .background(Color(.systemGroupedBackground))
+            .background(Color.white)
         }
     }
     
@@ -99,6 +109,7 @@ struct HomeView: View {
                 HStack(spacing: 16) {
                     ForEach(filteredPromotions(viewModel.dailyDeals)) { promotion in
                         StandardPromotionCell(promotion: promotion)
+                            .frame(width: 280)  // Ajusta este valor según sea necesario
                     }
                 }
             }
