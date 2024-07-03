@@ -66,32 +66,34 @@ struct PromotionDetailView: View {
     }
     
     private func merchantInfo(merchant: MerchantDetail) -> some View {
-        HStack {
-            CachedAsyncImage(url: URL(string: merchant.logoURL)) { image in
-                image.resizable().aspectRatio(contentMode: .fit)
-            } placeholder: {
-                Circle().fill(Color.gray)
-            }
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-            
-            VStack(alignment: .leading) {
-                Text(merchant.name).font(.headline)
-                Text(merchant.category).font(.subheadline).foregroundColor(.secondary)
-            }
-            
-            Spacer()
-            
-            Button(action: viewModel.toggleFavorite) {
-                Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                    .foregroundColor(viewModel.isFavorite ? .red : .gray)
+            NavigationLink(destination: MerchantDetailView(merchantId: merchant.id)) {
+                HStack {
+                    CachedAsyncImage(url: URL(string: merchant.logoURL)) { image in
+                        image.resizable().aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        Circle().fill(Color.gray)
+                    }
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                    
+                    VStack(alignment: .leading) {
+                        Text(merchant.name).font(.headline)
+                        Text(merchant.category).font(.subheadline).foregroundColor(.secondary)
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: viewModel.toggleFavorite) {
+                        Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
+                            .foregroundColor(viewModel.isFavorite ? .red : .gray)
+                    }
+                }
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
             }
         }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
     
     private func promotionDetails(_ promotion: PromotionDetail) -> some View {
         VStack(alignment: .leading, spacing: 10) {
