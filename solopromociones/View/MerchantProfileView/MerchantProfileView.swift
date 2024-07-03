@@ -33,10 +33,10 @@ struct MerchantProfileView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(viewModel.user.name)
+                        Text(viewModel.user?.name ?? "")
                             .font(.title2)
                             .fontWeight(.bold)
-                        Text(viewModel.user.email)
+                        Text(viewModel.user?.email ?? "")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                         Text("Merchant")
@@ -118,7 +118,7 @@ struct MerchantProfileView: View {
                 }
             }
         }
-        .navigationTitle(scrollOffset < -50 ? viewModel.user.name : "")
+        .navigationTitle((scrollOffset < -50 ? viewModel.user?.name : "") ?? "")
         .sheet(isPresented: $showingAddPromotion) {
             AddPromotionView(profileViewModel: viewModel)
         }

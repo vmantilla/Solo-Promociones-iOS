@@ -161,21 +161,3 @@ struct ConfirmationView: View {
         }
     }
 }
-
-
-struct ConfirmationView_Previews: PreviewProvider {
-    static var previews: some View {
-        let profileViewModel = ProfileViewModel(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true))
-        let addPromotionViewModel = AddPromotionViewModel(profileViewModel: profileViewModel)
-        addPromotionViewModel.title = "Título de Ejemplo"
-        addPromotionViewModel.description = "Descripción de Ejemplo"
-        addPromotionViewModel.endDate = Date().addingTimeInterval(60 * 60 * 24 * 10) // 10 days from now
-        addPromotionViewModel.imageURL = "https://dummyimage.com/600x400/000/fff"
-        addPromotionViewModel.conditions = "Condiciones de Ejemplo"
-        addPromotionViewModel.recurrence = .none
-        addPromotionViewModel.startDate = Date()
-        addPromotionViewModel.endDate = Date().addingTimeInterval(60 * 60 * 24 * 10) // 10 days from now
-
-        return ConfirmationView(viewModel: ConfirmationViewModel(addPromotionViewModel: addPromotionViewModel))
-    }
-}

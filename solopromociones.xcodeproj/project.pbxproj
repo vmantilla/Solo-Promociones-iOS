@@ -28,6 +28,17 @@
 		7929E42D2C35A8E700CCD12E /* MerchantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E42C2C35A8E700CCD12E /* MerchantDetailView.swift */; };
 		7929E42F2C35A90D00CCD12E /* MerchantDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */; };
 		7929E4312C35AB6400CCD12E /* merchantDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 7929E4302C35AB6400CCD12E /* merchantDetail.json */; };
+		7929E4332C35B69300CCD12E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4322C35B69300CCD12E /* SearchBar.swift */; };
+		7929E4362C35DC4800CCD12E /* AuthenticationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4352C35DC4800CCD12E /* AuthenticationFlow.swift */; };
+		7929E4382C35DC6100CCD12E /* PhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4372C35DC6100CCD12E /* PhoneNumberView.swift */; };
+		7929E43A2C35DC7700CCD12E /* VerificationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4392C35DC7700CCD12E /* VerificationCodeView.swift */; };
+		7929E43C2C35DCDD00CCD12E /* ProfileContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E43B2C35DCDD00CCD12E /* ProfileContainerView.swift */; };
+		7929E43E2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E43D2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift */; };
+		7929E4402C35DDAB00CCD12E /* MerchantFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E43F2C35DDAB00CCD12E /* MerchantFlowView.swift */; };
+		7929E4452C35DDFA00CCD12E /* BusinessInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4442C35DDFA00CCD12E /* BusinessInfoView.swift */; };
+		7929E4472C35DE0C00CCD12E /* SpotSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4462C35DE0C00CCD12E /* SpotSelectionView.swift */; };
+		7929E4492C35DE1E00CCD12E /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4482C35DE1E00CCD12E /* PaymentView.swift */; };
+		7929E44B2C35DE3600CCD12E /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */; };
 		79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */; };
 		79369D8D2C1A3DC200B7B7A6 /* promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 79369D8C2C1A3DC200B7B7A6 /* promotions.json */; };
 		79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */; };
@@ -127,6 +138,17 @@
 		7929E42C2C35A8E700CCD12E /* MerchantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailView.swift; sourceTree = "<group>"; };
 		7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewModel.swift; sourceTree = "<group>"; };
 		7929E4302C35AB6400CCD12E /* merchantDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = merchantDetail.json; sourceTree = "<group>"; };
+		7929E4322C35B69300CCD12E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		7929E4352C35DC4800CCD12E /* AuthenticationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFlow.swift; sourceTree = "<group>"; };
+		7929E4372C35DC6100CCD12E /* PhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberView.swift; sourceTree = "<group>"; };
+		7929E4392C35DC7700CCD12E /* VerificationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeView.swift; sourceTree = "<group>"; };
+		7929E43B2C35DCDD00CCD12E /* ProfileContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerView.swift; sourceTree = "<group>"; };
+		7929E43D2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedProfileView.swift; sourceTree = "<group>"; };
+		7929E43F2C35DDAB00CCD12E /* MerchantFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantFlowView.swift; sourceTree = "<group>"; };
+		7929E4442C35DDFA00CCD12E /* BusinessInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessInfoView.swift; sourceTree = "<group>"; };
+		7929E4462C35DE0C00CCD12E /* SpotSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSelectionView.swift; sourceTree = "<group>"; };
+		7929E4482C35DE1E00CCD12E /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		79369D8C2C1A3DC200B7B7A6 /* promotions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = promotions.json; sourceTree = "<group>"; };
 		79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewModel.swift; sourceTree = "<group>"; };
@@ -220,6 +242,7 @@
 		7913026D2C222F1200A68C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7929E4342C35DC3200CCD12E /* AuthenticationFlow */,
 				7929E42B2C35A8DF00CCD12E /* MerchantDetailView */,
 				79F2365B2C349CB6002F489D /* PromotionDetailView */,
 				79F236552C34765F002F489D /* SettingsView */,
@@ -273,6 +296,27 @@
 			path = MerchantDetailView;
 			sourceTree = "<group>";
 		};
+		7929E4342C35DC3200CCD12E /* AuthenticationFlow */ = {
+			isa = PBXGroup;
+			children = (
+				7929E4352C35DC4800CCD12E /* AuthenticationFlow.swift */,
+				7929E4372C35DC6100CCD12E /* PhoneNumberView.swift */,
+				7929E4392C35DC7700CCD12E /* VerificationCodeView.swift */,
+			);
+			path = AuthenticationFlow;
+			sourceTree = "<group>";
+		};
+		7929E4432C35DDDD00CCD12E /* NewMerchantFlow */ = {
+			isa = PBXGroup;
+			children = (
+				7929E4442C35DDFA00CCD12E /* BusinessInfoView.swift */,
+				7929E4462C35DE0C00CCD12E /* SpotSelectionView.swift */,
+				7929E4482C35DE1E00CCD12E /* PaymentView.swift */,
+				7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */,
+			);
+			path = NewMerchantFlow;
+			sourceTree = "<group>";
+		};
 		79369D892C1A3DA300B7B7A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				793FC0652C248ABA009F6516 /* SearchView.swift */,
+				7929E4322C35B69300CCD12E /* SearchBar.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -371,7 +416,11 @@
 		793FC07C2C248F20009F6516 /* RegularProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				7929E4432C35DDDD00CCD12E /* NewMerchantFlow */,
 				793FC07D2C248F28009F6516 /* RegularProfileView.swift */,
+				7929E43B2C35DCDD00CCD12E /* ProfileContainerView.swift */,
+				7929E43D2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift */,
+				7929E43F2C35DDAB00CCD12E /* MerchantFlowView.swift */,
 			);
 			path = RegularProfileView;
 			sourceTree = "<group>";
@@ -642,13 +691,16 @@
 			files = (
 				793FC07B2C248ECD009F6516 /* MerchantProfileView.swift in Sources */,
 				79F236522C34436A002F489D /* CityPickerView.swift in Sources */,
+				7929E4402C35DDAB00CCD12E /* MerchantFlowView.swift in Sources */,
 				7913027A2C22309200A68C7F /* CircularImagePromotionCell.swift in Sources */,
 				793FC0752C248D63009F6516 /* AddPromotionView.swift in Sources */,
 				795F975C2C18E4CA0097C7FC /* Persistence.swift in Sources */,
 				795F97552C18E4C80097C7FC /* DailyPromotionsView.swift in Sources */,
+				7929E4492C35DE1E00CCD12E /* PaymentView.swift in Sources */,
 				793FC0702C248CFC009F6516 /* ProfileViewModel.swift in Sources */,
 				7913027E2C2230B300A68C7F /* HorizontalPromotionCell.swift in Sources */,
 				793FC0842C2494AF009F6516 /* PromotionEditDetailViewModel.swift in Sources */,
+				7929E43A2C35DC7700CCD12E /* VerificationCodeView.swift in Sources */,
 				793FC0662C248ABA009F6516 /* SearchView.swift in Sources */,
 				793FC08F2C24B930009F6516 /* ConfirmationView.swift in Sources */,
 				79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */,
@@ -659,6 +711,7 @@
 				79E068732C2A0B1800B2656E /* CountdownPromotionCell.swift in Sources */,
 				79E068672C2A0A2400B2656E /* CompactHorizontalPromotionCell.swift in Sources */,
 				79E068542C29C0DB00B2656E /* AddPromotionCell.swift in Sources */,
+				7929E43C2C35DCDD00CCD12E /* ProfileContainerView.swift in Sources */,
 				79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */,
 				7929E4282C359A3A00CCD12E /* PromotionDetailViewModel.swift in Sources */,
 				791302822C2230FA00A68C7F /* BannerStylePromotionCell.swift in Sources */,
@@ -668,7 +721,9 @@
 				793FC0972C24D2D3009F6516 /* AddPromotionViewModel.swift in Sources */,
 				79E068712C2A0AEF00B2656E /* ComparativePromotionCell.swift in Sources */,
 				7929E42D2C35A8E700CCD12E /* MerchantDetailView.swift in Sources */,
+				7929E4452C35DDFA00CCD12E /* BusinessInfoView.swift in Sources */,
 				793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */,
+				7929E4362C35DC4800CCD12E /* AuthenticationFlow.swift in Sources */,
 				793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */,
 				79E068572C29C1FC00B2656E /* EditProfileView.swift in Sources */,
 				79F236572C347666002F489D /* SettingsView.swift in Sources */,
@@ -686,9 +741,11 @@
 				79F2365D2C349CC2002F489D /* PromotionDetailView.swift in Sources */,
 				79E068772C2A0BC900B2656E /* CategoryPromotionCell.swift in Sources */,
 				795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */,
+				7929E4472C35DE0C00CCD12E /* SpotSelectionView.swift in Sources */,
 				793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */,
 				7929E42F2C35A90D00CCD12E /* MerchantDetailViewModel.swift in Sources */,
 				791302862C2231C500A68C7F /* ImageFirstPromotionCell.swift in Sources */,
+				7929E4332C35B69300CCD12E /* SearchBar.swift in Sources */,
 				79E068632C2A08C000B2656E /* ToGoodToGOCell.swift in Sources */,
 				791302782C22307F00A68C7F /* CardStylePromotionCell.swift in Sources */,
 				79E068752C2A0B3900B2656E /* StandardPromotionCell.swift in Sources */,
@@ -699,12 +756,15 @@
 				791302722C22302100A68C7F /* MinimalistPromotionCell.swift in Sources */,
 				793FC0692C248ACF009F6516 /* FavoritesView.swift in Sources */,
 				7913028A2C2232B700A68C7F /* DetailedPromotionCell.swift in Sources */,
+				7929E44B2C35DE3600CCD12E /* TermsAndConditionsView.swift in Sources */,
 				7913027C2C2230A300A68C7F /* OverlayTextPromotionCell.swift in Sources */,
 				793FC0632C248AA8009F6516 /* HomeView.swift in Sources */,
 				79F236592C348008002F489D /* StatView.swift in Sources */,
 				7913026F2C222F1D00A68C7F /* PromotionCell.swift in Sources */,
 				79F236542C3443B7002F489D /* PromotionCard.swift in Sources */,
+				7929E4382C35DC6100CCD12E /* PhoneNumberView.swift in Sources */,
 				79E068692C2A0A3B00B2656E /* GridPromotionCell.swift in Sources */,
+				7929E43E2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift in Sources */,
 				79E0685D2C29E86900B2656E /* CategoryButton.swift in Sources */,
 				79F236502C344339002F489D /* PromotionRow.swift in Sources */,
 			);
@@ -878,7 +938,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rmantilla26.tagme;
+				PRODUCT_BUNDLE_IDENTIFIER = solopromociones.ravit.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -907,7 +967,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rmantilla26.tagme;
+				PRODUCT_BUNDLE_IDENTIFIER = solopromociones.ravit.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

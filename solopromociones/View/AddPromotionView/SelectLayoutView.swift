@@ -77,9 +77,7 @@ struct SelectLayoutView_Previews: PreviewProvider {
         NavigationView {
             SelectLayoutView(
                 viewModel: AddPromotionViewModel(
-                    profileViewModel: ProfileViewModel(
-                        user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)
-                    )
+                    profileViewModel: ProfileViewModel()
                 )
             )
         }

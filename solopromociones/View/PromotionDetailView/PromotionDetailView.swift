@@ -37,8 +37,6 @@ struct PromotionDetailView: View {
         merchantInfo(merchant: promotion.merchant)
         promotionDetails(promotion)
         locationInfo(merchant: promotion.merchant)
-        contactInfo(merchant: promotion.merchant)
-        socialMediaLinks(merchant: promotion.merchant)
         otherPromotions(merchant: promotion.merchant, promotions: promotion.otherPromotions)
     }
     

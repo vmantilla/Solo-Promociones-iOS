@@ -5,7 +5,7 @@ struct ProfileView: View {
     @State private var showingAddPromotion = false
     
     init(user: User) {
-        _viewModel = StateObject(wrappedValue: ProfileViewModel(user: user))
+        _viewModel = StateObject(wrappedValue: ProfileViewModel())
     }
     
     var body: some View {
@@ -13,7 +13,7 @@ struct ProfileView: View {
                 if viewModel.isMerchant {
                     MerchantProfileView(viewModel: viewModel)
                 } else {
-                    RegularProfileView(viewModel: viewModel)
+                    ProfileContainerView(viewModel: viewModel)
                 }
             }
         }

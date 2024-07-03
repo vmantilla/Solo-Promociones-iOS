@@ -76,7 +76,7 @@ struct HomeView: View {
     
     private var searchSection: some View {
         ZStack {
-            SearchBar(text: $searchText)
+            SearchBar(text: $searchText, isKeyboardEnabled: false, shouldFocus: false)
             
             Button(action: {
                 isSearchActive = true

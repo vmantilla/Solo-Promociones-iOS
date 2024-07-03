@@ -16,7 +16,7 @@ struct EditProfileView: View {
 
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
-        _name = State(initialValue: viewModel.user.name)
+        _name = State(initialValue: viewModel.user?.name ?? "")
     }
 
     var body: some View {
@@ -49,6 +49,6 @@ struct EditProfileView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(viewModel: ProfileViewModel(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)))
+        EditProfileView(viewModel: ProfileViewModel())
     }
 }

@@ -183,9 +183,3 @@ struct AddPromotionView: View {
         }
     }
 }
-
-struct AddPromotionView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPromotionView(profileViewModel: ProfileViewModel(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: true)))
-    }
-}

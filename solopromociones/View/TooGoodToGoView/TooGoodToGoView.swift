@@ -43,7 +43,7 @@ struct TooGoodToGoView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    SearchBar(text: $searchText)
+                    SearchBar(text: $searchText, shouldFocus: false)
                     
                     CategoryScrollView(categories: viewModel.categories, selectedCategory: $selectedCategory)
                     
@@ -68,25 +68,6 @@ struct TooGoodToGoView: View {
             (searchText.isEmpty || product.title.localizedCaseInsensitiveContains(searchText)) &&
             (selectedCategory == nil || product.category == selectedCategory)
         }
-    }
-}
-
-struct SearchBar: View {
-    @Binding var text: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-            TextField("Buscar productos", text: $text)
-            if !text.isEmpty {
-                Button(action: { text = "" }) {
-                    Image(systemName: "xmark.circle.fill")
-                }
-            }
-        }
-        .padding(8)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
     }
 }
 

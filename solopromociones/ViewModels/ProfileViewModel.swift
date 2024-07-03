@@ -1,18 +1,39 @@
 import SwiftUI
+import Combine
 
 class ProfileViewModel: ObservableObject {
-    @Published var user: User
-    @Published var isMerchant: Bool
+    @Published var user: User?
+    @Published var isAuthenticated: Bool = false
+    @Published var isMerchant: Bool = false
     @Published var merchantPromotions: [Promotion] = []
     @Published var profileImage: UIImage?
     @Published var backgroundImage: UIImage?
     @Published var availableSpots: Int = 0
     
-    init(user: User) {
-        self.user = user
-        self.isMerchant = user.isMerchant
-        if user.isMerchant {
-            loadPromotions()
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        checkAuthenticationStatus()
+    }
+    
+    func checkAuthenticationStatus() {
+        // Aquí implementarías la lógica real para verificar si el usuario está autenticado
+        // Por ahora, simularemos esto con un valor hardcodeado
+        isAuthenticated = false
+        user = nil
+    }
+    
+    func authenticateUser(phoneNumber: String, verificationCode: String, completion: @escaping (Bool) -> Void) {
+        // Aquí implementarías la lógica de autenticación real
+        // Por ahora, simularemos una autenticación exitosa
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.isAuthenticated = true
+            self.user = User(id: "1", name: "Usuario Ejemplo", email: "usuario@ejemplo.com", isMerchant: false)
+            self.isMerchant = self.user?.isMerchant ?? false
+            if self.isMerchant {
+                self.loadPromotions()
+            }
+            completion(true)
         }
     }
     
@@ -26,7 +47,7 @@ class ProfileViewModel: ObservableObject {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             let usersContainer = try decoder.decode(UsersContainer.self, from: data)
-            if let merchant = usersContainer.users.first(where: { $0.id == user.id }) {
+            if let merchant = usersContainer.users.first(where: { $0.id == user?.id }) {
                 self.merchantPromotions = merchant.promotions ?? []
             }
         } catch {
@@ -35,32 +56,42 @@ class ProfileViewModel: ObservableObject {
     }
     
     func toggleMerchantStatus() {
-        self.isMerchant.toggle()
-        self.user.isMerchant = self.isMerchant
-        if self.isMerchant {
+        isMerchant.toggle()
+        user?.isMerchant = isMerchant
+        if isMerchant {
             loadPromotions()
         } else {
-            self.merchantPromotions = []
+            merchantPromotions = []
         }
     }
     
     func convertToMerchant(with spots: Int) {
-            self.isMerchant = true
-            self.user.isMerchant = true
-            self.availableSpots = spots
-            loadPromotions()
-        }
+        isMerchant = true
+        user?.isMerchant = true
+        availableSpots = spots
+        loadPromotions()
+    }
 
-        func addPromotion(_ promotion: Promotion) {
-            if merchantPromotions.count < availableSpots {
-                merchantPromotions.append(promotion)
-            }
+    func addPromotion(_ promotion: Promotion) {
+        if merchantPromotions.count < availableSpots {
+            merchantPromotions.append(promotion)
         }
+    }
     
     func updateProfile(name: String, profileImage: UIImage?, backgroundImage: UIImage?) {
-            self.user.name = name
-            self.profileImage = profileImage
-            self.backgroundImage = backgroundImage
-            // Implement actual update logic here (e.g., API calls)
-        }
+        user?.name = name
+        self.profileImage = profileImage
+        self.backgroundImage = backgroundImage
+        // Implement actual update logic here (e.g., API calls)
+    }
+    
+    func signOut() {
+        isAuthenticated = false
+        user = nil
+        isMerchant = false
+        merchantPromotions = []
+        profileImage = nil
+        backgroundImage = nil
+        availableSpots = 0
+    }
 }
