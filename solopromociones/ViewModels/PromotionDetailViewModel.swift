@@ -69,32 +69,13 @@ class PromotionDetailViewModel: ObservableObject {
         guard let url = URL(string: urlString) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    
-    func usePromotion() {
-        guard let promotionId = promotion?.id else { return }
-        
-        promotionService.usePromotion(promotionId: promotionId)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                if case .failure(let error) = completion {
-                    print("Error using promotion: \(error)")
-                }
-            } receiveValue: { _ in
-                print("Promotion used successfully")
-                // You might want to update the UI or the promotion object here
-            }
-            .store(in: &cancellables)
-    }
 }
 
-// Protocol for dependency injection and easier testing
 protocol PromotionServiceProtocol {
     func fetchPromotionDetail(id: String) -> AnyPublisher<PromotionDetail, Error>
     func updateFavoriteStatus(promotionId: String, isFavorite: Bool) -> AnyPublisher<Void, Error>
-    func usePromotion(promotionId: String) -> AnyPublisher<Void, Error>
 }
 
-// Concrete implementation of the service
 class PromotionService: PromotionServiceProtocol {
     func fetchPromotionDetail(id: String) -> AnyPublisher<PromotionDetail, Error> {
         // Implement the actual API call here
@@ -127,21 +108,7 @@ class PromotionService: PromotionServiceProtocol {
         }
         .eraseToAnyPublisher()
     }
-    
-    func usePromotion(promotionId: String) -> AnyPublisher<Void, Error> {
-        // Implement the actual API call here
-        // For now, we'll use a mock implementation
-        return Future { promise in
-            // Simulate network delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                promise(.success(()))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
 }
-
-// Keep the existing PromotionDetail, MerchantDetail, and PromotionSummary structs as they are
 
 struct PromotionDetail: Codable {
     let id: String
@@ -163,6 +130,12 @@ struct MerchantDetail: Codable {
     let latitude: Double
     let longitude: Double
     let address: String
+    let phoneNumber: String?
+    let email: String?
+    let website: String?
+    let facebookURL: String?
+    let instagramURL: String?
+    let whatsappNumber: String?
 }
 
 struct PromotionSummary: Codable, Identifiable {

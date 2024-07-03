@@ -37,8 +37,9 @@ struct PromotionDetailView: View {
         merchantInfo(merchant: promotion.merchant)
         promotionDetails(promotion)
         locationInfo(merchant: promotion.merchant)
+        contactInfo(merchant: promotion.merchant)
+        socialMediaLinks(merchant: promotion.merchant)
         otherPromotions(merchant: promotion.merchant, promotions: promotion.otherPromotions)
-        usePromotionButton()
     }
     
     private func imageCarousel(images: [String]) -> some View {
@@ -133,6 +134,100 @@ struct PromotionDetailView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
     
+    private func contactInfo(merchant: MerchantDetail) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Información de contacto").font(.headline)
+            
+            if let phoneNumber = merchant.phoneNumber {
+                HStack {
+                    Image(systemName: "phone")
+                    Text(phoneNumber)
+                }
+            }
+            
+            if let email = merchant.email {
+                HStack {
+                    Image(systemName: "envelope")
+                    Text(email)
+                }
+            }
+            
+            if let website = merchant.website {
+                HStack {
+                    Image(systemName: "globe")
+                    Text(website)
+                }
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+    }
+    
+    private func socialMediaLinks(merchant: MerchantDetail) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            VStack(spacing: 10) {
+                if let facebookURL = merchant.facebookURL {
+                    socialMediaButton(
+                        icon: "f.circle.fill",
+                        text: "Síguenos en Facebook",
+                        color: .blue
+                    ) {
+                        openURL(facebookURL)
+                    }
+                }
+                
+                if let instagramURL = merchant.instagramURL {
+                    socialMediaButton(
+                        icon: "camera.circle.fill",
+                        text: "Síguenos en Instagram",
+                        color: .purple
+                    ) {
+                        openURL(instagramURL)
+                    }
+                }
+                
+                if let whatsappNumber = merchant.whatsappNumber {
+                    socialMediaButton(
+                        icon: "phone.circle.fill",
+                        text: "Contáctanos por WhatsApp",
+                        color: .green
+                    ) {
+                        openWhatsApp(whatsappNumber)
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+    }
+
+    private func socialMediaButton(icon: String, text: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: icon)
+                    .foregroundColor(.white)
+                    .frame(width: 30, height: 30)
+                    .background(color)
+                    .clipShape(Circle())
+                
+                Text(text)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(10)
+        }
+    }
+    
     private func otherPromotions(merchant: MerchantDetail, promotions: [PromotionSummary]) -> some View {
         VStack(alignment: .leading) {
             Text("Más promociones de \(merchant.name)")
@@ -167,16 +262,13 @@ struct PromotionDetailView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
     
-    private func usePromotionButton() -> some View {
-        Button(action: viewModel.usePromotion) {
-            Text("Usar Promoción")
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
-        }
-        .padding()
+    private func openURL(_ urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    private func openWhatsApp(_ number: String) {
+        let urlString = "https://wa.me/\(number)"
+        openURL(urlString)
     }
 }

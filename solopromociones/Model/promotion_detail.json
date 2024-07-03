@@ -17,7 +17,13 @@
     "logoURL": "https://example.com/logo.jpg",
     "latitude": 4.710989,
     "longitude": -74.072092,
-    "address": "Calle 82 #11-75, Bogotá, Colombia"
+    "address": "Calle 82 #11-75, Bogotá, Colombia",
+    "phoneNumber": "+57 1 234 5678",
+    "email": "info@rincondeloscockteles.com",
+    "website": "https://www.rincondeloscockteles.com",
+    "facebookURL": "https://www.facebook.com/rincondeloscockteles",
+    "instagramURL": "https://www.instagram.com/rincondeloscockteles",
+    "whatsappNumber": "+573001234567"
   },
   "otherPromotions": [
     {
