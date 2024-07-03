@@ -13,17 +13,11 @@ struct MainTabView: View {
                 }
                 .tag(0)
             
-            SearchView(viewModel: viewModel)
-                .tabItem {
-                    Label("Buscar", systemImage: "magnifyingglass")
-                }
-                .tag(1)
-            
             DailyPromotionsView()
                 .tabItem {
                     Label("Días", systemImage: "calendar")
                 }
-                .tag(2)
+                .tag(1)
             
             TooGoodToGoView()
                 .tabItem {
@@ -34,13 +28,13 @@ struct MainTabView: View {
                             .foregroundColor(.green)
                     }
                 }
-                .tag(3)
+                .tag(2)
             
             ProfileView(user: user)
                 .tabItem {
                     Label("Perfil", systemImage: user.isMerchant ? "briefcase" : "person")
                 }
-                .tag(4)
+                .tag(3)
         }
     }
 }

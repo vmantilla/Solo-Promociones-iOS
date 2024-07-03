@@ -4,31 +4,29 @@ struct SearchView: View {
     @State private var searchText = ""
     @State private var recentSearches: [String] = ["Restaurantes", "Cine", "Spa"]
     @ObservedObject var viewModel: HomeViewModel
-    
+    @State private var isSearching = false
+
     var body: some View {
-        VStack(spacing: 20) {
-            searchBar
-            
-            if searchText.isEmpty {
-                recentSearchesSection
-                popularCategoriesSection
-            } else {
-                searchResultsSection
+        ScrollView {
+            VStack(spacing: 20) {
+                SearchBar(text: $searchText)
+                
+                if searchText.isEmpty {
+                    recentSearchesSection
+                    popularCategoriesSection
+                } else if searchText.count >= 4 {
+                    searchResultsSection
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
+            .padding(.horizontal)
+            .gesture(DragGesture().onChanged { _ in
+                hideKeyboard()
+            })
         }
-        .padding()
         .navigationTitle("Buscar")
-    }
-    
-    private var searchBar: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
-            TextField("Buscar promociones", text: $searchText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-        }
+        
     }
     
     private var recentSearchesSection: some View {
@@ -42,7 +40,9 @@ struct SearchView: View {
                     Text(search)
                     Spacer()
                     Button(action: {
-                        // Eliminar búsqueda reciente
+                        if let index = recentSearches.firstIndex(of: search) {
+                            recentSearches.remove(at: index)
+                        }
                     }) {
                         Image(systemName: "xmark")
                     }
@@ -72,6 +72,13 @@ struct SearchView: View {
                     PromotionRow(promotion: promotion)
                 }
             }
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
+    }
+
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

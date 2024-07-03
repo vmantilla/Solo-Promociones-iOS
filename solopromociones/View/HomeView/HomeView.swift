@@ -7,38 +7,47 @@ struct HomeView: View {
     @State private var selectedCategory: String?
     @State private var showCityPicker = false
     @State private var currentFeaturedPage = 0
+    @State private var isSearchActive = false
     
     let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @Binding var selectedTab: Int
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    headerSection
-                    searchSection
-                    categorySection
-                    if !filteredPromotions(viewModel.featuredPromotions).isEmpty {
-                        featuredSection
+            VStack {
+                NavigationLink(
+                    destination: SearchView(viewModel: viewModel),
+                    isActive: $isSearchActive,
+                    label: { EmptyView() }
+                ).hidden()
+                
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        headerSection
+                        searchSection
+                        categorySection
+                        if !filteredPromotions(viewModel.featuredPromotions).isEmpty {
+                            featuredSection
+                        }
+                        if !filteredPromotions(viewModel.dailyDeals).isEmpty {
+                            dailyDealsSection
+                        }
+                        if !filteredPromotions(viewModel.nearbyPromotions).isEmpty {
+                            nearbyPromotionsSection
+                        }
+                        if !filteredPromotions(viewModel.popularPromotions).isEmpty {
+                            popularPromotionsSection
+                        }
+                        if !filteredPromotions(viewModel.promotions).isEmpty {
+                            allPromotionsSection
+                        }
                     }
-                    if !filteredPromotions(viewModel.dailyDeals).isEmpty {
-                        dailyDealsSection
-                    }
-                    if !filteredPromotions(viewModel.nearbyPromotions).isEmpty {
-                        nearbyPromotionsSection
-                    }
-                    if !filteredPromotions(viewModel.popularPromotions).isEmpty {
-                        popularPromotionsSection
-                    }
-                    if !filteredPromotions(viewModel.promotions).isEmpty {
-                        allPromotionsSection
-                    }
+                    .padding()
                 }
-                .padding()
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarHidden(true)
+                .background(Color.white)
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(true)
-            .background(Color.white)
         }
     }
     
@@ -66,7 +75,15 @@ struct HomeView: View {
     }
     
     private var searchSection: some View {
-        SearchBar(text: $searchText)
+        ZStack {
+            SearchBar(text: $searchText)
+            
+            Button(action: {
+                isSearchActive = true
+            }) {
+                Color.clear
+            }
+        }
     }
     
     private var categorySection: some View {
