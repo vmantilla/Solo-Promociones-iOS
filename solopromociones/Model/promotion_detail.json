@@ -1,0 +1,34 @@
+{
+  "id": "promo123",
+  "title": "2x1 en Cocteles",
+  "description": "Disfruta de 2 cocteles por el precio de 1 en nuestro bar. Una oportunidad perfecta para probar nuestra variedad de cocteles artesanales.",
+  "validUntil": "2024-06-30",
+  "images": [
+    "https://example.com/cocktail1.jpg",
+    "https://example.com/cocktail2.jpg",
+    "https://example.com/bar.jpg"
+  ],
+  "conditions": "Válido de lunes a jueves, de 18:00 a 22:00. No acumulable con otras promociones.",
+  "isFavorite": false,
+  "merchant": {
+    "id": "merchant456",
+    "name": "El Rincón de los Cocteles",
+    "category": "Bar y Restaurante",
+    "logoURL": "https://example.com/logo.jpg",
+    "latitude": 4.710989,
+    "longitude": -74.072092,
+    "address": "Calle 82 #11-75, Bogotá, Colombia"
+  },
+  "otherPromotions": [
+    {
+      "id": "promo789",
+      "title": "Happy Hour Extendido",
+      "imageURL": "https://example.com/happyhour.jpg"
+    },
+    {
+      "id": "promo101",
+      "title": "Noche de Tapas",
+      "imageURL": "https://example.com/tapas.jpg"
+    }
+  ]
+}

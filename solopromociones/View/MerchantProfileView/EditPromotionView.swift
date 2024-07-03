@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct EditPromotionView: View {
-    @ObservedObject var viewModel: PromotionDetailViewModel
+    @ObservedObject var viewModel: PromotionEditDetailViewModel
     @Environment(\.presentationMode) var presentationMode
     
     @State private var title: String
@@ -10,7 +10,7 @@ struct EditPromotionView: View {
     @State private var imageURL: String
     @State private var conditions: String
     
-    init(viewModel: PromotionDetailViewModel) {
+    init(viewModel: PromotionEditDetailViewModel) {
         self.viewModel = viewModel
         _title = State(initialValue: viewModel.promotion.title)
         _description = State(initialValue: viewModel.promotion.description)
@@ -113,7 +113,7 @@ struct EditPromotionView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EditPromotionView(
-                viewModel: PromotionDetailViewModel(
+                viewModel: PromotionEditDetailViewModel(
                     promotion: Promotion(id: "1", title: "Oferta Especial", description: "Descripción de la oferta especial", validUntil: "30/07/2024", imageURL: "https://example.com/image.jpg", conditions: "Aplican restricciones")
                 )
             )

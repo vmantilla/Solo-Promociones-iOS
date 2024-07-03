@@ -5,7 +5,7 @@ struct StandardPromotionCell: View {
     let promotion: Promotion
 
     var body: some View {
-        NavigationLink(destination: PromotionDetailView(promotion: promotion)) {
+        NavigationLink(destination: PromotionDetailView(promotionId: "promo123")) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack(alignment: .top, spacing: 12) {
                     CachedAsyncImage(url: URL(string: promotion.imageURL)) { phase in

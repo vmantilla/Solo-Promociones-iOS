@@ -36,7 +36,25 @@ struct Promotion: Identifiable, Codable {
     var imageURL: String
     var conditions: String
     var category: String? = ""
+    var merchant: Merchant?
+    
 }
+
+struct Merchant: Identifiable, Codable {
+        let id: String
+        let name: String
+        let category: String
+        let logoURL: String
+        let latitude: Double
+        let longitude: Double
+        let address: String
+        let phoneNumber: String?
+        let email: String?
+        let website: String?
+        let facebookURL: String?
+        let instagramURL: String?
+        let whatsappNumber: String?
+    }
 
 struct City: Identifiable, Codable {
     var id: String { name }
