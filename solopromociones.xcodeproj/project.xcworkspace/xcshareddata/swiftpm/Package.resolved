@@ -1,4 +1,5 @@
 {
+  "originHash" : "5e0879e2948b714fc8e8997dabcef552ba081f29b53900018c610c166fe170f2",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -82,6 +83,24 @@
       }
     },
     {
+      "identity" : "swift-perception",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-perception",
+      "state" : {
+        "revision" : "d3ab98dc2887d1cc3bed676f6fa354da4cb22b3c",
+        "version" : "1.2.4"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
+        "version" : "510.0.2"
+      }
+    },
+    {
       "identity" : "swiftui-cached-async-image",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
@@ -109,5 +128,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

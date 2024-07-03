@@ -130,7 +130,8 @@ struct MerchantProfileView: View {
         }
         .sheet(isPresented: $showingEditPromotion) {
             if let promotion = selectedPromotion {
-                //EditPromotionView(viewModel: viewModel, promotion: promotion)
+                let promotionDetailViewModel = PromotionDetailViewModel(promotion: promotion)
+                EditPromotionView(viewModel: promotionDetailViewModel)
             }
         }
     }

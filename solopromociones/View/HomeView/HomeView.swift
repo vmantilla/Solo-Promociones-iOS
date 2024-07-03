@@ -109,7 +109,7 @@ struct HomeView: View {
                 HStack(spacing: 16) {
                     ForEach(filteredPromotions(viewModel.dailyDeals)) { promotion in
                         StandardPromotionCell(promotion: promotion)
-                            .frame(width: 280)  // Ajusta este valor según sea necesario
+                            .frame(width: 280)
                     }
                 }
             }

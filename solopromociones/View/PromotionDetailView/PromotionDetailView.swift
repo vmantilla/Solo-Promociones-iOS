@@ -1,122 +1,109 @@
+//
+//  PromotionDetailView.swift
+//  solopromociones
+//
+//  Created by RAVIT Admin on 2/07/24.
+//
+
 import SwiftUI
+import CachedAsyncImage
 
 struct PromotionDetailView: View {
-    @ObservedObject var viewModel: PromotionDetailViewModel
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State private var title: String
-    @State private var description: String
-    @State private var validUntil: String
-    @State private var imageURL: String
-    @State private var conditions: String
-    
-    init(viewModel: PromotionDetailViewModel) {
-        self.viewModel = viewModel
-        _title = State(initialValue: viewModel.promotion.title)
-        _description = State(initialValue: viewModel.promotion.description)
-        _validUntil = State(initialValue: viewModel.promotion.validUntil)
-        _imageURL = State(initialValue: viewModel.promotion.imageURL)
-        _conditions = State(initialValue: viewModel.promotion.conditions)
-    }
-    
+    let promotion: Promotion
+    let storeName = ""
+
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Editar Promoción")
+            VStack(alignment: .leading, spacing: 16) {
+                // Imagen de la promoción
+                CachedAsyncImage(url: URL(string: promotion.imageURL)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 250)
+                            .clipped()
+                    case .failure:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 250)
+                            .foregroundColor(.gray)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+                .cornerRadius(10)
+                .shadow(radius: 5)
+
+                // Título de la promoción
+                Text(promotion.title)
                     .font(.largeTitle)
-                    .bold()
-                    .padding(.top)
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Título")
+                    .fontWeight(.bold)
+
+                // Nombre de la tienda
+                HStack {
+                    Text("Tienda:")
                         .font(.headline)
-                    TextField("Título", text: $title)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                    Text(storeName)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
                 }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Descripción")
+
+                // Descripción de la promoción
+                Text(promotion.description)
+                    .font(.body)
+                    .foregroundColor(.secondary)
+
+                // Precios
+                HStack {
+                    Text("Precio original:")
                         .font(.headline)
-                    TextEditor(text: $description)
-                        .frame(height: 100)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                    Text("\(10.99, specifier: "%.2f")€")
+                        .strikethrough()
+                        .foregroundColor(.secondary)
                 }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Válido hasta")
+
+                HStack {
+                    Text("Precio Eco:")
                         .font(.headline)
-                    TextField("Válido hasta", text: $validUntil)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                    Text("\(5.50, specifier: "%.2f")€")
+                        .fontWeight(.bold)
+                        .foregroundColor(.green)
                 }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("URL de la imagen")
+
+                // Fecha de caducidad
+                HStack {
+                    Text("Caduca el:")
                         .font(.headline)
-                    TextField("URL de la imagen", text: $imageURL)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                    Text(Date().addingTimeInterval(5400), style: .date)
+                        .foregroundColor(.red)
                 }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Condiciones")
+
+                // Categoría
+                HStack {
+                    Text("Categoría:")
                         .font(.headline)
-                    TextEditor(text: $conditions)
-                        .frame(height: 100)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                    Text(promotion.category ?? "")
+                        .font(.subheadline)
+                        .foregroundColor(.blue)
                 }
-                
-                Button(action: {
-                    viewModel.updatePromotion(title: title, description: description, validUntil: validUntil, imageURL: imageURL, conditions: conditions)
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Guardar cambios")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                .padding(.vertical)
-                
-                Button(action: {
-                    viewModel.deletePromotion()
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Eliminar Promoción")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.red)
-                        .cornerRadius(8)
-                }
-                .padding(.vertical)
+
+                Spacer()
             }
             .padding()
         }
-        .background(Color(.systemGroupedBackground))
+        .navigationTitle("Detalles de la Promoción")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct PromotionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            PromotionDetailView(
-                viewModel: PromotionDetailViewModel(
-                    promotion: Promotion(id: "1", title: "Oferta Especial", description: "Descripción de la oferta especial", validUntil: "30/07/2024", imageURL: "https://example.com/image.jpg", conditions: "Aplican restricciones")
-                )
-            )
-        }
+        let promotion = Promotion(id: "1", title: "Oferta Especial", description: "Descripción de la oferta especial", validUntil: "30/07/2024", imageURL: "https://example.com/image.jpg", conditions: "Aplican restricciones")
+        PromotionDetailView(promotion: promotion)
     }
 }

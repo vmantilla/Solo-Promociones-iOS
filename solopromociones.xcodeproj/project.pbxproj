@@ -35,7 +35,7 @@
 		793FC0702C248CFC009F6516 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC06F2C248CFC009F6516 /* ProfileViewModel.swift */; };
 		793FC0722C248D11009F6516 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0712C248D11009F6516 /* User.swift */; };
 		793FC0752C248D63009F6516 /* AddPromotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0742C248D63009F6516 /* AddPromotionView.swift */; };
-		793FC0782C248D96009F6516 /* PromotionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0772C248D96009F6516 /* PromotionDetailView.swift */; };
+		793FC0782C248D96009F6516 /* EditPromotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC0772C248D96009F6516 /* EditPromotionView.swift */; };
 		793FC07B2C248ECD009F6516 /* MerchantProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC07A2C248ECD009F6516 /* MerchantProfileView.swift */; };
 		793FC07E2C248F28009F6516 /* RegularProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC07D2C248F28009F6516 /* RegularProfileView.swift */; };
 		793FC0822C249195009F6516 /* merchant_promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 793FC0812C249195009F6516 /* merchant_promotions.json */; };
@@ -81,6 +81,7 @@
 		79F236542C3443B7002F489D /* PromotionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236532C3443B7002F489D /* PromotionCard.swift */; };
 		79F236572C347666002F489D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236562C347666002F489D /* SettingsView.swift */; };
 		79F236592C348008002F489D /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236582C348008002F489D /* StatView.swift */; };
+		79F2365D2C349CC2002F489D /* PromotionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2365C2C349CC2002F489D /* PromotionDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,7 +128,7 @@
 		793FC06F2C248CFC009F6516 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		793FC0712C248D11009F6516 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		793FC0742C248D63009F6516 /* AddPromotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionView.swift; sourceTree = "<group>"; };
-		793FC0772C248D96009F6516 /* PromotionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailView.swift; sourceTree = "<group>"; };
+		793FC0772C248D96009F6516 /* EditPromotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPromotionView.swift; sourceTree = "<group>"; };
 		793FC07A2C248ECD009F6516 /* MerchantProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantProfileView.swift; sourceTree = "<group>"; };
 		793FC07D2C248F28009F6516 /* RegularProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularProfileView.swift; sourceTree = "<group>"; };
 		793FC0812C249195009F6516 /* merchant_promotions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = merchant_promotions.json; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		79F236532C3443B7002F489D /* PromotionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCard.swift; sourceTree = "<group>"; };
 		79F236562C347666002F489D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79F236582C348008002F489D /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
+		79F2365C2C349CC2002F489D /* PromotionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		7913026D2C222F1200A68C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				79F2365B2C349CB6002F489D /* PromotionDetailView */,
 				79F236552C34765F002F489D /* SettingsView */,
 				79E068612C2A08A300B2656E /* NuevasCeldas */,
 				79E0685E2C29ECD700B2656E /* TooGoodToGoView */,
@@ -215,7 +218,6 @@
 				793FC0872C24B2A2009F6516 /* Common */,
 				793FC07C2C248F20009F6516 /* RegularProfileView */,
 				793FC0792C248EC6009F6516 /* MerchantProfileView */,
-				793FC0762C248D8F009F6516 /* PromotionDetailView */,
 				793FC0732C248D55009F6516 /* AddPromotionView */,
 				793FC06D2C248B3C009F6516 /* DailyPromotionsView */,
 				793FC06A2C248AD9009F6516 /* ProfileView */,
@@ -332,17 +334,10 @@
 			path = AddPromotionView;
 			sourceTree = "<group>";
 		};
-		793FC0762C248D8F009F6516 /* PromotionDetailView */ = {
-			isa = PBXGroup;
-			children = (
-				793FC0772C248D96009F6516 /* PromotionDetailView.swift */,
-			);
-			path = PromotionDetailView;
-			sourceTree = "<group>";
-		};
 		793FC0792C248EC6009F6516 /* MerchantProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				793FC0772C248D96009F6516 /* EditPromotionView.swift */,
 				793FC07A2C248ECD009F6516 /* MerchantProfileView.swift */,
 				79E068532C29C0DB00B2656E /* AddPromotionCell.swift */,
 				79F236582C348008002F489D /* StatView.swift */,
@@ -468,6 +463,14 @@
 				79F236562C347666002F489D /* SettingsView.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		79F2365B2C349CB6002F489D /* PromotionDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				79F2365C2C349CC2002F489D /* PromotionDetailView.swift */,
+			);
+			path = PromotionDetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -653,6 +656,7 @@
 				793FC06C2C248B17009F6516 /* ProfileView.swift in Sources */,
 				79E0686D2C2A0AA800B2656E /* CollapsiblePromotionCell.swift in Sources */,
 				791302882C2232A500A68C7F /* CompactPromotionCell.swift in Sources */,
+				79F2365D2C349CC2002F489D /* PromotionDetailView.swift in Sources */,
 				79E068772C2A0BC900B2656E /* CategoryPromotionCell.swift in Sources */,
 				795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */,
 				793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */,
@@ -660,7 +664,7 @@
 				79E068632C2A08C000B2656E /* ToGoodToGOCell.swift in Sources */,
 				791302782C22307F00A68C7F /* CardStylePromotionCell.swift in Sources */,
 				79E068752C2A0B3900B2656E /* StandardPromotionCell.swift in Sources */,
-				793FC0782C248D96009F6516 /* PromotionDetailView.swift in Sources */,
+				793FC0782C248D96009F6516 /* EditPromotionView.swift in Sources */,
 				79E0686B2C2A0A8800B2656E /* FeaturedPromotionCell.swift in Sources */,
 				793FC0722C248D11009F6516 /* User.swift in Sources */,
 				795F975F2C18E4CA0097C7FC /* solopromociones.xcdatamodeld in Sources */,
