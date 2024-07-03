@@ -1,0 +1,69 @@
+{
+  "id": "merchant456",
+  "name": "El Rincón de los Cocteles",
+  "category": "Bar y Restaurante",
+  "logoURL": "https://example.com/logo.jpg",
+  "latitude": 4.710989,
+  "longitude": -74.072092,
+  "address": "Calle 82 #11-75, Bogotá, Colombia",
+  "phoneNumber": "+57 1 234 5678",
+  "email": "info@rincondeloscockteles.com",
+  "website": "https://www.rincondeloscockteles.com",
+  "facebookURL": "https://www.facebook.com/rincondeloscockteles",
+  "instagramURL": "https://www.instagram.com/rincondeloscockteles",
+  "whatsappNumber": "+573001234567",
+  "images": [
+    "https://example.com/cocktail1.jpg",
+    "https://example.com/cocktail2.jpg",
+    "https://example.com/bar.jpg"
+  ],
+  "openingHours": [
+    {
+      "day": "Lunes",
+      "openingTime": "18:00",
+      "closingTime": "22:00"
+    },
+    {
+      "day": "Martes",
+      "openingTime": "18:00",
+      "closingTime": "22:00"
+    },
+    {
+      "day": "Miércoles",
+      "openingTime": "18:00",
+      "closingTime": "22:00"
+    },
+    {
+      "day": "Jueves",
+      "openingTime": "18:00",
+      "closingTime": "22:00"
+    },
+    {
+      "day": "Viernes",
+      "openingTime": "18:00",
+      "closingTime": "02:00"
+    },
+    {
+      "day": "Sábado",
+      "openingTime": "18:00",
+      "closingTime": "02:00"
+    },
+    {
+      "day": "Domingo",
+      "openingTime": "18:00",
+      "closingTime": "22:00"
+    }
+  ],
+  "promotions": [
+    {
+      "id": "promo789",
+      "title": "Happy Hour Extendido",
+      "imageURL": "https://example.com/happyhour.jpg"
+    },
+    {
+      "id": "promo101",
+      "title": "Noche de Tapas",
+      "imageURL": "https://example.com/tapas.jpg"
+    }
+  ]
+}

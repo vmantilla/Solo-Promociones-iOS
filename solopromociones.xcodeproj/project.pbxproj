@@ -25,6 +25,9 @@
 		7913028C2C2232CD00A68C7F /* RoundedPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913028B2C2232CD00A68C7F /* RoundedPromotionCell.swift */; };
 		7929E4282C359A3A00CCD12E /* PromotionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4272C359A3A00CCD12E /* PromotionDetailViewModel.swift */; };
 		7929E42A2C359ACD00CCD12E /* promotion_detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 7929E4292C359ACD00CCD12E /* promotion_detail.json */; };
+		7929E42D2C35A8E700CCD12E /* MerchantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E42C2C35A8E700CCD12E /* MerchantDetailView.swift */; };
+		7929E42F2C35A90D00CCD12E /* MerchantDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */; };
+		7929E4312C35AB6400CCD12E /* merchantDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 7929E4302C35AB6400CCD12E /* merchantDetail.json */; };
 		79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */; };
 		79369D8D2C1A3DC200B7B7A6 /* promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 79369D8C2C1A3DC200B7B7A6 /* promotions.json */; };
 		79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */; };
@@ -121,6 +124,9 @@
 		7913028B2C2232CD00A68C7F /* RoundedPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPromotionCell.swift; sourceTree = "<group>"; };
 		7929E4272C359A3A00CCD12E /* PromotionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailViewModel.swift; sourceTree = "<group>"; };
 		7929E4292C359ACD00CCD12E /* promotion_detail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = promotion_detail.json; sourceTree = "<group>"; };
+		7929E42C2C35A8E700CCD12E /* MerchantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailView.swift; sourceTree = "<group>"; };
+		7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewModel.swift; sourceTree = "<group>"; };
+		7929E4302C35AB6400CCD12E /* merchantDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = merchantDetail.json; sourceTree = "<group>"; };
 		79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		79369D8C2C1A3DC200B7B7A6 /* promotions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = promotions.json; sourceTree = "<group>"; };
 		79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewModel.swift; sourceTree = "<group>"; };
@@ -214,6 +220,7 @@
 		7913026D2C222F1200A68C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7929E42B2C35A8DF00CCD12E /* MerchantDetailView */,
 				79F2365B2C349CB6002F489D /* PromotionDetailView */,
 				79F236552C34765F002F489D /* SettingsView */,
 				79E068612C2A08A300B2656E /* NuevasCeldas */,
@@ -258,9 +265,18 @@
 			path = PromotionCells;
 			sourceTree = "<group>";
 		};
+		7929E42B2C35A8DF00CCD12E /* MerchantDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				7929E42C2C35A8E700CCD12E /* MerchantDetailView.swift */,
+			);
+			path = MerchantDetailView;
+			sourceTree = "<group>";
+		};
 		79369D892C1A3DA300B7B7A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7929E4302C35AB6400CCD12E /* merchantDetail.json */,
 				7929E4292C359ACD00CCD12E /* promotion_detail.json */,
 				79E1D77E2C2727440093723D /* home.json */,
 				79E1D77C2C2724E00093723D /* cities.json */,
@@ -326,6 +342,7 @@
 				793FC0962C24D2D3009F6516 /* AddPromotionViewModel.swift */,
 				79E1D77A2C27248F0093723D /* HomeViewModel.swift */,
 				7929E4272C359A3A00CCD12E /* PromotionDetailViewModel.swift */,
+				7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -591,6 +608,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7929E4312C35AB6400CCD12E /* merchantDetail.json in Resources */,
 				795F975A2C18E4CA0097C7FC /* Preview Assets.xcassets in Resources */,
 				7929E42A2C359ACD00CCD12E /* promotion_detail.json in Resources */,
 				79E1D77D2C2724E00093723D /* cities.json in Resources */,
@@ -649,6 +667,7 @@
 				791302842C22310B00A68C7F /* SplitViewPromotionCell.swift in Sources */,
 				793FC0972C24D2D3009F6516 /* AddPromotionViewModel.swift in Sources */,
 				79E068712C2A0AEF00B2656E /* ComparativePromotionCell.swift in Sources */,
+				7929E42D2C35A8E700CCD12E /* MerchantDetailView.swift in Sources */,
 				793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */,
 				793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */,
 				79E068572C29C1FC00B2656E /* EditProfileView.swift in Sources */,
@@ -668,6 +687,7 @@
 				79E068772C2A0BC900B2656E /* CategoryPromotionCell.swift in Sources */,
 				795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */,
 				793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */,
+				7929E42F2C35A90D00CCD12E /* MerchantDetailViewModel.swift in Sources */,
 				791302862C2231C500A68C7F /* ImageFirstPromotionCell.swift in Sources */,
 				79E068632C2A08C000B2656E /* ToGoodToGOCell.swift in Sources */,
 				791302782C22307F00A68C7F /* CardStylePromotionCell.swift in Sources */,
