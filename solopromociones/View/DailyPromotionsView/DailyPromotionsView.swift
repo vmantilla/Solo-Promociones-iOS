@@ -14,9 +14,11 @@ struct DailyPromotionsView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Fecha seleccionada:")
-                            .font(.subheadline)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
                         Text(viewModel.selectedDate, style: .date)
-                            .font(.headline)
+                            .font(.subheadline)
+                            .foregroundColor(.primary)
                     }
                     Spacer()
                     Button(action: {
@@ -24,7 +26,7 @@ struct DailyPromotionsView: View {
                         viewModel.resetToCurrentDay()
                     }) {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.secondary)
                     }
                 }
                 .padding()
@@ -33,10 +35,21 @@ struct DailyPromotionsView: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
             } else {
-                // Barra de Navegación de Días original
+                // Barra de Navegación de Días modificada
                 ScrollViewReader { scrollProxy in
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 0) {
+                        HStack(spacing: 10) {
+                            Button(action: {
+                                showingCalendar = true
+                            }) {
+                                Image(systemName: "calendar")
+                                    .padding(8)
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(8)
+                            }
+                            .foregroundColor(.secondary)
+                            .padding(.leading, 16) // Añadido padding a la izquierda
+                            
                             ForEach(viewModel.days.indices, id: \.self) { index in
                                 DayButton(day: viewModel.days[index],
                                           isSelected: viewModel.selectedDayIndex == index,
@@ -46,19 +59,11 @@ struct DailyPromotionsView: View {
                                 })
                                 .id(index)
                             }
-                            
-                            Button(action: {
-                                showingCalendar = true
-                            }) {
-                                Image(systemName: "calendar")
-                                    .padding()
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(10)
-                            }
                         }
+                        .padding(.trailing, 16) // Añadido padding a la derecha
                     }
                     .padding(.vertical, 8)
-                    .background(Color.gray.opacity(0.1))
+                    .background(Color.gray.opacity(0.05))
                 }
             }
             
@@ -102,6 +107,7 @@ struct DailyPromotionsView: View {
             }
         }
         .navigationTitle("Promociones Diarias")
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingCalendar) {
             MonthlyCalendarView(selectedDate: $viewModel.selectedDate, viewModel: viewModel)
         }
@@ -118,21 +124,21 @@ struct DailyPromotionsView: View {
         case 1:
             StandardPromotionCell(promotion: promotion)
         case 2:
-            CarouselPromotionCell(promotions: [promotion, promotion]) // Asumiendo que necesitas más de una promoción
+            CarouselPromotionCell(promotions: [promotion, promotion])
         case 3:
             CompactHorizontalPromotionCell(promotion: promotion)
         case 4:
-            GridPromotionCell(promotions: [promotion, promotion, promotion, promotion]) // Asumiendo que necesitas 4 promociones
+            GridPromotionCell(promotions: [promotion, promotion, promotion, promotion])
         case 5:
             FeaturedPromotionCell(promotion: promotion)
         case 6:
             CollapsiblePromotionCell(promotion: promotion)
         case 7:
-            TimelinePromotionCell(promotions: [promotion, promotion, promotion]) // Asumiendo que necesitas varias promociones
+            TimelinePromotionCell(promotions: [promotion, promotion, promotion])
         case 8:
-            ComparativePromotionCell(promotion1: promotion, promotion2: promotion) // Asumiendo que necesitas dos promociones
+            ComparativePromotionCell(promotion1: promotion, promotion2: promotion)
         case 9:
-            CategoryPromotionCell(category: "Ejemplo", promotions: [promotion, promotion, promotion]) // Asumiendo que necesitas varias promociones
+            CategoryPromotionCell(category: "Ejemplo", promotions: [promotion, promotion, promotion])
         case 10:
             CountdownPromotionCell(promotion: promotion)
         default:
@@ -150,16 +156,16 @@ struct DayButton: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Text(day.formattedDay)
-                    .font(.headline)
+                    .font(.footnote)
                 Text(day.formattedDate)
-                    .font(.subheadline)
+                    .font(.caption)
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
-            .background(isSelected ? Color.blue.opacity(0.2) : Color.clear)
-            .cornerRadius(10)
+            .background(isSelected ? Color.blue.opacity(0.1) : Color.clear)
+            .cornerRadius(8)
         }
-        .foregroundColor(isSelected ? .blue : .primary)
+        .foregroundColor(isSelected ? .blue : .secondary)
     }
 }
 

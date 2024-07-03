@@ -39,6 +39,8 @@
 		7929E4472C35DE0C00CCD12E /* SpotSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4462C35DE0C00CCD12E /* SpotSelectionView.swift */; };
 		7929E4492C35DE1E00CCD12E /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E4482C35DE1E00CCD12E /* PaymentView.swift */; };
 		7929E44B2C35DE3600CCD12E /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */; };
+		7929E44D2C35E7B400CCD12E /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44C2C35E7B400CCD12E /* UserSession.swift */; };
+		7929E44F2C35EACE00CCD12E /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44E2C35EACE00CCD12E /* ProductViewModel.swift */; };
 		79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */; };
 		79369D8D2C1A3DC200B7B7A6 /* promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 79369D8C2C1A3DC200B7B7A6 /* promotions.json */; };
 		79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */; };
@@ -149,6 +151,8 @@
 		7929E4462C35DE0C00CCD12E /* SpotSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotSelectionView.swift; sourceTree = "<group>"; };
 		7929E4482C35DE1E00CCD12E /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
+		7929E44C2C35E7B400CCD12E /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		7929E44E2C35EACE00CCD12E /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		79369D8C2C1A3DC200B7B7A6 /* promotions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = promotions.json; sourceTree = "<group>"; };
 		79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewModel.swift; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */,
 				79369D8C2C1A3DC200B7B7A6 /* promotions.json */,
 				793FC0712C248D11009F6516 /* User.swift */,
+				7929E44C2C35E7B400CCD12E /* UserSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				79E1D77A2C27248F0093723D /* HomeViewModel.swift */,
 				7929E4272C359A3A00CCD12E /* PromotionDetailViewModel.swift */,
 				7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */,
+				7929E44E2C35EACE00CCD12E /* ProductViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -703,10 +709,12 @@
 				7929E43A2C35DC7700CCD12E /* VerificationCodeView.swift in Sources */,
 				793FC0662C248ABA009F6516 /* SearchView.swift in Sources */,
 				793FC08F2C24B930009F6516 /* ConfirmationView.swift in Sources */,
+				7929E44F2C35EACE00CCD12E /* ProductViewModel.swift in Sources */,
 				79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */,
 				79E068602C29ECDF00B2656E /* TooGoodToGoView.swift in Sources */,
 				79E068652C2A09F900B2656E /* CarouselPromotionCell.swift in Sources */,
 				793FC0602C248A84009F6516 /* MainTabView.swift in Sources */,
+				7929E44D2C35E7B400CCD12E /* UserSession.swift in Sources */,
 				791302802C2230EB00A68C7F /* HighlightedConditionsPromotionCell.swift in Sources */,
 				79E068732C2A0B1800B2656E /* CountdownPromotionCell.swift in Sources */,
 				79E068672C2A0A2400B2656E /* CompactHorizontalPromotionCell.swift in Sources */,

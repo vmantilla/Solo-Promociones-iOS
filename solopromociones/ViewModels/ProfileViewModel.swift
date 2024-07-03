@@ -17,19 +17,25 @@ class ProfileViewModel: ObservableObject {
     }
     
     func checkAuthenticationStatus() {
-        // Aquí implementarías la lógica real para verificar si el usuario está autenticado
-        // Por ahora, simularemos esto con un valor hardcodeado
-        isAuthenticated = false
-        user = nil
+        isAuthenticated = UserSession.shared.isLoggedIn()
+        user = UserSession.shared.currentUser
+        isMerchant = user?.isMerchant ?? false
+        if isMerchant {
+            loadPromotions()
+        }
     }
     
     func authenticateUser(phoneNumber: String, verificationCode: String, completion: @escaping (Bool) -> Void) {
         // Aquí implementarías la lógica de autenticación real
         // Por ahora, simularemos una autenticación exitosa
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let newUser = User(id: "1", name: "Usuario Ejemplo", email: "usuario@ejemplo.com", isMerchant: false)
+            let token = "sample_auth_token"
+            UserSession.shared.login(user: newUser, token: token)
+            
             self.isAuthenticated = true
-            self.user = User(id: "1", name: "Usuario Ejemplo", email: "usuario@ejemplo.com", isMerchant: false)
-            self.isMerchant = self.user?.isMerchant ?? false
+            self.user = newUser
+            self.isMerchant = newUser.isMerchant
             if self.isMerchant {
                 self.loadPromotions()
             }
@@ -63,6 +69,11 @@ class ProfileViewModel: ObservableObject {
         } else {
             merchantPromotions = []
         }
+        
+        // Actualizar el UserSession
+        if let updatedUser = user {
+            UserSession.shared.login(user: updatedUser, token: UserSession.shared.authToken ?? "")
+        }
     }
     
     func convertToMerchant(with spots: Int) {
@@ -70,6 +81,11 @@ class ProfileViewModel: ObservableObject {
         user?.isMerchant = true
         availableSpots = spots
         loadPromotions()
+        
+        // Actualizar el UserSession
+        if let updatedUser = user {
+            UserSession.shared.login(user: updatedUser, token: UserSession.shared.authToken ?? "")
+        }
     }
 
     func addPromotion(_ promotion: Promotion) {
@@ -83,9 +99,15 @@ class ProfileViewModel: ObservableObject {
         self.profileImage = profileImage
         self.backgroundImage = backgroundImage
         // Implement actual update logic here (e.g., API calls)
+        
+        // Actualizar el UserSession
+        if let updatedUser = user {
+            UserSession.shared.login(user: updatedUser, token: UserSession.shared.authToken ?? "")
+        }
     }
     
     func signOut() {
+        UserSession.shared.logout()
         isAuthenticated = false
         user = nil
         isMerchant = false

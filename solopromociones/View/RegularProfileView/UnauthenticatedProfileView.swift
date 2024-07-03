@@ -1,10 +1,3 @@
-//
-//  UnauthenticatedProfileView.swift
-//  solopromociones
-//
-//  Created by RAVIT Admin on 3/07/24.
-//
-
 import SwiftUI
 
 struct UnauthenticatedProfileView: View {
@@ -14,15 +7,30 @@ struct UnauthenticatedProfileView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
-                Text("Bienvenido a Solo Promociones")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(.top, 50)
+            VStack(spacing: 30) {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.blue)
+                    .padding(.top, 20)
 
-                Text("Para acceder a todas las funcionalidades, por favor inicia sesión.")
+                VStack(spacing: 5) {
+                    Text("Bienvenido a")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                    
+                    Text("¡Solo Promociones!")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+                }
+
+                Text("Inicia sesión para disfrutar de todas las funcionalidades")
+                    .font(.subheadline)
                     .multilineTextAlignment(.center)
-                    .padding()
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal)
 
                 Button(action: {
                     showingAuthFlow = true
@@ -37,22 +45,24 @@ struct UnauthenticatedProfileView: View {
                 }
                 .padding(.horizontal)
 
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 20) {
                     Text("Con una cuenta podrás:")
                         .font(.headline)
+                        .padding(.bottom, 5)
 
-                    BulletPoint(text: "Guardar tus comercios favoritos")
-                    BulletPoint(text: "Recibir notificaciones de promociones")
-                    BulletPoint(text: "Calificar y comentar promociones")
-                    BulletPoint(text: "Publicar tus propias promociones como comerciante")
+                    FeatureRow(icon: "heart.fill", text: "Guardar tus comercios favoritos")
+                    FeatureRow(icon: "bell.fill", text: "Recibir notificaciones de promociones")
+                    FeatureRow(icon: "star.fill", text: "Calificar y comentar promociones")
+                    FeatureRow(icon: "megaphone.fill", text: "Publicar tus propias promociones")
                 }
                 .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal)
 
                 Spacer(minLength: 50)
             }
+            .padding()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -61,7 +71,7 @@ struct UnauthenticatedProfileView: View {
                     showingSettings = true
                 }) {
                     Image(systemName: "gear")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.blue)
                 }
             }
         }
@@ -71,13 +81,26 @@ struct UnauthenticatedProfileView: View {
     }
 }
 
-struct BulletPoint: View {
+struct FeatureRow: View {
+    let icon: String
     let text: String
 
     var body: some View {
-        HStack(alignment: .top) {
-            Text("•")
+        HStack(spacing: 15) {
+            Image(systemName: icon)
+                .foregroundColor(.blue)
+                .frame(width: 30)
             Text(text)
+                .font(.subheadline)
+                .foregroundColor(.primary)
+        }
+    }
+}
+
+struct UnauthenticatedProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            UnauthenticatedProfileView(viewModel: ProfileViewModel(), showingAuthFlow: .constant(false), showingSettings: .constant(false))
         }
     }
 }

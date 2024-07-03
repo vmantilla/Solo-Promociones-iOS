@@ -16,7 +16,7 @@ struct MonthlyCalendarView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
+            VStack(spacing: 15) {
                 // Category selection
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
@@ -30,19 +30,22 @@ struct MonthlyCalendarView: View {
                     }
                     .padding(.horizontal)
                 }
-                .padding(.top)
+                .padding(.top, 8)
                 
                 // Month navigation
                 HStack {
                     Button(action: previousMonth) {
                         Image(systemName: "chevron.left")
+                            .foregroundColor(.secondary)
                     }
                     Spacer()
                     Text(dateFormatter.string(from: currentMonth))
-                        .font(.headline)
+                        .font(.subheadline)
+                        .foregroundColor(.primary)
                     Spacer()
                     Button(action: nextMonth) {
                         Image(systemName: "chevron.right")
+                            .foregroundColor(.secondary)
                     }
                 }
                 .padding(.horizontal)
@@ -52,13 +55,13 @@ struct MonthlyCalendarView: View {
                     ForEach(["D", "L", "M", "M", "J", "V", "S"], id: \.self) { day in
                         Text(day)
                             .frame(maxWidth: .infinity)
-                            .font(.caption)
+                            .font(.caption2)
                             .foregroundColor(.secondary)
                     }
                 }
                 
                 // Calendar grid
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 8) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 6) {
                     ForEach(daysInMonth(), id: \.self) { date in
                         if let date = date {
                             DayCell(date: date,
@@ -125,23 +128,24 @@ struct DayCell: View {
     
     var body: some View {
         Text("\(calendar.component(.day, from: date))")
-            .frame(height: 40)
+            .frame(height: 35)
             .frame(maxWidth: .infinity)
             .background(
                 Group {
                     if isSelected {
-                        Circle().fill(Color.blue)
+                        Circle().fill(Color.blue.opacity(0.2))
                     } else if hasPromotion {
-                        Circle().fill(Color.blue.opacity(0.3))
+                        Circle().fill(Color.blue.opacity(0.1))
                     }
                 }
             )
-            .foregroundColor(isSelected ? .white : (isInCurrentMonth ? .primary : .secondary))
+            .foregroundColor(isSelected ? .blue : (isInCurrentMonth ? .primary : .secondary))
             .opacity(isInCurrentMonth ? 1 : 0.5)
             .overlay(
                 Circle()
-                    .stroke(Color.blue, lineWidth: calendar.isDateInToday(date) ? 2 : 0)
+                    .stroke(Color.blue.opacity(0.5), lineWidth: calendar.isDateInToday(date) ? 1 : 0)
             )
+            .font(.footnote)
     }
 }
 
