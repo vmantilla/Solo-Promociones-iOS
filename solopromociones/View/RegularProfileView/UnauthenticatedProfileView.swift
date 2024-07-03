@@ -7,22 +7,22 @@ struct UnauthenticatedProfileView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 30) {
+            VStack(spacing: 24) {
                 Image(systemName: "person.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.blue)
-                    .padding(.top, 20)
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(Color.blue.opacity(0.8))
+                    .padding(.top, 16)
 
-                VStack(spacing: 5) {
+                VStack(spacing: 4) {
                     Text("Bienvenido a")
-                        .font(.title2)
-                        .fontWeight(.medium)
+                        .font(.headline)
+                        .fontWeight(.regular)
                     
                     Text("¡Solo Promociones!")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.title3)
+                        .fontWeight(.semibold)
                         .foregroundColor(.blue)
                 }
 
@@ -36,31 +36,33 @@ struct UnauthenticatedProfileView: View {
                     showingAuthFlow = true
                 }) {
                     Text("Iniciar Sesión")
-                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                        .background(Color.blue.opacity(0.8))
+                        .cornerRadius(8)
                 }
                 .padding(.horizontal)
 
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 16) {
                     Text("Con una cuenta podrás:")
-                        .font(.headline)
-                        .padding(.bottom, 5)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .padding(.bottom, 4)
 
-                    FeatureRow(icon: "heart.fill", text: "Guardar tus comercios favoritos")
-                    FeatureRow(icon: "bell.fill", text: "Recibir notificaciones de promociones")
-                    FeatureRow(icon: "star.fill", text: "Calificar y comentar promociones")
-                    FeatureRow(icon: "megaphone.fill", text: "Publicar tus propias promociones")
+                    FeatureRow(icon: "heart", text: "Guardar tus comercios favoritos")
+                    FeatureRow(icon: "bell", text: "Recibir notificaciones de promociones")
+                    FeatureRow(icon: "star", text: "Calificar y comentar promociones")
+                    FeatureRow(icon: "megaphone", text: "Publicar tus propias promociones")
                 }
                 .padding()
-                .background(Color.blue.opacity(0.1))
-                .cornerRadius(15)
+                .background(Color.blue.opacity(0.05))
+                .cornerRadius(12)
                 .padding(.horizontal)
 
-                Spacer(minLength: 50)
+                Spacer(minLength: 40)
             }
             .padding()
         }
@@ -71,7 +73,8 @@ struct UnauthenticatedProfileView: View {
                     showingSettings = true
                 }) {
                     Image(systemName: "gear")
-                        .foregroundColor(.blue)
+                        .font(.body)
+                        .foregroundColor(.secondary)
                 }
             }
         }
@@ -86,12 +89,12 @@ struct FeatureRow: View {
     let text: String
 
     var body: some View {
-        HStack(spacing: 15) {
+        HStack(spacing: 12) {
             Image(systemName: icon)
-                .foregroundColor(.blue)
-                .frame(width: 30)
+                .foregroundColor(Color.blue.opacity(0.8))
+                .frame(width: 24)
             Text(text)
-                .font(.subheadline)
+                .font(.footnote)
                 .foregroundColor(.primary)
         }
     }

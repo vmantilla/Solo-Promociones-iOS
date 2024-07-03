@@ -11,7 +11,7 @@ struct PromotionDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 16) {
                 Group {
                     if let promotion = viewModel.promotion {
                         promotionContent(promotion)
@@ -19,11 +19,12 @@ struct PromotionDetailView: View {
                         ProgressView("Cargando promoción...")
                     } else if let error = viewModel.error {
                         Text("Error: \(error.localizedDescription)")
+                            .font(.footnote)
                             .foregroundColor(.red)
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
@@ -59,207 +60,119 @@ struct PromotionDetailView: View {
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-        .frame(height: 250)
-        .cornerRadius(12)
+        .frame(height: 200)
+        .cornerRadius(8)
     }
     
     private func merchantInfo(merchant: MerchantDetail) -> some View {
-            NavigationLink(destination: MerchantDetailView(merchantId: merchant.id)) {
-                HStack {
-                    CachedAsyncImage(url: URL(string: merchant.logoURL)) { image in
-                        image.resizable().aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        Circle().fill(Color.gray)
-                    }
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                    
-                    VStack(alignment: .leading) {
-                        Text(merchant.name).font(.headline)
-                        Text(merchant.category).font(.subheadline).foregroundColor(.secondary)
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: viewModel.toggleFavorite) {
-                        Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                            .foregroundColor(viewModel.isFavorite ? .red : .gray)
-                    }
+        NavigationLink(destination: MerchantDetailView(merchantId: merchant.id)) {
+            HStack {
+                CachedAsyncImage(url: URL(string: merchant.logoURL)) { image in
+                    image.resizable().aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    Circle().fill(Color.gray.opacity(0.2))
                 }
-                .padding()
-                .background(Color(.systemBackground))
-                .cornerRadius(12)
-                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                .frame(width: 40, height: 40)
+                .clipShape(Circle())
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(merchant.name).font(.subheadline).fontWeight(.medium)
+                    Text(merchant.category).font(.caption).foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                Button(action: viewModel.toggleFavorite) {
+                    Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
+                        .font(.subheadline)
+                        .foregroundColor(viewModel.isFavorite ? .red : .gray)
+                }
             }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(Color(.systemBackground))
+            .cornerRadius(8)
+            .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 1)
         }
+    }
     
     private func promotionDetails(_ promotion: PromotionDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(promotion.title).font(.title2).fontWeight(.bold)
-            Text(promotion.description).font(.body)
+        VStack(alignment: .leading, spacing: 8) {
+            Text(promotion.title).font(.headline).fontWeight(.medium)
+            Text(promotion.description).font(.subheadline).foregroundColor(.secondary)
             HStack {
                 Image(systemName: "calendar")
                 Text("Válido hasta: \(promotion.validUntil)")
             }
-            .font(.subheadline)
+            .font(.caption)
             .foregroundColor(.secondary)
             
-            Text("Condiciones:").font(.headline)
-            Text(promotion.conditions).font(.subheadline)
+            Text("Condiciones:").font(.subheadline).fontWeight(.medium)
+            Text(promotion.conditions).font(.caption).foregroundColor(.secondary)
         }
-        .padding()
+        .padding(.vertical, 12)
+        .padding(.horizontal, 12)
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 1)
     }
     
     private func locationInfo(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Ubicación").font(.headline)
-            Text(merchant.address).font(.subheadline)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Ubicación").font(.subheadline).fontWeight(.medium)
+            Text(merchant.address).font(.caption).foregroundColor(.secondary)
             
             Button(action: viewModel.openInMaps) {
                 Text("Ver en el mapa")
-                    .fontWeight(.semibold)
+                    .font(.footnote)
+                    .fontWeight(.medium)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(10)
+                    .padding(.vertical, 8)
+                    .background(Color.green.opacity(0.8))
+                    .cornerRadius(8)
             }
         }
-        .padding()
+        .padding(.vertical, 12)
+        .padding(.horizontal, 12)
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
-    
-    private func contactInfo(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Información de contacto").font(.headline)
-            
-            if let phoneNumber = merchant.phoneNumber {
-                HStack {
-                    Image(systemName: "phone")
-                    Text(phoneNumber)
-                }
-            }
-            
-            if let email = merchant.email {
-                HStack {
-                    Image(systemName: "envelope")
-                    Text(email)
-                }
-            }
-            
-            if let website = merchant.website {
-                HStack {
-                    Image(systemName: "globe")
-                    Text(website)
-                }
-            }
-        }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
-    
-    private func socialMediaLinks(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            VStack(spacing: 10) {
-                if let facebookURL = merchant.facebookURL {
-                    socialMediaButton(
-                        icon: "f.circle.fill",
-                        text: "Síguenos en Facebook",
-                        color: .blue
-                    ) {
-                        openURL(facebookURL)
-                    }
-                }
-                
-                if let instagramURL = merchant.instagramURL {
-                    socialMediaButton(
-                        icon: "camera.circle.fill",
-                        text: "Síguenos en Instagram",
-                        color: .purple
-                    ) {
-                        openURL(instagramURL)
-                    }
-                }
-                
-                if let whatsappNumber = merchant.whatsappNumber {
-                    socialMediaButton(
-                        icon: "phone.circle.fill",
-                        text: "Contáctanos por WhatsApp",
-                        color: .green
-                    ) {
-                        openWhatsApp(whatsappNumber)
-                    }
-                }
-            }
-        }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
-
-    private func socialMediaButton(icon: String, text: String, color: Color, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: icon)
-                    .foregroundColor(.white)
-                    .frame(width: 30, height: 30)
-                    .background(color)
-                    .clipShape(Circle())
-                
-                Text(text)
-                    .foregroundColor(.primary)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.secondary)
-            }
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(10)
-        }
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 1)
     }
     
     private func otherPromotions(merchant: MerchantDetail, promotions: [PromotionSummary]) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Más promociones de \(merchant.name)")
-                .font(.headline)
-                .padding(.bottom, 5)
+                .font(.subheadline)
+                .fontWeight(.medium)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
+                HStack(spacing: 12) {
                     ForEach(promotions) { promotion in
-                        VStack {
+                        VStack(spacing: 4) {
                             CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                                 image.resizable().aspectRatio(contentMode: .fill)
                             } placeholder: {
-                                Color.gray
+                                Color.gray.opacity(0.2)
                             }
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(8)
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(6)
                             
                             Text(promotion.title)
-                                .font(.caption)
+                                .font(.caption2)
                                 .lineLimit(2)
                                 .multilineTextAlignment(.center)
                         }
-                        .frame(width: 100)
+                        .frame(width: 80)
                     }
                 }
             }
         }
-        .padding()
+        .padding(.vertical, 12)
+        .padding(.horizontal, 12)
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 1)
     }
     
     private func openURL(_ urlString: String) {

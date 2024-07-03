@@ -130,6 +130,9 @@ struct MerchantDetail: Codable {
     let images: [String]
     let openingHours: [OpeningHours]
     let promotions: [MerchantPromotion]
+    let description: String
+    let categories: [String]
+    let mainCategory: String
 }
 
 struct OpeningHours: Codable {

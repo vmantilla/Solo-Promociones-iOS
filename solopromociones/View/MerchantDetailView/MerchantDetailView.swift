@@ -11,7 +11,7 @@ struct MerchantDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 16) {
                 Group {
                     if let merchant = viewModel.merchant {
                         merchantContent(merchant)
@@ -19,6 +19,7 @@ struct MerchantDetailView: View {
                         ProgressView("Cargando información del comerciante...")
                     } else if let error = viewModel.error {
                         Text("Error: \(error.localizedDescription)")
+                            .font(.footnote)
                             .foregroundColor(.red)
                     }
                 }
@@ -58,8 +59,8 @@ struct MerchantDetailView: View {
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-        .frame(height: 250)
-        .cornerRadius(12)
+        .frame(height: 200)
+        .cornerRadius(10)
     }
     
     private func merchantInfo(merchant: MerchantDetail) -> some View {
@@ -67,14 +68,14 @@ struct MerchantDetailView: View {
             CachedAsyncImage(url: URL(string: merchant.logoURL)) { image in
                 image.resizable().aspectRatio(contentMode: .fit)
             } placeholder: {
-                Circle().fill(Color.gray)
+                Circle().fill(Color.gray.opacity(0.2))
             }
-            .frame(width: 50, height: 50)
+            .frame(width: 40, height: 40)
             .clipShape(Circle())
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(merchant.name).font(.headline)
-                Text(merchant.category).font(.subheadline).foregroundColor(.secondary)
+                Text(merchant.category).font(.caption).foregroundColor(.secondary)
             }
             
             Spacer()
@@ -82,61 +83,66 @@ struct MerchantDetailView: View {
             Button(action: viewModel.toggleFavorite) {
                 Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(viewModel.isFavorite ? .red : .gray)
+                    .font(.subheadline)
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
     
     private func openingHours(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Horas de apertura").font(.headline)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Horas de apertura").font(.subheadline).fontWeight(.medium)
             ForEach(merchant.openingHours, id: \.day) { hours in
                 HStack {
-                    Text(hours.day).font(.subheadline)
+                    Text(hours.day).font(.caption)
                     Spacer()
-                    Text("\(hours.openingTime) - \(hours.closingTime)").font(.subheadline)
+                    Text("\(hours.openingTime) - \(hours.closingTime)").font(.caption)
                 }
+                .foregroundColor(.secondary)
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
     
     private func locationInfo(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Ubicación").font(.headline)
-            Text(merchant.address).font(.subheadline)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Ubicación").font(.subheadline).fontWeight(.medium)
+            Text(merchant.address).font(.caption).foregroundColor(.secondary)
             
             Button(action: viewModel.openInMaps) {
                 Text("Ver en el mapa")
-                    .fontWeight(.semibold)
+                    .font(.footnote)
+                    .fontWeight(.medium)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(10)
+                    .padding(.vertical, 8)
+                    .background(Color.green.opacity(0.8))
+                    .cornerRadius(8)
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
     
     private func contactInfo(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Información de contacto").font(.headline)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Información de contacto").font(.subheadline).fontWeight(.medium)
             
             if let phoneNumber = merchant.phoneNumber {
                 HStack {
                     Image(systemName: "phone")
                     Text(phoneNumber)
                 }
+                .font(.caption)
+                .foregroundColor(.secondary)
             }
             
             if let email = merchant.email {
@@ -144,6 +150,8 @@ struct MerchantDetailView: View {
                     Image(systemName: "envelope")
                     Text(email)
                 }
+                .font(.caption)
+                .foregroundColor(.secondary)
             }
             
             if let website = merchant.website {
@@ -151,17 +159,19 @@ struct MerchantDetailView: View {
                     Image(systemName: "globe")
                     Text(website)
                 }
+                .font(.caption)
+                .foregroundColor(.secondary)
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
     
     private func socialMediaLinks(merchant: MerchantDetail) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            VStack(spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
+            VStack(spacing: 8) {
                 if let facebookURL = merchant.facebookURL {
                     socialMediaButton(
                         icon: "f.circle.fill",
@@ -195,8 +205,8 @@ struct MerchantDetailView: View {
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 
     private func socialMediaButton(icon: String, text: String, color: Color, action: @escaping () -> Void) -> some View {
@@ -204,56 +214,59 @@ struct MerchantDetailView: View {
             HStack {
                 Image(systemName: icon)
                     .foregroundColor(.white)
-                    .frame(width: 30, height: 30)
-                    .background(color)
+                    .frame(width: 24, height: 24)
+                    .background(color.opacity(0.8))
                     .clipShape(Circle())
                 
                 Text(text)
+                    .font(.footnote)
                     .foregroundColor(.primary)
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
+                    .font(.caption)
                     .foregroundColor(.secondary)
             }
-            .padding()
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
             .background(Color(.secondarySystemBackground))
-            .cornerRadius(10)
+            .cornerRadius(8)
         }
     }
     
     private func merchantPromotions(promotions: [MerchantPromotion]) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Otras Promociones")
-                .font(.headline)
-                .padding(.bottom, 5)
+                .font(.subheadline)
+                .fontWeight(.medium)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
+                HStack(spacing: 12) {
                     ForEach(promotions) { promotion in
-                        VStack {
+                        VStack(spacing: 4) {
                             CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                                 image.resizable().aspectRatio(contentMode: .fill)
                             } placeholder: {
-                                Color.gray
+                                Color.gray.opacity(0.2)
                             }
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(8)
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(6)
                             
                             Text(promotion.title)
-                                .font(.caption)
+                                .font(.caption2)
                                 .lineLimit(2)
                                 .multilineTextAlignment(.center)
                         }
-                        .frame(width: 100)
+                        .frame(width: 80)
                     }
                 }
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
     
     private func openURL(_ urlString: String) {

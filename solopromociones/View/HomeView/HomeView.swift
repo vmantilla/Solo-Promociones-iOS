@@ -14,7 +14,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 NavigationLink(
                     destination: SearchView(viewModel: viewModel),
                     isActive: $isSearchActive,
@@ -22,7 +22,7 @@ struct HomeView: View {
                 ).hidden()
                 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .leading, spacing: 16) {
                         headerSection
                         searchSection
                         categorySection
@@ -42,27 +42,28 @@ struct HomeView: View {
                             allPromotionsSection
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarHidden(true)
-                .background(Color.white)
+                .background(Color(UIColor.systemBackground))
             }
         }
     }
     
     private var headerSection: some View {
         HStack {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text("Buscar promociones en")
-                    .font(.headline)
+                    .font(.footnote)
                     .foregroundColor(.secondary)
                 Button(action: { showCityPicker = true }) {
                     HStack {
                         Text(viewModel.selectedCity)
-                            .font(.largeTitle)
-                            .bold()
+                            .font(.title2)
+                            .fontWeight(.semibold)
                         Image(systemName: "chevron.down")
+                            .font(.caption)
                             .foregroundColor(.secondary)
                     }
                 }
@@ -77,6 +78,7 @@ struct HomeView: View {
     private var searchSection: some View {
         ZStack {
             SearchBar(text: $searchText, isKeyboardEnabled: false, shouldFocus: false)
+                .opacity(0.8)
             
             Button(action: {
                 isSearchActive = true
@@ -88,45 +90,46 @@ struct HomeView: View {
     
     private var categorySection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
+            HStack(spacing: 10) {
                 ForEach(viewModel.categories, id: \.self) { category in
                     Button(action: {
                         selectedCategory = selectedCategory == category ? nil : category
                     }) {
                         Text(category)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.2))
-                            .foregroundColor(selectedCategory == category ? .white : .primary)
-                            .cornerRadius(20)
+                            .font(.footnote)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(selectedCategory == category ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
+                            .foregroundColor(selectedCategory == category ? .blue : .primary)
+                            .cornerRadius(16)
                     }
                 }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 4)
         }
     }
     
     private var featuredSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Promociones destacadas")
-                .font(.title2)
-                .bold()
+                .font(.headline)
+                .fontWeight(.medium)
             
             CarouselPromotionCell(promotions: filteredPromotions(viewModel.featuredPromotions))
         }
     }
     
     private var dailyDealsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Ofertas del día")
-                .font(.title2)
-                .bold()
+                .font(.headline)
+                .fontWeight(.medium)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
+                HStack(spacing: 12) {
                     ForEach(filteredPromotions(viewModel.dailyDeals)) { promotion in
                         StandardPromotionCell(promotion: promotion)
-                            .frame(width: 280)
+                            .frame(width: 260)
                     }
                 }
             }
@@ -134,10 +137,10 @@ struct HomeView: View {
     }
     
     private var nearbyPromotionsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Cerca de ti")
-                .font(.title2)
-                .bold()
+                .font(.headline)
+                .fontWeight(.medium)
             
             ForEach(filteredPromotions(viewModel.nearbyPromotions)) { promotion in
                 PromotionRow(promotion: promotion)
@@ -146,10 +149,10 @@ struct HomeView: View {
     }
     
     private var popularPromotionsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Promociones populares")
-                .font(.title2)
-                .bold()
+                .font(.headline)
+                .fontWeight(.medium)
             
             ForEach(filteredPromotions(viewModel.popularPromotions)) { promotion in
                 CollapsiblePromotionCell(promotion: promotion)
@@ -158,16 +161,17 @@ struct HomeView: View {
     }
     
     private var allPromotionsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("Todas las promociones")
-                    .font(.title2)
-                    .bold()
+                    .font(.headline)
+                    .fontWeight(.medium)
                 Spacer()
                 Button(action: {
                     // Acción para ver todas las promociones
                 }) {
                     Text("Ver todas (\(filteredPromotions(viewModel.promotions).count))")
+                        .font(.footnote)
                         .foregroundColor(.blue)
                 }
             }

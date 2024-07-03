@@ -1,7 +1,6 @@
 import SwiftUI
 import CachedAsyncImage
 
-
 struct TooGoodToGoView: View {
     @StateObject private var viewModel = ProductViewModel()
     @State private var searchText = ""
@@ -10,14 +9,15 @@ struct TooGoodToGoView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     SearchBar(text: $searchText, shouldFocus: false)
+                        .opacity(0.8)
                     
                     CategoryScrollView(categories: viewModel.categories, selectedCategory: $selectedCategory)
                     
                     ExplanationText()
                     
-                    LazyVStack(spacing: 16) {
+                    LazyVStack(spacing: 12) {
                         ForEach(filteredProducts()) { product in
                             ProductCard(product: product)
                         }
@@ -26,7 +26,7 @@ struct TooGoodToGoView: View {
                 .padding()
             }
             .navigationTitle("Eco Ofertas")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(.systemBackground))
         }
     }
@@ -45,20 +45,22 @@ struct CategoryScrollView: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
+            HStack(spacing: 10) {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
                         selectedCategory = selectedCategory == category ? nil : category
                     }) {
                         Text(category)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(selectedCategory == category ? Color.blue : Color.gray.opacity(0.2))
-                            .foregroundColor(selectedCategory == category ? .white : .primary)
-                            .cornerRadius(20)
+                            .font(.footnote)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(selectedCategory == category ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
+                            .foregroundColor(selectedCategory == category ? .blue : .primary)
+                            .cornerRadius(16)
                     }
                 }
             }
+            .padding(.horizontal, 4)
         }
     }
 }
@@ -66,76 +68,83 @@ struct CategoryScrollView: View {
 struct ExplanationText: View {
     var body: some View {
         Text("Estos productos están cerca de su fecha de caducidad o son considerados demasiado valiosos para desechar. ¡Aprovecha estas ofertas y ayuda a reducir el desperdicio!")
-            .font(.caption)
+            .font(.caption2)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
+            .padding(.horizontal)
     }
 }
-
-// El ProductCard permanece igual
 
 struct ProductCard: View {
     let product: Product
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top) {
+            HStack(alignment: .top, spacing: 12) {
                 CachedAsyncImage(url: URL(string: product.imageURL)) { image in
                     image.resizable().aspectRatio(contentMode: .fill)
                 } placeholder: {
-                    Color.gray
+                    Color.gray.opacity(0.2)
                 }
-                .frame(width: 100, height: 100)
-                .cornerRadius(8)
+                .frame(width: 80, height: 80)
+                .cornerRadius(6)
                 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 3) {
                     Text(product.storeName)
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundColor(.secondary)
                     Text(product.title)
-                        .font(.headline)
-                    Text(product.description)
                         .font(.subheadline)
+                        .fontWeight(.medium)
+                    Text(product.description)
+                        .font(.caption)
                         .foregroundColor(.gray)
+                        .lineLimit(2)
                 }
             }
             
             HStack {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text("Precio original: \(product.originalPrice, specifier: "%.2f")€")
                         .strikethrough()
+                        .font(.caption2)
                         .foregroundColor(.secondary)
                     Text("Precio Eco: \(product.discountedPrice, specifier: "%.2f")€")
-                        .font(.title3)
-                        .fontWeight(.bold)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                         .foregroundColor(.green)
                 }
                 Spacer()
-                VStack(alignment: .trailing) {
+                VStack(alignment: .trailing, spacing: 2) {
                     Text("Recoger antes de:")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
                     Text(product.expirationDate, style: .time)
-                        .fontWeight(.semibold)
+                        .font(.caption)
+                        .fontWeight(.medium)
                         .foregroundColor(.red)
                 }
             }
             
             HStack {
                 Image(systemName: "location")
+                    .font(.caption2)
                 Text("\(product.distance, specifier: "%.1f") km")
+                    .font(.caption2)
                 Spacer()
                 Text(product.category)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color.blue.opacity(0.1))
+                    .font(.caption2)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.blue.opacity(0.08))
                     .cornerRadius(4)
             }
-            .font(.caption)
             .foregroundColor(.secondary)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .padding(12)
+        .background(Color(.systemBackground))
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 
