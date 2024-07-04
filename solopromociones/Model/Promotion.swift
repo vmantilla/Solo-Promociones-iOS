@@ -56,9 +56,11 @@ struct Merchant: Identifiable, Codable {
         let whatsappNumber: String?
     }
 
+
 struct City: Identifiable, Codable {
     var id: String { name }
-    var name: String
+    let name: String
+    let imageName: String
 }
 
 

@@ -1,10 +1,3 @@
-//
-//  CityPickerView.swift
-//  solopromociones
-//
-//  Created by RAVIT Admin on 2/07/24.
-//
-
 import SwiftUI
 
 struct CityPickerView: View {
@@ -12,19 +5,52 @@ struct CityPickerView: View {
     let cities: [City]
     @Environment(\.presentationMode) var presentationMode
     
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         NavigationView {
-            List(cities) { city in
-                Button(action: {
-                    selectedCity = city.name
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text(city.name)
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(cities) { city in
+                        Button(action: {
+                            selectedCity = city.name
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            VStack {
+                                Image(systemName: "building.2.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 30)
+                                    .foregroundColor(.gray)
+                                    .padding(.bottom, 10)
+                                
+                                Text(city.name)
+                                    .font(.subheadline)
+                                    .foregroundColor(.primary)
+                            }
+                            .frame(height: 120)
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(selectedCity == city.name ? Color.blue : Color.clear, lineWidth: 2)
+                            )
+                        }
+                    }
                 }
+                .padding()
             }
             .navigationTitle("Seleccionar ciudad")
-            .navigationBarItems(trailing: Button("Cerrar") {
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "xmark")
+                    .foregroundColor(.gray)
             })
         }
     }
@@ -32,6 +58,11 @@ struct CityPickerView: View {
 
 struct CityPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        CityPickerView(selectedCity: .constant(""), cities: [])
+        CityPickerView(selectedCity: .constant("Bogotá"), cities: [
+            City(name: "Bogotá", imageName: "bogota"),
+            City(name: "Medellín", imageName: "medellin"),
+            City(name: "Cali", imageName: "cali"),
+            City(name: "Barranquilla", imageName: "barranquilla")
+        ])
     }
 }

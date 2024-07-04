@@ -1,5 +1,22 @@
 [
-    { "name": "Ámsterdam" },
-    { "name": "Londres" },
-    { "name": "París" }
+    { "name": "Bogotá", "imageName": "bogota" },
+    { "name": "Medellín", "imageName": "medellin" },
+    { "name": "Cali", "imageName": "cali" },
+    { "name": "Barranquilla", "imageName": "barranquilla" },
+    { "name": "Cartagena", "imageName": "cartagena" },
+    { "name": "Santa Marta", "imageName": "santa_marta" },
+    { "name": "Bucaramanga", "imageName": "bucaramanga" },
+    { "name": "Cúcuta", "imageName": "cucuta" },
+    { "name": "Pereira", "imageName": "pereira" },
+    { "name": "Manizales", "imageName": "manizales" },
+    { "name": "Armenia", "imageName": "armenia" },
+    { "name": "Villavicencio", "imageName": "villavicencio" },
+    { "name": "Pasto", "imageName": "pasto" },
+    { "name": "Neiva", "imageName": "neiva" },
+    { "name": "Popayán", "imageName": "popayan" },
+    { "name": "Ibagué", "imageName": "ibague" },
+    { "name": "Valledupar", "imageName": "valledupar" },
+    { "name": "Montería", "imageName": "monteria" },
+    { "name": "Sincelejo", "imageName": "sincelejo" },
+    { "name": "Tunja", "imageName": "tunja" }
 ]
