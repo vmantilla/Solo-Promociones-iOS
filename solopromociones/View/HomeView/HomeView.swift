@@ -6,6 +6,7 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var selectedCategory: String?
     @State private var showCityPicker = false
+    @State private var showCategoryPicker = false
     @State private var currentFeaturedPage = 0
     @State private var isSearchActive = false
     
@@ -26,7 +27,6 @@ struct HomeView: View {
                         VStack(alignment: .leading, spacing: 16) {
                             headerSection
                             searchSection
-                            categorySection
                             if !filteredPromotions(viewModel.featuredPromotions).isEmpty {
                                 featuredSection
                             }
@@ -47,7 +47,7 @@ struct HomeView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
-                    .background(Color(UIColor.systemBackground))
+                    .background(Color(.systemBackground))
                 }
             }
             
@@ -56,13 +56,19 @@ struct HomeView: View {
                     .onTapGesture {
                         viewModel.showError = false
                     }
-                    .zIndex(1) // Ensure the error view is on top
+                    .zIndex(1)
             }
+        }
+        .sheet(isPresented: $showCityPicker) {
+            CityPickerView(selectedCity: $viewModel.selectedCity, cities: viewModel.cities)
+        }
+        .sheet(isPresented: $showCategoryPicker) {
+            CategoryPickerView(selectedCategory: $selectedCategory, categories: ["Todas las categorías"] + viewModel.categories)
         }
     }
     
     private var headerSection: some View {
-        HStack {
+        HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Buscar promociones en")
                     .font(.footnote)
@@ -70,54 +76,58 @@ struct HomeView: View {
                 Button(action: { showCityPicker = true }) {
                     HStack {
                         Text(viewModel.selectedCity)
-                            .font(.title2)
+                            .font(.headline)
                             .fontWeight(.semibold)
                         Image(systemName: "chevron.down")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                 }
-                .sheet(isPresented: $showCityPicker) {
-                    CityPickerView(selectedCity: $viewModel.selectedCity, cities: viewModel.cities)
-                }
             }
             Spacer()
-        }
-    }
-    
-    private var searchSection: some View {
-        ZStack {
-            SearchBar(text: $searchText, isKeyboardEnabled: false, shouldFocus: false)
-                .opacity(0.8)
-            
-            Button(action: {
-                isSearchActive = true
-            }) {
-                Color.clear
-            }
-        }
-    }
-    
-    private var categorySection: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                ForEach(viewModel.categories, id: \.self) { category in
-                    Button(action: {
-                        selectedCategory = selectedCategory == category ? nil : category
-                    }) {
-                        Text(category)
-                            .font(.footnote)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(selectedCategory == category ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
-                            .foregroundColor(selectedCategory == category ? .blue : .primary)
-                            .cornerRadius(16)
+            VStack(alignment: .trailing, spacing: 4) {
+                Text("Categoría")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                Button(action: { showCategoryPicker = true }) {
+                    HStack {
+                        Text(selectedCategory ?? "Todas")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                        Image(systemName: "chevron.down")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
-            .padding(.horizontal, 4)
         }
+        .padding(.bottom, 8)
     }
+    
+    private var searchSection: some View {
+            HStack {
+                ZStack {
+                    SearchBar(text: $searchText, isKeyboardEnabled: false, shouldFocus: false)
+                        .opacity(0.8)
+                    
+                    Button(action: {
+                        isSearchActive = true
+                    }) {
+                        Color.clear
+                    }
+                }
+                
+                Button(action: {
+                    showCategoryPicker = true
+                }) {
+                    Image(systemName: "slider.horizontal.3")
+                        .foregroundColor(.primary)
+                        .padding(8)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                }
+            }
+        }
     
     private var featuredSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -194,7 +204,41 @@ struct HomeView: View {
     private func filteredPromotions(_ promotions: [Promotion]) -> [Promotion] {
         promotions.filter { promotion in
             (searchText.isEmpty || promotion.title.localizedCaseInsensitiveContains(searchText)) &&
-            (selectedCategory == nil || promotion.category == selectedCategory)
+            (selectedCategory == nil || selectedCategory == "Todas las categorías" || promotion.category == selectedCategory)
+        }
+    }
+}
+
+struct CategoryPickerView: View {
+    @Binding var selectedCategory: String?
+    let categories: [String]
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(categories, id: \.self) { category in
+                    Button(action: {
+                        selectedCategory = category == "Todas las categorías" ? nil : category
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        HStack {
+                            Text(category)
+                            Spacer()
+                            if category == selectedCategory || (category == "Todas las categorías" && selectedCategory == nil) {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                    }
+                }
+            }
+            .listStyle(PlainListStyle())
+            .navigationTitle("Categorías")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Cerrar") {
+                presentationMode.wrappedValue.dismiss()
+            })
         }
     }
 }
