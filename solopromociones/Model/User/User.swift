@@ -8,9 +8,10 @@
 import Foundation
 
 struct User: Identifiable, Codable {
-    var id: String
-    var name: String
+    var id: Int
+    var name: String?
     var email: String
-    var isMerchant: Bool
+    var isMerchant: Bool = false
+    var anonymous: Bool
     var promotions: [Promotion]?
 }

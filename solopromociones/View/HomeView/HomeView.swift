@@ -13,40 +13,42 @@ struct HomeView: View {
     @Binding var selectedTab: Int
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                NavigationLink(
-                    destination: SearchView(viewModel: viewModel),
-                    isActive: $isSearchActive,
-                    label: { EmptyView() }
-                ).hidden()
-                
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        headerSection
-                        searchSection
-                        categorySection
-                        if !filteredPromotions(viewModel.featuredPromotions).isEmpty {
-                            featuredSection
+        ZStack {
+            NavigationView {
+                VStack(spacing: 0) {
+                    NavigationLink(
+                        destination: SearchView(viewModel: viewModel),
+                        isActive: $isSearchActive,
+                        label: { EmptyView() }
+                    ).hidden()
+                    
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            headerSection
+                            searchSection
+                            categorySection
+                            if !filteredPromotions(viewModel.featuredPromotions).isEmpty {
+                                featuredSection
+                            }
+                            if !filteredPromotions(viewModel.dailyDeals).isEmpty {
+                                dailyDealsSection
+                            }
+                            if !filteredPromotions(viewModel.nearbyPromotions).isEmpty {
+                                nearbyPromotionsSection
+                            }
+                            if !filteredPromotions(viewModel.popularPromotions).isEmpty {
+                                popularPromotionsSection
+                            }
+                            if !filteredPromotions(viewModel.promotions).isEmpty {
+                                allPromotionsSection
+                            }
                         }
-                        if !filteredPromotions(viewModel.dailyDeals).isEmpty {
-                            dailyDealsSection
-                        }
-                        if !filteredPromotions(viewModel.nearbyPromotions).isEmpty {
-                            nearbyPromotionsSection
-                        }
-                        if !filteredPromotions(viewModel.popularPromotions).isEmpty {
-                            popularPromotionsSection
-                        }
-                        if !filteredPromotions(viewModel.promotions).isEmpty {
-                            allPromotionsSection
-                        }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
+                    .background(Color(UIColor.systemBackground))
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarHidden(true)
-                .background(Color(UIColor.systemBackground))
             }
             
             if viewModel.showError {
@@ -54,6 +56,7 @@ struct HomeView: View {
                     .onTapGesture {
                         viewModel.showError = false
                     }
+                    .zIndex(1) // Ensure the error view is on top
             }
         }
     }

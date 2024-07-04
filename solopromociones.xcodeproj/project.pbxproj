@@ -122,6 +122,8 @@
 		DFA54F6C2C371B9C000A5277 /* PromotionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F6B2C371B9C000A5277 /* PromotionSummary.swift */; };
 		DFA54F6E2C3725BA000A5277 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F6D2C3725BA000A5277 /* Paths.swift */; };
 		DFA54F702C372838000A5277 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F6F2C372837000A5277 /* ErrorView.swift */; };
+		DFA54F732C373F2F000A5277 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F722C373F2F000A5277 /* AuthService.swift */; };
+		DFA54F752C373FD4000A5277 /* AnonymousAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F742C373FD4000A5277 /* AnonymousAuthResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +259,8 @@
 		DFA54F6B2C371B9C000A5277 /* PromotionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionSummary.swift; sourceTree = "<group>"; };
 		DFA54F6D2C3725BA000A5277 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
 		DFA54F6F2C372837000A5277 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		DFA54F722C373F2F000A5277 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		DFA54F742C373FD4000A5277 /* AnonymousAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousAuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,12 +379,6 @@
 				DFA54F4D2C371414000A5277 /* Home */,
 				DFA54F4A2C3713F2000A5277 /* Merchant */,
 				DFA54F452C3713BD000A5277 /* Promotions */,
-				7929E4302C35AB6400CCD12E /* merchantDetail.json */,
-				7929E4292C359ACD00CCD12E /* promotion_detail.json */,
-				79E1D77E2C2727440093723D /* home.json */,
-				79E1D77C2C2724E00093723D /* cities.json */,
-				793FC0812C249195009F6516 /* merchant_promotions.json */,
-				79369D8C2C1A3DC200B7B7A6 /* promotions.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -511,6 +509,7 @@
 		795F97512C18E4C80097C7FC /* solopromociones */ = {
 			isa = PBXGroup;
 			children = (
+				DFA54F712C373064000A5277 /* Mocks */,
 				793FC06E2C248CD1009F6516 /* ViewModels */,
 				79369D892C1A3DA300B7B7A6 /* Model */,
 				7913026D2C222F1200A68C7F /* View */,
@@ -634,6 +633,7 @@
 				DFA54F592C3714FA000A5277 /* CityService.swift */,
 				DFA54F672C371A9A000A5277 /* PromotionService.swift */,
 				DFA54F6D2C3725BA000A5277 /* Paths.swift */,
+				DFA54F722C373F2F000A5277 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -700,8 +700,22 @@
 				793FC0712C248D11009F6516 /* User.swift */,
 				7929E44C2C35E7B400CCD12E /* UserSession.swift */,
 				DFA54F652C3715BC000A5277 /* UsersContainer.swift */,
+				DFA54F742C373FD4000A5277 /* AnonymousAuthResponse.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		DFA54F712C373064000A5277 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				7929E4302C35AB6400CCD12E /* merchantDetail.json */,
+				7929E4292C359ACD00CCD12E /* promotion_detail.json */,
+				79E1D77E2C2727440093723D /* home.json */,
+				79E1D77C2C2724E00093723D /* cities.json */,
+				793FC0812C249195009F6516 /* merchant_promotions.json */,
+				79369D8C2C1A3DC200B7B7A6 /* promotions.json */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -865,6 +879,7 @@
 				793FC0702C248CFC009F6516 /* ProfileViewModel.swift in Sources */,
 				7913027E2C2230B300A68C7F /* HorizontalPromotionCell.swift in Sources */,
 				793FC0842C2494AF009F6516 /* PromotionEditDetailViewModel.swift in Sources */,
+				DFA54F752C373FD4000A5277 /* AnonymousAuthResponse.swift in Sources */,
 				7929E43A2C35DC7700CCD12E /* VerificationCodeView.swift in Sources */,
 				793FC0662C248ABA009F6516 /* SearchView.swift in Sources */,
 				DFA54F4C2C3713FF000A5277 /* Merchant.swift in Sources */,
@@ -951,6 +966,7 @@
 				7929E43E2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift in Sources */,
 				79E0685D2C29E86900B2656E /* CategoryButton.swift in Sources */,
 				79F236502C344339002F489D /* PromotionRow.swift in Sources */,
+				DFA54F732C373F2F000A5277 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

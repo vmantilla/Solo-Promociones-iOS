@@ -1,0 +1,66 @@
+[
+    {
+        "id": 5,
+        "name": "Barranquilla",
+        "code": "BAQ",
+        "country": "Colombia",
+        "created_at": "2024-04-26T22:36:00.150Z",
+        "updated_at": "2024-04-26T22:36:00.150Z"
+    },
+    {
+        "id": 1,
+        "name": "Bogotá",
+        "code": "BOG",
+        "country": "Colombia",
+        "created_at": "2024-04-26T22:36:00.058Z",
+        "updated_at": "2024-04-26T22:36:00.058Z"
+    },
+    {
+        "id": 6,
+        "name": "Buenos Aires",
+        "code": "BUE",
+        "country": "Argentina",
+        "created_at": "2024-04-26T22:36:00.152Z",
+        "updated_at": "2024-04-26T22:36:00.152Z"
+    },
+    {
+        "id": 4,
+        "name": "Cali",
+        "code": "CLO",
+        "country": "Colombia",
+        "created_at": "2024-04-26T22:36:00.147Z",
+        "updated_at": "2024-04-26T22:36:00.147Z"
+    },
+    {
+        "id": 2,
+        "name": "Cartagena",
+        "code": "CTG",
+        "country": "Colombia",
+        "created_at": "2024-04-26T22:36:00.118Z",
+        "updated_at": "2024-04-26T22:36:00.118Z"
+    },
+    {
+        "id": 3,
+        "name": "Medellín",
+        "code": "MDE",
+        "country": "Colombia",
+        "created_at": "2024-04-26T22:36:00.145Z",
+        "updated_at": "2024-04-26T22:36:00.145Z"
+    },
+    {
+        "id": 8,
+        "name": "Rio de Janeiro",
+        "code": "RIO",
+        "country": "Brazil",
+        "created_at": "2024-04-26T22:36:00.156Z",
+        "updated_at": "2024-04-26T22:36:00.156Z"
+    },
+    {
+        "id": 7,
+        "name": "São Paulo",
+        "code": "SAO",
+        "country": "Brazil",
+        "created_at": "2024-04-26T22:36:00.154Z",
+        "updated_at": "2024-04-26T22:36:00.154Z"
+    }
+]

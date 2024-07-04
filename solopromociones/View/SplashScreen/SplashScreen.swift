@@ -1,6 +1,7 @@
 import SwiftUI
 import Lottie
 
+
 struct SplashScreen: View {
     let name: String
     @EnvironmentObject var splashViewModel: SplashViewModel
@@ -13,12 +14,19 @@ struct SplashScreen: View {
             LottieView(name: name, loopMode: .playOnce) { finished in
                 animationFinished = finished
                 if finished {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        splashViewModel.dismissSplash()
-                    }
+                    splashViewModel.markAnimationFinished()
                 }
             }
             .frame(width: 200, height: 200)
+            
+            if splashViewModel.showError {
+                ErrorView(message: splashViewModel.errorMessage, webURL: splashViewModel.webURL)
+            }
+        }
+        .onAppear {
+            Task {
+                await splashViewModel.authenticateIfNeeded()
+            }
         }
     }
 }

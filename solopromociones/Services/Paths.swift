@@ -1,10 +1,3 @@
-//
-//  Paths.swift
-//  solopromociones
-//
-//  Created by Ravit dev on 4/07/24.
-//
-
 import Foundation
 
 struct API {
@@ -13,4 +6,5 @@ struct API {
 
 struct Endpoints {
     static let cities = "\(API.baseURL)/cities"
+    static let anonymousUsers = "\(API.baseURL)/anonymous_users"
 }

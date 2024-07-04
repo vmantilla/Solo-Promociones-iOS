@@ -29,7 +29,7 @@ class ProfileViewModel: ObservableObject {
         // Aquí implementarías la lógica de autenticación real
         // Por ahora, simularemos una autenticación exitosa
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let newUser = User(id: "1", name: "Usuario Ejemplo", email: "usuario@ejemplo.com", isMerchant: false)
+            let newUser = User(id: 1, name: "Usuario Ejemplo", email: "usuario@ejemplo.com", isMerchant: false, anonymous: false)
             let token = "sample_auth_token"
             UserSession.shared.login(user: newUser, token: token)
             
@@ -61,7 +61,7 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func toggleMerchantStatus() {
+    @MainActor func toggleMerchantStatus() {
         isMerchant.toggle()
         user?.isMerchant = isMerchant
         if isMerchant {
@@ -76,7 +76,7 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func convertToMerchant(with spots: Int) {
+    @MainActor func convertToMerchant(with spots: Int) {
         isMerchant = true
         user?.isMerchant = true
         availableSpots = spots
@@ -94,7 +94,7 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func updateProfile(name: String, profileImage: UIImage?, backgroundImage: UIImage?) {
+    @MainActor func updateProfile(name: String, profileImage: UIImage?, backgroundImage: UIImage?) {
         user?.name = name
         self.profileImage = profileImage
         self.backgroundImage = backgroundImage
@@ -106,7 +106,7 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func signOut() {
+    @MainActor func signOut() {
         UserSession.shared.logout()
         isAuthenticated = false
         user = nil

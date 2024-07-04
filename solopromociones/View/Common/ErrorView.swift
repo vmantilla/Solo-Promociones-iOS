@@ -2,30 +2,44 @@ import SwiftUI
 
 struct ErrorView: View {
     let message: String
-    let imageName: String = "exclamationmark.triangle.fill" // Puedes cambiar esto a una imagen personalizada si tienes una
-
+    let imageName: String = "exclamationmark.triangle"
+    let webURL: URL?
+    
+    init(message: String, webURL: URL? = nil) {
+        self.message = message
+        self.webURL = webURL
+    }
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 15) {
             Image(systemName: imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
-                .padding(.bottom, 20)
+                .frame(width: 50, height: 50)
+                .foregroundColor(.orange)
+            
             Text(message)
-                .font(.headline)
+                .font(.subheadline)
                 .multilineTextAlignment(.center)
-                .padding()
+                .foregroundColor(.secondary)
+            
+            if let webURL = webURL {
+                Button(action: {
+                    UIApplication.shared.open(webURL)
+                }) {
+                    Text("Visita nuestra web")
+                        .foregroundColor(.blue)
+                        .underline()
+                }
+            }
         }
         .padding()
-        .background(Color.white)
+        .background(Color(.systemBackground))
         .cornerRadius(10)
-        .shadow(radius: 10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
         .padding()
-    }
-}
-
-struct ErrorView_Previews: PreviewProvider {
-    static var previews: some View {
-        ErrorView(message: "Ha ocurrido un error. Estamos trabajando para solucionarlo.")
     }
 }

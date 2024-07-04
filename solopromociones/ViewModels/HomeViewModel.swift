@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import SwiftUI
 
 @MainActor
 protocol HomeViewModelProtocol: ObservableObject {
@@ -15,6 +16,7 @@ protocol HomeViewModelProtocol: ObservableObject {
     var errorMessage: String { get }
     func loadPromotions() async
     func loadCities() async
+    func refreshCities() async
     func searchPromotions(query: String) -> [Promotion]
 }
 
@@ -41,19 +43,22 @@ class HomeViewModel: ObservableObject, HomeViewModelProtocol {
             await loadPromotions()
             await loadCities()
         }
+        loadSelectedCity()
     }
     
     func loadPromotions() async {
         do {
             let jsonData = try await promotionService.fetchPromotions()
-            self.promotions = jsonData.promotions
-            self.categories = jsonData.categories
-            
-            // Asignar promociones a diferentes secciones
-            self.featuredPromotions = Array(jsonData.promotions.prefix(5))
-            self.dailyDeals = Array(jsonData.promotions.suffix(5))
-            self.nearbyPromotions = Array(jsonData.promotions.shuffled().prefix(5))
-            self.popularPromotions = Array(jsonData.promotions.shuffled().prefix(3))
+            await MainActor.run {
+                self.promotions = jsonData.promotions
+                self.categories = jsonData.categories
+                
+                // Asignar promociones a diferentes secciones
+                self.featuredPromotions = Array(jsonData.promotions.prefix(5))
+                self.dailyDeals = Array(jsonData.promotions.suffix(5))
+                self.nearbyPromotions = Array(jsonData.promotions.shuffled().prefix(5))
+                self.popularPromotions = Array(jsonData.promotions.shuffled().prefix(3))
+            }
         } catch {
             await MainActor.run {
                 self.showError = true
@@ -63,17 +68,37 @@ class HomeViewModel: ObservableObject, HomeViewModelProtocol {
     }
     
     func loadCities() async {
-        do {
-            let cities = try await cityService.fetchCities()
-            self.cities = cities
-            if let firstCity = cities.first {
+        let localCities = cityService.loadCitiesLocally()
+        if !localCities.isEmpty {
+            self.cities = localCities
+            if selectedCity.isEmpty, let firstCity = localCities.first {
                 self.selectedCity = firstCity.name
+            }
+        } else {
+            await refreshCities()
+        }
+    }
+
+    func refreshCities() async {
+        do {
+            let remoteCities = try await cityService.fetchCities()
+            await MainActor.run {
+                self.cities = remoteCities
+                if selectedCity.isEmpty, let firstCity = remoteCities.first {
+                    self.selectedCity = firstCity.name
+                }
             }
         } catch {
             await MainActor.run {
                 self.showError = true
                 self.errorMessage = "Ha ocurrido un error al cargar las ciudades. Estamos trabajando para solucionarlo."
             }
+        }
+    }
+    
+    func loadSelectedCity() {
+        if let city = cityService.loadSelectedCity() {
+            selectedCity = city
         }
     }
     

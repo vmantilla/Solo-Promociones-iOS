@@ -18,9 +18,3 @@ struct ProfileView: View {
             }
         }
 }
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(user: User(id: "1", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: false))
-    }
-}

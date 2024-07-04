@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var user = User(id: "2", name: "Raul Mantilla", email: "rmantilla26@gmail.com", isMerchant: false)
     @State private var selectedTab = 0
     @StateObject private var viewModel = HomeViewModel()
+    @ObservedObject private var userSession = UserSession.shared
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -30,11 +30,16 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            ProfileView(user: user)
-                .tabItem {
-                    Label("Perfil", systemImage: user.isMerchant ? "briefcase" : "person")
-                }
-                .tag(3)
+            if let user = userSession.currentUser {
+                ProfileView(user: user)
+                    .tabItem {
+                        Label("Perfil", systemImage: user.isMerchant ? "briefcase" : "person")
+                    }
+                    .tag(3)
+            }
+        }
+        .onAppear {
+            userSession.loadFromUserDefaults()
         }
     }
 }

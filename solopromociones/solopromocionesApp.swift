@@ -1,5 +1,7 @@
 import SwiftUI
 
+import SwiftUI
+
 @main
 struct solopromocionesApp: App {
     @StateObject private var splashViewModel = SplashViewModel()
@@ -20,6 +22,7 @@ struct solopromocionesApp: App {
         }
     }
 }
+
 
 struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
