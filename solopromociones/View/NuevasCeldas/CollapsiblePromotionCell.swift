@@ -13,12 +13,15 @@ struct CollapsiblePromotionCell: View {
     @State private var isExpanded = false
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(promotion.title)
-                    .font(.headline)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
                 Spacer()
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
             .contentShape(Rectangle())
             .onTapGesture {
@@ -33,8 +36,8 @@ struct CollapsiblePromotionCell: View {
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

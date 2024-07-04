@@ -6,30 +6,32 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct PromotionRow: View {
     let promotion: Promotion
     
     var body: some View {
-        HStack {
-            AsyncImage(url: URL(string: promotion.imageURL)) { image in
+        HStack(spacing: 10) {
+            CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                 image.resizable()
             } placeholder: {
-                Color.gray
+                Color.gray.opacity(0.2)
             }
-            .frame(width: 80, height: 80)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .frame(width: 60, height: 60)
+            .cornerRadius(6)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(promotion.title)
-                    .font(.headline)
-                Text("promotion.category")
-                    .foregroundColor(.blue)
                     .font(.subheadline)
+                    .fontWeight(.medium)
+                Text("promotion.category")
+                    .font(.caption)
+                    .foregroundColor(.blue)
             }
             Spacer()
         }
-        .padding(.vertical, 5)
+        .padding(.vertical, 4)
     }
 }
 

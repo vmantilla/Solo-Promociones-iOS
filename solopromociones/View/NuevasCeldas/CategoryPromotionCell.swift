@@ -13,35 +13,36 @@ struct CategoryPromotionCell: View {
     let promotions: [Promotion]
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(category)
-                .font(.headline)
+                .font(.subheadline)
+                .fontWeight(.medium)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
+                HStack(spacing: 8) {
                     ForEach(promotions) { promotion in
-                        VStack {
+                        VStack(spacing: 4) {
                             CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                                 image.resizable().aspectRatio(contentMode: .fill)
                             } placeholder: {
-                                Color.gray
+                                Color.gray.opacity(0.2)
                             }
-                            .frame(width: 120, height: 120)
-                            .cornerRadius(8)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(6)
                             
                             Text(promotion.title)
-                                .font(.caption)
+                                .font(.caption2)
                                 .lineLimit(2)
                         }
-                        .frame(width: 120)
+                        .frame(width: 100)
                     }
                 }
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

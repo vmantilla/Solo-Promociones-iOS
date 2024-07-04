@@ -74,6 +74,10 @@
 		795F97692C18E4CB0097C7FC /* solopromocionesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97682C18E4CB0097C7FC /* solopromocionesTests.swift */; };
 		795F97732C18E4CB0097C7FC /* solopromocionesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97722C18E4CB0097C7FC /* solopromocionesUITests.swift */; };
 		795F97752C18E4CB0097C7FC /* solopromocionesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F97742C18E4CB0097C7FC /* solopromocionesUITestsLaunchTests.swift */; };
+		7999B1B32C36EB180031AAF0 /* splash_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7999B1B22C36EB180031AAF0 /* splash_animation.json */; };
+		7999B1B62C36EBEC0031AAF0 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7999B1B52C36EBEC0031AAF0 /* SplashScreen.swift */; };
+		7999B1B82C36EC150031AAF0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7999B1B72C36EC150031AAF0 /* Lottie */; };
+		7999B1BA2C36ED6E0031AAF0 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7999B1B92C36ED6E0031AAF0 /* SplashViewModel.swift */; };
 		79E068542C29C0DB00B2656E /* AddPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E068532C29C0DB00B2656E /* AddPromotionCell.swift */; };
 		79E068572C29C1FC00B2656E /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E068562C29C1FC00B2656E /* EditProfileView.swift */; };
 		79E068592C29CD1C00B2656E /* MonthlyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E068582C29CD1C00B2656E /* MonthlyCalendarView.swift */; };
@@ -188,6 +192,9 @@
 		795F976E2C18E4CB0097C7FC /* solopromocionesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = solopromocionesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		795F97722C18E4CB0097C7FC /* solopromocionesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solopromocionesUITests.swift; sourceTree = "<group>"; };
 		795F97742C18E4CB0097C7FC /* solopromocionesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solopromocionesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7999B1B22C36EB180031AAF0 /* splash_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_animation.json; sourceTree = "<group>"; };
+		7999B1B52C36EBEC0031AAF0 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		7999B1B92C36ED6E0031AAF0 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		79E068532C29C0DB00B2656E /* AddPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionCell.swift; sourceTree = "<group>"; };
 		79E068562C29C1FC00B2656E /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		79E068582C29CD1C00B2656E /* MonthlyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalendarView.swift; sourceTree = "<group>"; };
@@ -223,6 +230,7 @@
 			files = (
 				79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */,
 				7913026C2C222E0700A68C7F /* CachedAsyncImage in Frameworks */,
+				7999B1B82C36EC150031AAF0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +254,7 @@
 		7913026D2C222F1200A68C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7999B1B42C36EB9B0031AAF0 /* SplashScreen */,
 				7929E4342C35DC3200CCD12E /* AuthenticationFlow */,
 				7929E42B2C35A8DF00CCD12E /* MerchantDetailView */,
 				79F2365B2C349CB6002F489D /* PromotionDetailView */,
@@ -462,6 +471,7 @@
 		795F97512C18E4C80097C7FC /* solopromociones */ = {
 			isa = PBXGroup;
 			children = (
+				7999B1B02C36EAF50031AAF0 /* Resources */,
 				793FC06E2C248CD1009F6516 /* ViewModels */,
 				7913026D2C222F1200A68C7F /* View */,
 				79369D892C1A3DA300B7B7A6 /* Model */,
@@ -497,6 +507,31 @@
 				795F97742C18E4CB0097C7FC /* solopromocionesUITestsLaunchTests.swift */,
 			);
 			path = solopromocionesUITests;
+			sourceTree = "<group>";
+		};
+		7999B1B02C36EAF50031AAF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7999B1B12C36EAFC0031AAF0 /* Animations */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7999B1B12C36EAFC0031AAF0 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				7999B1B22C36EB180031AAF0 /* splash_animation.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		7999B1B42C36EB9B0031AAF0 /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7999B1B52C36EBEC0031AAF0 /* SplashScreen.swift */,
+				7999B1B92C36ED6E0031AAF0 /* SplashViewModel.swift */,
+			);
+			path = SplashScreen;
 			sourceTree = "<group>";
 		};
 		79E068552C29C1F400B2656E /* EditProfileView */ = {
@@ -570,6 +605,7 @@
 			packageProductDependencies = (
 				79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */,
 				7913026B2C222E0700A68C7F /* CachedAsyncImage */,
+				7999B1B72C36EC150031AAF0 /* Lottie */,
 			);
 			productName = solopromociones;
 			productReference = 795F974F2C18E4C80097C7FC /* solopromociones.app */;
@@ -646,6 +682,7 @@
 			packageReferences = (
 				79369D922C1A3E7F00B7B7A6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				7913026A2C222E0700A68C7F /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				7999B1AF2C36EAE90031AAF0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 795F97502C18E4C80097C7FC /* Products */;
 			projectDirPath = "";
@@ -664,6 +701,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7929E4312C35AB6400CCD12E /* merchantDetail.json in Resources */,
+				7999B1B32C36EB180031AAF0 /* splash_animation.json in Resources */,
 				795F975A2C18E4CA0097C7FC /* Preview Assets.xcassets in Resources */,
 				7929E42A2C359ACD00CCD12E /* promotion_detail.json in Resources */,
 				79E1D77D2C2724E00093723D /* cities.json in Resources */,
@@ -718,6 +756,7 @@
 				791302802C2230EB00A68C7F /* HighlightedConditionsPromotionCell.swift in Sources */,
 				79E068732C2A0B1800B2656E /* CountdownPromotionCell.swift in Sources */,
 				79E068672C2A0A2400B2656E /* CompactHorizontalPromotionCell.swift in Sources */,
+				7999B1BA2C36ED6E0031AAF0 /* SplashViewModel.swift in Sources */,
 				79E068542C29C0DB00B2656E /* AddPromotionCell.swift in Sources */,
 				7929E43C2C35DCDD00CCD12E /* ProfileContainerView.swift in Sources */,
 				79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */,
@@ -758,6 +797,7 @@
 				791302782C22307F00A68C7F /* CardStylePromotionCell.swift in Sources */,
 				79E068752C2A0B3900B2656E /* StandardPromotionCell.swift in Sources */,
 				793FC0782C248D96009F6516 /* EditPromotionView.swift in Sources */,
+				7999B1B62C36EBEC0031AAF0 /* SplashScreen.swift in Sources */,
 				79E0686B2C2A0A8800B2656E /* FeaturedPromotionCell.swift in Sources */,
 				793FC0722C248D11009F6516 /* User.swift in Sources */,
 				795F975F2C18E4CA0097C7FC /* solopromociones.xcdatamodeld in Sources */,
@@ -936,11 +976,13 @@
 				DEVELOPMENT_TEAM = A28KN944JQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Solo Promociones";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -965,11 +1007,13 @@
 				DEVELOPMENT_TEAM = A28KN944JQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Solo Promociones";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1117,6 +1161,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7999B1AF2C36EAE90031AAF0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1129,6 +1181,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79369D922C1A3E7F00B7B7A6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		7999B1B72C36EC150031AAF0 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7999B1AF2C36EAE90031AAF0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 

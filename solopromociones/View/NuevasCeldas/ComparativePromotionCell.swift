@@ -13,41 +13,41 @@ struct ComparativePromotionCell: View {
     let promotion2: Promotion
     
     var body: some View {
-        HStack {
-            VStack {
+        HStack(spacing: 12) {
+            VStack(spacing: 4) {
                 CachedAsyncImage(url: URL(string: promotion1.imageURL)) { image in
                     image.resizable().aspectRatio(contentMode: .fill)
                 } placeholder: {
-                    Color.gray
+                    Color.gray.opacity(0.2)
                 }
-                .frame(width: 100, height: 100)
-                .cornerRadius(8)
+                .frame(width: 80, height: 80)
+                .cornerRadius(6)
                 
                 Text(promotion1.title)
-                    .font(.caption)
+                    .font(.caption2)
                     .lineLimit(2)
             }
             
             Divider()
             
-            VStack {
+            VStack(spacing: 4) {
                 CachedAsyncImage(url: URL(string: promotion2.imageURL)) { image in
                     image.resizable().aspectRatio(contentMode: .fill)
                 } placeholder: {
-                    Color.gray
+                    Color.gray.opacity(0.2)
                 }
-                .frame(width: 100, height: 100)
-                .cornerRadius(8)
+                .frame(width: 80, height: 80)
+                .cornerRadius(6)
                 
                 Text(promotion2.title)
-                    .font(.caption)
+                    .font(.caption2)
                     .lineLimit(2)
             }
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

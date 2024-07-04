@@ -1,6 +1,7 @@
 {
   "id": "merchant456",
   "name": "El Rincón de los Cocteles",
+  "description": "El Rincón de los Cocteles es el lugar perfecto para disfrutar de una amplia variedad de cocteles artesanales en un ambiente acogedor y elegante. Nuestro bar y restaurante ofrece una experiencia única con una selección exclusiva de bebidas y platos deliciosos, ideal para cualquier ocasión, ya sea una salida con amigos o una celebración especial.",
   "category": "Bar y Restaurante",
   "logoURL": "https://example.com/logo.jpg",
   "latitude": 4.710989,
@@ -65,5 +66,13 @@
       "title": "Noche de Tapas",
       "imageURL": "https://example.com/tapas.jpg"
     }
-  ]
+  ],"categories": [
+      "Cocteles",
+      "Bebidas Artesanales",
+      "Restaurante",
+      "Bar",
+      "Happy Hour",
+      "Tapas"
+    ],
+  "mainCategory": "Restaurante"
 }

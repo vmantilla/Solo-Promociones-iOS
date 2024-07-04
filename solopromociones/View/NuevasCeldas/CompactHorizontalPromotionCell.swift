@@ -12,32 +12,35 @@ struct CompactHorizontalPromotionCell: View {
     let promotion: Promotion
     
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                 image.resizable().aspectRatio(contentMode: .fill)
             } placeholder: {
-                Color.gray
+                Color.gray.opacity(0.2)
             }
-            .frame(width: 80, height: 80)
-            .cornerRadius(8)
+            .frame(width: 60, height: 60)
+            .cornerRadius(6)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(promotion.title)
-                    .font(.headline)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
                 Text(promotion.validUntil)
-                    .font(.caption)
+                    .font(.caption2)
                     .foregroundColor(.red)
             }
             
             Spacer()
             
             Text("Ver")
+                .font(.footnote)
                 .foregroundColor(.blue)
         }
-        .padding()
+        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

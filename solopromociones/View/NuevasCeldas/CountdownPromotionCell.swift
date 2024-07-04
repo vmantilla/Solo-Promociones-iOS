@@ -13,21 +13,22 @@ struct CountdownPromotionCell: View {
     @State private var timeRemaining: TimeInterval = 3600 // Example: 1 hour
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             StandardPromotionCell(promotion: promotion)
             
             HStack {
                 Text("Termina en:")
+                    .font(.caption)
                 Text("\(timeString(from: timeRemaining))")
-                    .fontWeight(.bold)
+                    .font(.caption)
+                    .fontWeight(.semibold)
                     .foregroundColor(.red)
             }
-            .font(.subheadline)
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
         .onAppear {
             startTimer()
         }

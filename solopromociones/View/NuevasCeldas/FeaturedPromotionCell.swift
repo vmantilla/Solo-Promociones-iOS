@@ -12,35 +12,36 @@ struct FeaturedPromotionCell: View {
     let promotion: Promotion
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Promoción Destacada")
-                .font(.headline)
+                .font(.subheadline)
+                .fontWeight(.medium)
                 .foregroundColor(.orange)
             
             CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                 image.resizable().aspectRatio(contentMode: .fill)
             } placeholder: {
-                Color.gray
+                Color.gray.opacity(0.2)
             }
-            .frame(height: 200)
-            .cornerRadius(12)
+            .frame(height: 160)
+            .cornerRadius(10)
             
             Text(promotion.title)
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.headline)
+                .fontWeight(.semibold)
             
             Text(promotion.description)
-                .font(.subheadline)
-                .foregroundColor(.gray)
+                .font(.caption)
+                .foregroundColor(.secondary)
             
             Text("Válido hasta: \(promotion.validUntil)")
-                .font(.caption)
+                .font(.caption2)
                 .foregroundColor(.red)
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

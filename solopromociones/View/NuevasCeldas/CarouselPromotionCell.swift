@@ -12,16 +12,17 @@ struct CarouselPromotionCell: View {
     let promotions: [Promotion]
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Ofertas Destacadas")
-                .font(.headline)
+                .font(.subheadline)
+                .fontWeight(.medium)
             
             TabView {
                 ForEach(promotions) { promotion in
                     StandardPromotionCell(promotion: promotion)
                 }
             }
-            .frame(height: 250)
+            .frame(height: 220)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         }
     }

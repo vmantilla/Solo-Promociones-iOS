@@ -6,28 +6,30 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct PromotionCard: View {
     let promotion: Promotion
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            AsyncImage(url: URL(string: promotion.imageURL)) { image in
+        VStack(alignment: .leading, spacing: 8) {
+            CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
                 image.resizable()
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
-                Color.gray
+                Color.gray.opacity(0.2)
             }
-            .frame(height: 180)
+            .frame(height: 150)
             .clipped()
-            .cornerRadius(10)
+            .cornerRadius(8)
             
             Text(promotion.title)
-                .font(.headline)
+                .font(.subheadline)
+                .fontWeight(.medium)
                 .lineLimit(2)
             
             Text(promotion.description)
-                .font(.subheadline)
+                .font(.caption)
                 .foregroundColor(.secondary)
                 .lineLimit(2)
             

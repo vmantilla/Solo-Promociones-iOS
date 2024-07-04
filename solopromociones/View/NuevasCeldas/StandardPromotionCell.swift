@@ -6,12 +6,12 @@ struct StandardPromotionCell: View {
 
     var body: some View {
         NavigationLink(destination: PromotionDetailView(promotionId: "promo123")) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .top, spacing: 12) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .top, spacing: 10) {
                     CachedAsyncImage(url: URL(string: promotion.imageURL)) { phase in
                         switch phase {
                         case .empty:
-                            Color.gray.opacity(0.3)
+                            Color.gray.opacity(0.2)
                         case .success(let image):
                             image
                                 .resizable()
@@ -25,41 +25,41 @@ struct StandardPromotionCell: View {
                             EmptyView()
                         }
                     }
-                    .frame(width: 100, height: 100)
-                    .cornerRadius(8)
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(6)
 
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text(promotion.title)
-                            .font(.headline)
-                            .fontWeight(.bold)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
                             .foregroundColor(Color(.systemIndigo))
                         Text(promotion.description)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                             .lineLimit(2)
                     }
                 }
 
                 HStack {
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("Válido hasta:")
-                            .font(.caption)
+                            .font(.caption2)
                         Text(promotion.validUntil)
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
+                            .font(.caption)
+                            .fontWeight(.medium)
                             .foregroundColor(.red)
                     }
                     Spacer()
                     Text(promotion.conditions)
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundColor(.secondary)
                         .lineLimit(2)
                 }
             }
             .padding()
             .background(Color(.systemBackground))
-            .cornerRadius(12)
-            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
         }
         .buttonStyle(PlainButtonStyle())
     }

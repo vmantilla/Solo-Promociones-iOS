@@ -5,27 +5,27 @@ struct TimelinePromotionCell: View {
     let promotions: [Promotion]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 16) {
             Text("Próximos Eventos")
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.subheadline)
+                .fontWeight(.medium)
             
             ForEach(promotions) { promotion in
-                HStack(alignment: .top, spacing: 15) {
+                HStack(alignment: .top, spacing: 12) {
                     VStack {
                         Circle()
-                            .fill(Color.blue)
-                            .frame(width: 20, height: 20)
+                            .fill(Color.blue.opacity(0.8))
+                            .frame(width: 16, height: 16)
                         Rectangle()
-                            .fill(Color.blue)
-                            .frame(width: 2)
+                            .fill(Color.blue.opacity(0.8))
+                            .frame(width: 1)
                     }
-                    .frame(height: 120)
+                    .frame(height: 100)
                     
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text(promotion.title)
-                            .font(.headline)
-                            .foregroundColor(.primary)
+                            .font(.subheadline)
+                            .fontWeight(.medium)
                         
                         HStack {
                             CachedAsyncImage(url: URL(string: promotion.imageURL)) { image in
@@ -33,19 +33,19 @@ struct TimelinePromotionCell: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                             } placeholder: {
-                                Color.gray
+                                Color.gray.opacity(0.2)
                             }
-                            .frame(width: 80, height: 80)
-                            .cornerRadius(8)
+                            .frame(width: 60, height: 60)
+                            .cornerRadius(6)
                             
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: 2) {
                                 Text(promotion.description)
-                                    .font(.subheadline)
+                                    .font(.caption)
                                     .foregroundColor(.secondary)
-                                    .lineLimit(3)
+                                    .lineLimit(2)
                                 
                                 Text("Válido hasta: \(promotion.validUntil)")
-                                    .font(.caption)
+                                    .font(.caption2)
                                     .foregroundColor(.blue)
                                 
                                 Text(promotion.conditions)
@@ -59,8 +59,8 @@ struct TimelinePromotionCell: View {
         }
         .padding()
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 }
 

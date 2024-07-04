@@ -33,6 +33,8 @@ struct MerchantDetailView: View {
     private func merchantContent(_ merchant: MerchantDetail) -> some View {
         imageCarousel(images: merchant.images)
         merchantInfo(merchant: merchant)
+        merchantDescription(merchant: merchant)
+        categoryTags(categories: merchant.categories)
         openingHours(merchant: merchant)
         locationInfo(merchant: merchant)
         contactInfo(merchant: merchant)
@@ -75,7 +77,7 @@ struct MerchantDetailView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(merchant.name).font(.headline)
-                Text(merchant.category).font(.caption).foregroundColor(.secondary)
+                Text(merchant.mainCategory).font(.caption).foregroundColor(.secondary)
             }
             
             Spacer()
@@ -90,6 +92,37 @@ struct MerchantDetailView: View {
         .background(Color(.systemBackground))
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+    
+    private func merchantDescription(merchant: MerchantDetail) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Sobre nosotros")
+                .font(.subheadline)
+                .fontWeight(.medium)
+            Text(merchant.description)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+    
+    private func categoryTags(categories: [String]) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(categories, id: \.self) { category in
+                    Text(category)
+                        .font(.caption2)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.random.opacity(0.2))
+                        .foregroundColor(Color.random.opacity(0.8))
+                        .cornerRadius(12)
+                }
+            }
+        }
     }
     
     private func openingHours(merchant: MerchantDetail) -> some View {
@@ -277,6 +310,16 @@ struct MerchantDetailView: View {
     private func openWhatsApp(_ number: String) {
         let urlString = "https://wa.me/\(number)"
         openURL(urlString)
+    }
+}
+
+extension Color {
+    static var random: Color {
+        return Color(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1)
+        )
     }
 }
 
