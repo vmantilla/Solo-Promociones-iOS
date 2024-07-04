@@ -48,6 +48,13 @@ struct HomeView: View {
                 .navigationBarHidden(true)
                 .background(Color(UIColor.systemBackground))
             }
+            
+            if viewModel.showError {
+                ErrorView(message: viewModel.errorMessage)
+                    .onTapGesture {
+                        viewModel.showError = false
+                    }
+            }
         }
     }
     

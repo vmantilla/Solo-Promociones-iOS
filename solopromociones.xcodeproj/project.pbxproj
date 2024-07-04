@@ -41,7 +41,6 @@
 		7929E44B2C35DE3600CCD12E /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */; };
 		7929E44D2C35E7B400CCD12E /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44C2C35E7B400CCD12E /* UserSession.swift */; };
 		7929E44F2C35EACE00CCD12E /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E44E2C35EACE00CCD12E /* ProductViewModel.swift */; };
-		79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */; };
 		79369D8D2C1A3DC200B7B7A6 /* promotions.json in Resources */ = {isa = PBXBuildFile; fileRef = 79369D8C2C1A3DC200B7B7A6 /* promotions.json */; };
 		79369D942C1A3E7F00B7B7A6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 79369D932C1A3E7F00B7B7A6 /* ComposableArchitecture */; };
 		79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */; };
@@ -104,6 +103,25 @@
 		79F236572C347666002F489D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236562C347666002F489D /* SettingsView.swift */; };
 		79F236592C348008002F489D /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F236582C348008002F489D /* StatView.swift */; };
 		79F2365D2C349CC2002F489D /* PromotionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2365C2C349CC2002F489D /* PromotionDetailView.swift */; };
+		DFA54F472C3713CA000A5277 /* PromotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F462C3713CA000A5277 /* PromotionData.swift */; };
+		DFA54F492C3713DF000A5277 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F482C3713DF000A5277 /* Promotion.swift */; };
+		DFA54F4C2C3713FF000A5277 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F4B2C3713FF000A5277 /* Merchant.swift */; };
+		DFA54F4F2C371421000A5277 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F4E2C371421000A5277 /* City.swift */; };
+		DFA54F522C371441000A5277 /* DayPromotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F512C371441000A5277 /* DayPromotion.swift */; };
+		DFA54F542C371454000A5277 /* DayCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F532C371454000A5277 /* DayCategory.swift */; };
+		DFA54F562C371463000A5277 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F552C371463000A5277 /* Day.swift */; };
+		DFA54F582C37148C000A5277 /* MerchantDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F572C37148C000A5277 /* MerchantDetail.swift */; };
+		DFA54F5A2C3714FA000A5277 /* CityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F592C3714FA000A5277 /* CityService.swift */; };
+		DFA54F5C2C371515000A5277 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F5B2C371515000A5277 /* ColorUtils.swift */; };
+		DFA54F5F2C371565000A5277 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F5E2C371565000A5277 /* Product.swift */; };
+		DFA54F612C371583000A5277 /* MerchantPromotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F602C371583000A5277 /* MerchantPromotion.swift */; };
+		DFA54F632C371596000A5277 /* OpeningHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F622C371596000A5277 /* OpeningHours.swift */; };
+		DFA54F662C3715BC000A5277 /* UsersContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F652C3715BC000A5277 /* UsersContainer.swift */; };
+		DFA54F682C371A9A000A5277 /* PromotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F672C371A9A000A5277 /* PromotionService.swift */; };
+		DFA54F6A2C371B86000A5277 /* PromotionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F692C371B86000A5277 /* PromotionDetail.swift */; };
+		DFA54F6C2C371B9C000A5277 /* PromotionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F6B2C371B9C000A5277 /* PromotionSummary.swift */; };
+		DFA54F6E2C3725BA000A5277 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F6D2C3725BA000A5277 /* Paths.swift */; };
+		DFA54F702C372838000A5277 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA54F6F2C372837000A5277 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,7 +175,6 @@
 		7929E44A2C35DE3600CCD12E /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		7929E44C2C35E7B400CCD12E /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		7929E44E2C35EACE00CCD12E /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
-		79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		79369D8C2C1A3DC200B7B7A6 /* promotions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = promotions.json; sourceTree = "<group>"; };
 		79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewModel.swift; sourceTree = "<group>"; };
 		793FC05F2C248A84009F6516 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -221,6 +238,25 @@
 		79F236562C347666002F489D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79F236582C348008002F489D /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 		79F2365C2C349CC2002F489D /* PromotionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailView.swift; sourceTree = "<group>"; };
+		DFA54F462C3713CA000A5277 /* PromotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionData.swift; sourceTree = "<group>"; };
+		DFA54F482C3713DF000A5277 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
+		DFA54F4B2C3713FF000A5277 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
+		DFA54F4E2C371421000A5277 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		DFA54F512C371441000A5277 /* DayPromotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPromotion.swift; sourceTree = "<group>"; };
+		DFA54F532C371454000A5277 /* DayCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCategory.swift; sourceTree = "<group>"; };
+		DFA54F552C371463000A5277 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		DFA54F572C37148C000A5277 /* MerchantDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetail.swift; sourceTree = "<group>"; };
+		DFA54F592C3714FA000A5277 /* CityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityService.swift; sourceTree = "<group>"; };
+		DFA54F5B2C371515000A5277 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		DFA54F5E2C371565000A5277 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		DFA54F602C371583000A5277 /* MerchantPromotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantPromotion.swift; sourceTree = "<group>"; };
+		DFA54F622C371596000A5277 /* OpeningHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHours.swift; sourceTree = "<group>"; };
+		DFA54F652C3715BC000A5277 /* UsersContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersContainer.swift; sourceTree = "<group>"; };
+		DFA54F672C371A9A000A5277 /* PromotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionService.swift; sourceTree = "<group>"; };
+		DFA54F692C371B86000A5277 /* PromotionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetail.swift; sourceTree = "<group>"; };
+		DFA54F6B2C371B9C000A5277 /* PromotionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionSummary.swift; sourceTree = "<group>"; };
+		DFA54F6D2C3725BA000A5277 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
+		DFA54F6F2C372837000A5277 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,15 +369,18 @@
 		79369D892C1A3DA300B7B7A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DFA54F642C3715A8000A5277 /* User */,
+				DFA54F5D2C371558000A5277 /* Eco */,
+				DFA54F502C371436000A5277 /* Day */,
+				DFA54F4D2C371414000A5277 /* Home */,
+				DFA54F4A2C3713F2000A5277 /* Merchant */,
+				DFA54F452C3713BD000A5277 /* Promotions */,
 				7929E4302C35AB6400CCD12E /* merchantDetail.json */,
 				7929E4292C359ACD00CCD12E /* promotion_detail.json */,
 				79E1D77E2C2727440093723D /* home.json */,
 				79E1D77C2C2724E00093723D /* cities.json */,
 				793FC0812C249195009F6516 /* merchant_promotions.json */,
-				79369D8A2C1A3DAD00B7B7A6 /* Promotion.swift */,
 				79369D8C2C1A3DC200B7B7A6 /* promotions.json */,
-				793FC0712C248D11009F6516 /* User.swift */,
-				7929E44C2C35E7B400CCD12E /* UserSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -394,12 +433,12 @@
 		793FC06E2C248CD1009F6516 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				79E1D77A2C27248F0093723D /* HomeViewModel.swift */,
 				79369D952C1A432400B7B7A6 /* PromotionsViewModel.swift */,
 				793FC06F2C248CFC009F6516 /* ProfileViewModel.swift */,
 				793FC0832C2494AF009F6516 /* PromotionEditDetailViewModel.swift */,
 				793FC0902C24BC1F009F6516 /* ConfirmationViewModel.swift */,
 				793FC0962C24D2D3009F6516 /* AddPromotionViewModel.swift */,
-				79E1D77A2C27248F0093723D /* HomeViewModel.swift */,
 				7929E4272C359A3A00CCD12E /* PromotionDetailViewModel.swift */,
 				7929E42E2C35A90D00CCD12E /* MerchantDetailViewModel.swift */,
 				7929E44E2C35EACE00CCD12E /* ProductViewModel.swift */,
@@ -444,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				793FC0882C24B2B2009F6516 /* ImagePicker.swift */,
+				DFA54F6F2C372837000A5277 /* ErrorView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -471,10 +511,12 @@
 		795F97512C18E4C80097C7FC /* solopromociones */ = {
 			isa = PBXGroup;
 			children = (
-				7999B1B02C36EAF50031AAF0 /* Resources */,
 				793FC06E2C248CD1009F6516 /* ViewModels */,
-				7913026D2C222F1200A68C7F /* View */,
 				79369D892C1A3DA300B7B7A6 /* Model */,
+				7913026D2C222F1200A68C7F /* View */,
+				DFA54F432C3712BD000A5277 /* Services */,
+				DFA54F442C3712CA000A5277 /* Utilities */,
+				7999B1B02C36EAF50031AAF0 /* Resources */,
 				795F97522C18E4C80097C7FC /* solopromocionesApp.swift */,
 				795F97562C18E4CA0097C7FC /* Assets.xcassets */,
 				795F975B2C18E4CA0097C7FC /* Persistence.swift */,
@@ -584,6 +626,82 @@
 				79F2365C2C349CC2002F489D /* PromotionDetailView.swift */,
 			);
 			path = PromotionDetailView;
+			sourceTree = "<group>";
+		};
+		DFA54F432C3712BD000A5277 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F592C3714FA000A5277 /* CityService.swift */,
+				DFA54F672C371A9A000A5277 /* PromotionService.swift */,
+				DFA54F6D2C3725BA000A5277 /* Paths.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		DFA54F442C3712CA000A5277 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F5B2C371515000A5277 /* ColorUtils.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DFA54F452C3713BD000A5277 /* Promotions */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F462C3713CA000A5277 /* PromotionData.swift */,
+				DFA54F482C3713DF000A5277 /* Promotion.swift */,
+				DFA54F692C371B86000A5277 /* PromotionDetail.swift */,
+				DFA54F6B2C371B9C000A5277 /* PromotionSummary.swift */,
+			);
+			path = Promotions;
+			sourceTree = "<group>";
+		};
+		DFA54F4A2C3713F2000A5277 /* Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F4B2C3713FF000A5277 /* Merchant.swift */,
+				DFA54F572C37148C000A5277 /* MerchantDetail.swift */,
+				DFA54F602C371583000A5277 /* MerchantPromotion.swift */,
+				DFA54F622C371596000A5277 /* OpeningHours.swift */,
+			);
+			path = Merchant;
+			sourceTree = "<group>";
+		};
+		DFA54F4D2C371414000A5277 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F4E2C371421000A5277 /* City.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DFA54F502C371436000A5277 /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F512C371441000A5277 /* DayPromotion.swift */,
+				DFA54F532C371454000A5277 /* DayCategory.swift */,
+				DFA54F552C371463000A5277 /* Day.swift */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
+		DFA54F5D2C371558000A5277 /* Eco */ = {
+			isa = PBXGroup;
+			children = (
+				DFA54F5E2C371565000A5277 /* Product.swift */,
+			);
+			path = Eco;
+			sourceTree = "<group>";
+		};
+		DFA54F642C3715A8000A5277 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				793FC0712C248D11009F6516 /* User.swift */,
+				7929E44C2C35E7B400CCD12E /* UserSession.swift */,
+				DFA54F652C3715BC000A5277 /* UsersContainer.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -734,33 +852,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				793FC07B2C248ECD009F6516 /* MerchantProfileView.swift in Sources */,
+				DFA54F612C371583000A5277 /* MerchantPromotion.swift in Sources */,
+				DFA54F472C3713CA000A5277 /* PromotionData.swift in Sources */,
 				79F236522C34436A002F489D /* CityPickerView.swift in Sources */,
 				7929E4402C35DDAB00CCD12E /* MerchantFlowView.swift in Sources */,
 				7913027A2C22309200A68C7F /* CircularImagePromotionCell.swift in Sources */,
 				793FC0752C248D63009F6516 /* AddPromotionView.swift in Sources */,
 				795F975C2C18E4CA0097C7FC /* Persistence.swift in Sources */,
 				795F97552C18E4C80097C7FC /* DailyPromotionsView.swift in Sources */,
+				DFA54F682C371A9A000A5277 /* PromotionService.swift in Sources */,
 				7929E4492C35DE1E00CCD12E /* PaymentView.swift in Sources */,
 				793FC0702C248CFC009F6516 /* ProfileViewModel.swift in Sources */,
 				7913027E2C2230B300A68C7F /* HorizontalPromotionCell.swift in Sources */,
 				793FC0842C2494AF009F6516 /* PromotionEditDetailViewModel.swift in Sources */,
 				7929E43A2C35DC7700CCD12E /* VerificationCodeView.swift in Sources */,
 				793FC0662C248ABA009F6516 /* SearchView.swift in Sources */,
+				DFA54F4C2C3713FF000A5277 /* Merchant.swift in Sources */,
 				793FC08F2C24B930009F6516 /* ConfirmationView.swift in Sources */,
+				DFA54F542C371454000A5277 /* DayCategory.swift in Sources */,
 				7929E44F2C35EACE00CCD12E /* ProductViewModel.swift in Sources */,
 				79369D962C1A432400B7B7A6 /* PromotionsViewModel.swift in Sources */,
 				79E068602C29ECDF00B2656E /* TooGoodToGoView.swift in Sources */,
 				79E068652C2A09F900B2656E /* CarouselPromotionCell.swift in Sources */,
+				DFA54F522C371441000A5277 /* DayPromotion.swift in Sources */,
 				793FC0602C248A84009F6516 /* MainTabView.swift in Sources */,
 				7929E44D2C35E7B400CCD12E /* UserSession.swift in Sources */,
 				791302802C2230EB00A68C7F /* HighlightedConditionsPromotionCell.swift in Sources */,
 				79E068732C2A0B1800B2656E /* CountdownPromotionCell.swift in Sources */,
+				DFA54F5F2C371565000A5277 /* Product.swift in Sources */,
 				79E068672C2A0A2400B2656E /* CompactHorizontalPromotionCell.swift in Sources */,
 				7999B1BA2C36ED6E0031AAF0 /* SplashViewModel.swift in Sources */,
 				79E068542C29C0DB00B2656E /* AddPromotionCell.swift in Sources */,
 				7929E43C2C35DCDD00CCD12E /* ProfileContainerView.swift in Sources */,
-				79369D8B2C1A3DAD00B7B7A6 /* Promotion.swift in Sources */,
+				DFA54F632C371596000A5277 /* OpeningHours.swift in Sources */,
 				7929E4282C359A3A00CCD12E /* PromotionDetailViewModel.swift in Sources */,
+				DFA54F4F2C371421000A5277 /* City.swift in Sources */,
+				DFA54F492C3713DF000A5277 /* Promotion.swift in Sources */,
 				791302822C2230FA00A68C7F /* BannerStylePromotionCell.swift in Sources */,
 				791302762C22306900A68C7F /* ImageBackgroundPromotionCell.swift in Sources */,
 				791302742C22303500A68C7F /* BoldTitlePromotionCell.swift in Sources */,
@@ -770,9 +897,12 @@
 				7929E42D2C35A8E700CCD12E /* MerchantDetailView.swift in Sources */,
 				7929E4452C35DDFA00CCD12E /* BusinessInfoView.swift in Sources */,
 				793FC0892C24B2B2009F6516 /* ImagePicker.swift in Sources */,
+				DFA54F662C3715BC000A5277 /* UsersContainer.swift in Sources */,
 				7929E4362C35DC4800CCD12E /* AuthenticationFlow.swift in Sources */,
+				DFA54F6E2C3725BA000A5277 /* Paths.swift in Sources */,
 				793FC08B2C24B32B009F6516 /* PreviewCell.swift in Sources */,
 				79E068572C29C1FC00B2656E /* EditProfileView.swift in Sources */,
+				DFA54F582C37148C000A5277 /* MerchantDetail.swift in Sources */,
 				79F236572C347666002F489D /* SettingsView.swift in Sources */,
 				793FC08D2C24B48A009F6516 /* SelectLayoutView.swift in Sources */,
 				79E1D77B2C27248F0093723D /* HomeViewModel.swift in Sources */,
@@ -786,15 +916,20 @@
 				79E0686D2C2A0AA800B2656E /* CollapsiblePromotionCell.swift in Sources */,
 				791302882C2232A500A68C7F /* CompactPromotionCell.swift in Sources */,
 				79F2365D2C349CC2002F489D /* PromotionDetailView.swift in Sources */,
+				DFA54F6C2C371B9C000A5277 /* PromotionSummary.swift in Sources */,
 				79E068772C2A0BC900B2656E /* CategoryPromotionCell.swift in Sources */,
 				795F97532C18E4C80097C7FC /* solopromocionesApp.swift in Sources */,
 				7929E4472C35DE0C00CCD12E /* SpotSelectionView.swift in Sources */,
 				793FC0912C24BC1F009F6516 /* ConfirmationViewModel.swift in Sources */,
+				DFA54F6A2C371B86000A5277 /* PromotionDetail.swift in Sources */,
 				7929E42F2C35A90D00CCD12E /* MerchantDetailViewModel.swift in Sources */,
 				791302862C2231C500A68C7F /* ImageFirstPromotionCell.swift in Sources */,
 				7929E4332C35B69300CCD12E /* SearchBar.swift in Sources */,
+				DFA54F5C2C371515000A5277 /* ColorUtils.swift in Sources */,
+				DFA54F702C372838000A5277 /* ErrorView.swift in Sources */,
 				79E068632C2A08C000B2656E /* ToGoodToGOCell.swift in Sources */,
 				791302782C22307F00A68C7F /* CardStylePromotionCell.swift in Sources */,
+				DFA54F5A2C3714FA000A5277 /* CityService.swift in Sources */,
 				79E068752C2A0B3900B2656E /* StandardPromotionCell.swift in Sources */,
 				793FC0782C248D96009F6516 /* EditPromotionView.swift in Sources */,
 				7999B1B62C36EBEC0031AAF0 /* SplashScreen.swift in Sources */,
@@ -810,6 +945,7 @@
 				79F236592C348008002F489D /* StatView.swift in Sources */,
 				7913026F2C222F1D00A68C7F /* PromotionCell.swift in Sources */,
 				79F236542C3443B7002F489D /* PromotionCard.swift in Sources */,
+				DFA54F562C371463000A5277 /* Day.swift in Sources */,
 				7929E4382C35DC6100CCD12E /* PhoneNumberView.swift in Sources */,
 				79E068692C2A0A3B00B2656E /* GridPromotionCell.swift in Sources */,
 				7929E43E2C35DD1D00CCD12E /* UnauthenticatedProfileView.swift in Sources */,

@@ -55,14 +55,3 @@ struct CityPickerView: View {
         }
     }
 }
-
-struct CityPickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        CityPickerView(selectedCity: .constant("Bogotá"), cities: [
-            City(name: "Bogotá", imageName: "bogota"),
-            City(name: "Medellín", imageName: "medellin"),
-            City(name: "Cali", imageName: "cali"),
-            City(name: "Barranquilla", imageName: "barranquilla")
-        ])
-    }
-}

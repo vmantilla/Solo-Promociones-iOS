@@ -28,7 +28,9 @@ struct PromotionDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.loadPromotionDetail()
+            Task {
+                await viewModel.loadPromotionDetail()
+            }
         }
     }
     
@@ -82,7 +84,11 @@ struct PromotionDetailView: View {
                 
                 Spacer()
                 
-                Button(action: viewModel.toggleFavorite) {
+                Button(action: {
+                    Task {
+                        await viewModel.toggleFavorite()
+                    }
+                }) {
                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
                         .font(.subheadline)
                         .foregroundColor(viewModel.isFavorite ? .red : .gray)

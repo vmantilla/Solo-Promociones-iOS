@@ -1,60 +1,54 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class PromotionDetailViewModel: ObservableObject {
     @Published var promotion: PromotionDetail?
     @Published var isLoading = false
     @Published var error: Error?
     @Published var isFavorite = false
     
-    private var cancellables = Set<AnyCancellable>()
     private let promotionService: PromotionServiceProtocol
     private var promotionId: String
     
     init(promotionId: String, promotionService: PromotionServiceProtocol = PromotionService()) {
         self.promotionId = promotionId
         self.promotionService = promotionService
+        Task {
+            await loadPromotionDetail()
+        }
     }
     
-    func loadPromotionDetail() {
+    func loadPromotionDetail() async {
         isLoading = true
-        promotionService.fetchPromotionDetail(id: promotionId)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                self?.isLoading = false
-                if case .failure(let error) = completion {
-                    self?.error = error
-                }
-            } receiveValue: { [weak self] promotionDetail in
-                self?.promotion = promotionDetail
-                self?.isFavorite = promotionDetail.isFavorite
-            }
-            .store(in: &cancellables)
+        do {
+            let promotionDetail = try await promotionService.fetchPromotionDetail(id: promotionId)
+            self.promotion = promotionDetail
+            self.isFavorite = promotionDetail.isFavorite
+        } catch {
+            self.error = error
+        }
+        isLoading = false
     }
     
-    func toggleFavorite() {
+    func toggleFavorite() async {
         guard var promotion = promotion else { return }
         isFavorite.toggle()
         promotion.isFavorite = isFavorite
         
-        promotionService.updateFavoriteStatus(promotionId: promotion.id, isFavorite: isFavorite)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                if case .failure(let error) = completion {
-                    print("Error updating favorite status: \(error)")
-                    // Revert the change if the update fails
-                    self.isFavorite.toggle()
-                }
-            } receiveValue: { _ in
-                print("Favorite status updated successfully")
-            }
-            .store(in: &cancellables)
+        do {
+            try await promotionService.updateFavoriteStatus(promotionId: promotion.id, isFavorite: isFavorite)
+        } catch {
+            print("Error updating favorite status: \(error)")
+            // Revert the change if the update fails
+            self.isFavorite.toggle()
+        }
     }
     
     func openInMaps() {
         guard let promotion = promotion else { return }
-              let latitude = promotion.merchant.latitude
-              let longitude = promotion.merchant.longitude
+        let latitude = promotion.merchant.latitude
+        let longitude = promotion.merchant.longitude
         
         let coordinates = "\(latitude),\(longitude)"
         let name = promotion.merchant.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -69,61 +63,4 @@ class PromotionDetailViewModel: ObservableObject {
         guard let url = URL(string: urlString) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-}
-
-protocol PromotionServiceProtocol {
-    func fetchPromotionDetail(id: String) -> AnyPublisher<PromotionDetail, Error>
-    func updateFavoriteStatus(promotionId: String, isFavorite: Bool) -> AnyPublisher<Void, Error>
-}
-
-class PromotionService: PromotionServiceProtocol {
-    func fetchPromotionDetail(id: String) -> AnyPublisher<PromotionDetail, Error> {
-        // Implement the actual API call here
-        // For now, we'll use a mock implementation
-        return Future { promise in
-            if let url = Bundle.main.url(forResource: "promotion_detail", withExtension: "json") {
-                do {
-                    let data = try Data(contentsOf: url)
-                    let decoder = JSONDecoder()
-                    let promotionDetail = try decoder.decode(PromotionDetail.self, from: data)
-                    promise(.success(promotionDetail))
-                } catch {
-                    promise(.failure(error))
-                }
-            } else {
-                promise(.failure(NSError(domain: "PromotionService", code: 404, userInfo: [NSLocalizedDescriptionKey: "Promotion detail not found"])))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    func updateFavoriteStatus(promotionId: String, isFavorite: Bool) -> AnyPublisher<Void, Error> {
-        // Implement the actual API call here
-        // For now, we'll use a mock implementation
-        return Future { promise in
-            // Simulate network delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                promise(.success(()))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-}
-
-struct PromotionDetail: Codable {
-    let id: String
-    let title: String
-    let description: String
-    let validUntil: String
-    let images: [String]
-    let conditions: String
-    var isFavorite: Bool
-    let merchant: MerchantDetail
-    let otherPromotions: [PromotionSummary]
-}
-
-struct PromotionSummary: Codable, Identifiable {
-    let id: String
-    let title: String
-    let imageURL: String
 }

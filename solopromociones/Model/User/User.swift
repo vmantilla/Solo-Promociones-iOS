@@ -7,11 +7,6 @@
 
 import Foundation
 
-
-struct UsersContainer: Codable {
-    let users: [User]
-}
-
 struct User: Identifiable, Codable {
     var id: String
     var name: String

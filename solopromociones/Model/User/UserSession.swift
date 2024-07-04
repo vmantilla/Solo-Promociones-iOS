@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 class UserSession: ObservableObject {
     static let shared = UserSession()
