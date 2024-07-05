@@ -1,31 +1,58 @@
 import SwiftUI
+import Lottie
 
 struct DailyPromotionsView: View {
     @StateObject var viewModel = PromotionsViewModel()
     @State private var showingCalendar = false
     @State private var isCustomDateSelected = false
+    @State private var isLoading = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            if isCustomDateSelected {
-                CustomDateView(viewModel: viewModel, isCustomDateSelected: $isCustomDateSelected)
-            } else {
-                DayNavigationView(viewModel: viewModel, showingCalendar: $showingCalendar)
+        ZStack {
+            VStack(spacing: 0) {
+                if isCustomDateSelected {
+                    CustomDateView(viewModel: viewModel, isCustomDateSelected: $isCustomDateSelected)
+                } else {
+                    DayNavigationView(viewModel: viewModel, showingCalendar: $showingCalendar)
+                }
+                
+                CategoriesView(viewModel: viewModel)
+                
+                PromotionsView(viewModel: viewModel)
+            }
+            .navigationTitle("Promociones Diarias")
+            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingCalendar) {
+                MonthlyCalendarView(selectedDate: $viewModel.selectedDate, viewModel: viewModel)
+            }
+            .onChange(of: viewModel.selectedDate) { newDate in
+                Task {
+                    await loadPromotionsForDate(newDate)
+                }
+            }
+            .onChange(of: viewModel.selectedCategory) { _ in
+                Task {
+                    await loadPromotionsForCurrentSelection()
+                }
             }
             
-            CategoriesView(viewModel: viewModel)
-            
-            PromotionsView(viewModel: viewModel)
+            if isLoading {
+                LoadingView()
+            }
         }
-        .navigationTitle("Promociones Diarias")
-        .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showingCalendar) {
-            MonthlyCalendarView(selectedDate: $viewModel.selectedDate, viewModel: viewModel)
-        }
-        .onChange(of: viewModel.selectedDate) { newDate in
-            viewModel.loadPromotionsForDate(newDate)
-            isCustomDateSelected = true
-        }
+    }
+    
+    private func loadPromotionsForDate(_ date: Date) async {
+        isLoading = true
+        isCustomDateSelected = true
+        await viewModel.loadPromotionsForDate(date)
+        isLoading = false
+    }
+    
+    private func loadPromotionsForCurrentSelection() async {
+        isLoading = true
+        await viewModel.loadPromotionsForCurrentSelection()
+        isLoading = false
     }
 }
 
@@ -46,7 +73,9 @@ struct CustomDateView: View {
             Spacer()
             Button(action: {
                 isCustomDateSelected = false
-                viewModel.resetToCurrentDay()
+                Task {
+                    await viewModel.resetToCurrentDay()
+                }
             }) {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.secondary)
@@ -59,8 +88,6 @@ struct CustomDateView: View {
         .padding(.top, 8)
     }
 }
-
-
 
 struct DayButton: View {
     let day: DayPromotion

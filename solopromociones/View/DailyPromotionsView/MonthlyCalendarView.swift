@@ -16,18 +16,24 @@ struct MonthlyCalendarView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 15) {
-                categorySelectionView()
-                monthNavigationView()
-                weekdayHeaderView()
-                calendarGridView()
-                Spacer()
+            ZStack {
+                VStack(spacing: 15) {
+                    categorySelectionView()
+                    monthNavigationView()
+                    weekdayHeaderView()
+                    calendarGridView()
+                    Spacer()
+                }
+                .padding()
+                .navigationBarTitle("Calendario", displayMode: .inline)
+                .navigationBarItems(trailing: Button("Cerrar") {
+                    presentationMode.wrappedValue.dismiss()
+                })
+                
+                if viewModel.isLoading {
+                    LoadingView()
+                }
             }
-            .padding()
-            .navigationBarTitle("Calendario", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Cerrar") {
-                presentationMode.wrappedValue.dismiss()
-            })
         }
     }
     
@@ -37,9 +43,13 @@ struct MonthlyCalendarView: View {
             HStack(spacing: 10) {
                 ForEach(viewModel.allCategories) { category in
                     CategoryFilterButton(category: category,
-                                         isSelected: selectedCategory == category,
+                                         isSelected: viewModel.selectedCategory == category,
                                          action: {
-                        selectedCategory = (selectedCategory == category) ? nil : category
+                        if viewModel.selectedCategory == category {
+                            viewModel.selectCategory(nil)
+                        } else {
+                            viewModel.selectCategory(category)
+                        }
                     })
                 }
             }
@@ -82,17 +92,20 @@ struct MonthlyCalendarView: View {
     
     @ViewBuilder
     private func calendarGridView() -> some View {
+        let days = daysInMonth()
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 6) {
-            ForEach(daysInMonth(), id: \.self) { date in
+            ForEach(Array(zip(days.indices, days)), id: \.0) { index, date in
                 if let date = date {
                     DayCell(date: date,
                             isSelected: calendar.isDate(date, inSameDayAs: selectedDate),
                             isInCurrentMonth: calendar.isDate(date, equalTo: currentMonth, toGranularity: .month),
-                            hasPromotion: viewModel.hasPromotion(on: date, category: selectedCategory))
+                            hasPromotion: viewModel.hasPromotion(on: date, category: viewModel.selectedCategory))
                         .onTapGesture {
                             selectedDate = date
-                            viewModel.loadPromotionsForDate(date)
-                            presentationMode.wrappedValue.dismiss()
+                            Task {
+                                await viewModel.loadPromotionsForDate(date)
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         }
                 } else {
                     Color.clear

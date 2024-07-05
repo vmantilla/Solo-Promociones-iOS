@@ -4,15 +4,22 @@ struct PromotionsView: View {
     @ObservedObject var viewModel: PromotionsViewModel
     
     var body: some View {
-        if !viewModel.days.isEmpty {
-            ScrollView {
-                LazyVStack(spacing: 20) {
-                    ForEach(viewModel.filteredPromotions(promotions: viewModel.days[viewModel.selectedDayIndex].categories.flatMap { $0.promotions ?? [] } ?? [])) { promotion in
-                        getPromotionCell(promotion: promotion)
-                            .padding(.horizontal)
+        ZStack {
+            if viewModel.isLoading {
+                LoadingView()
+            } else if viewModel.promotions.isEmpty {
+                Text("No hay promociones disponibles")
+                    .foregroundColor(.secondary)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 20) {
+                        ForEach(viewModel.promotions) { promotion in
+                            getPromotionCell(promotion: promotion)
+                                .padding(.horizontal)
+                        }
                     }
+                    .padding(.vertical)
                 }
-                .padding(.vertical)
             }
         }
     }

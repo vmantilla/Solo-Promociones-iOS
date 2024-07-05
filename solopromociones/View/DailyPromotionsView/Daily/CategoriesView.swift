@@ -20,9 +20,7 @@ struct CategoriesView: View {
                             category: category,
                             isSelected: viewModel.selectedCategory?.id == category.id,
                             action: {
-                                withAnimation {
-                                    viewModel.selectCategory(category)
-                                }
+                                viewModel.selectCategory(category)
                             }
                         )
                     }
