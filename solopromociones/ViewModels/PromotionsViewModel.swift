@@ -15,42 +15,37 @@ class PromotionsViewModel: ObservableObject {
         return formatter
     }()
 
-    init() {
-        loadPromotions()
-        loadCategories()
+    private let promotionService: PromotionServiceProtocol
+
+    init(promotionService: PromotionServiceProtocol = PromotionService()) {
+        self.promotionService = promotionService
+        Task {
+            await loadPromotions()
+        }
     }
 
-    func loadPromotions() {
-        guard let url = Bundle.main.url(forResource: "daily_promotions", withExtension: "json"),
-              let data = try? Data(contentsOf: url) else {
-            print("Failed to load promotions data.")
-            return
-        }
-
-        let decoder = JSONDecoder()
-        if let jsonData = try? decoder.decode([DayPromotion].self, from: data) {
-            self.days = jsonData.sorted {
-                dateFormatter.date(from: $0.date)! < dateFormatter.date(from: $1.date)!
-            }
+    @MainActor
+    func loadPromotions() async {
+        do {
+            self.days = try await promotionService.fetchDailyPromotions()
             if let today = days.firstIndex(where: {
                 calendar.isDateInToday(dateFormatter.date(from: $0.date)!)
             }) {
                 selectedDayIndex = today
             }
+            loadCategories()
+        } catch {
+            print("Failed to load promotions: \(error)")
         }
     }
     
     func loadCategories() {
-        guard let url = Bundle.main.url(forResource: "categories", withExtension: "json"),
-              let data = try? Data(contentsOf: url) else {
-            print("Failed to load categories data.")
-            return
-        }
-        
-        let decoder = JSONDecoder()
-        if let jsonData = try? decoder.decode([Category].self, from: data) {
-            self.categories = jsonData
-        }
+        let allCategories = days.flatMap { $0.categories }
+        self.categories = allCategories.reduce(into: [Category]()) { result, category in
+            if !result.contains(where: { $0.id == category.id }) {
+                result.append(category)
+            }
+        }.sorted(by: { $0.id < $1.id })
     }
 
     var allCategories: [Category] {
@@ -91,7 +86,6 @@ class PromotionsViewModel: ObservableObject {
         }
     }
 
-    // Nueva función para filtrar promociones
     func filteredPromotions(promotions: [Promotion]) -> [Promotion] {
         promotions.filter { promotion in
             let matchesCategory = selectedCategory == nil || promotion.categories?.contains { $0.name == selectedCategory?.name } ?? false

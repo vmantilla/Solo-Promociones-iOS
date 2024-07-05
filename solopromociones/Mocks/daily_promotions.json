@@ -4,35 +4,35 @@
         "date": "14/06/2024",
         "categories": [
             {
-                "id": 1,
-                "name": "Cocteles",
-                "iconName": "cocktail",
-                "color": "red",
+                "id": 2,
+                "name": "Restaurantes",
+                "iconName": "fork.knife",
+                "colorString": "red",
                 "promotions": [
                     {
                         "id": "1",
-                        "title": "2x1 en Cocteles",
-                        "description": "Disfruta de 2 cocteles por el precio de 1 en nuestro bar.",
+                        "title": "2x1 en Platos Principales",
+                        "description": "Disfruta de 2 platos principales por el precio de 1 en nuestro restaurante.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://www.saborusa.com/cr/wp-content/uploads/sites/14/2020/05/Sorprende-a-tus-invitados-con-estos-espectaculares-cocteles-Foto-destacada.png",
-                        "conditions": "Solo en barra.",
+                        "imageURL": "https://example.com/restaurant-promo.jpg",
+                        "conditions": "Válido de lunes a jueves.",
                         "cellType": "Standard"
                     }
                 ]
             },
             {
-                "id": 2,
-                "name": "Hamburguesas",
-                "iconName": "hamburger",
-                "color": "brown",
+                "id": 3,
+                "name": "Cafeterías",
+                "iconName": "cup.and.saucer.fill",
+                "colorString": "brown",
                 "promotions": [
                     {
                         "id": "2",
-                        "title": "Descuento en Hamburguesas",
-                        "description": "20% de descuento en todas las hamburguesas.",
+                        "title": "Descuento en Café",
+                        "description": "20% de descuento en todos los cafés.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://www.recetasnestle.com.ec/sites/default/files/styles/recipe_detail_desktop/public/srh_recipes/4e4293857c03d819e4ae51de1e86d66a.webp?itok=A5BBV75V",
-                        "conditions": "No incluye bebidas.",
+                        "imageURL": "https://example.com/coffee-promo.jpg",
+                        "conditions": "No acumulable con otras ofertas.",
                         "cellType": "Featured"
                     }
                 ]
@@ -44,10 +44,10 @@
         "date": "15/06/2024",
         "categories": [
             {
-                "id": 3,
-                "name": "Gimnasio",
-                "iconName": "dumbbell",
-                "color": "blue",
+                "id": 6,
+                "name": "Deportes",
+                "iconName": "sportscourt.fill",
+                "colorString": "orange",
                 "promotions": [
                     {
                         "id": "3",
@@ -61,17 +61,17 @@
                 ]
             },
             {
-                "id": 4,
-                "name": "Calzado",
-                "iconName": "shoe",
-                "color": "black",
+                "id": 5,
+                "name": "Compras",
+                "iconName": "bag.fill",
+                "colorString": "green",
                 "promotions": [
                     {
                         "id": "4",
                         "title": "Oferta en Calzado",
                         "description": "30% de descuento en calzado para hombres.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://scontent.fctg1-3.fna.fbcdn.net/v/t1.6435-9/157720913_3710252785738445_6461570420081539039_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SbvSPFdaE3EQ7kNvgGKZreL&_nc_ht=scontent.fctg1-3.fna&cb_e2o_trans=q&oh=00_AYAgaTY91bzgs89CmagRIF3bykViLVQgiA6qj8VpFWt-iQ&oe=669961C9",
+                        "imageURL": "https://example.com/shoe-promo.jpg",
                         "conditions": "Solo productos seleccionados.",
                         "cellType": "Grid"
                     }
@@ -84,35 +84,35 @@
         "date": "16/06/2024",
         "categories": [
             {
-                "id": 5,
-                "name": "Spa",
-                "iconName": "spa",
-                "color": "pink",
+                "id": 10,
+                "name": "Salud y Belleza",
+                "iconName": "heart.fill",
+                "colorString": "pink",
                 "promotions": [
                     {
                         "id": "5",
                         "title": "Descuento en Spa",
                         "description": "40% de descuento en todos los tratamientos de spa.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://dummyimage.com/600x400/000/fff",
+                        "imageURL": "https://example.com/spa-promo.jpg",
                         "conditions": "Requiere reserva previa.",
                         "cellType": "Collapsible"
                     }
                 ]
             },
             {
-                "id": 6,
-                "name": "Librería",
-                "iconName": "book",
-                "color": "green",
+                "id": 9,
+                "name": "Educación",
+                "iconName": "book.fill",
+                "colorString": "indigo",
                 "promotions": [
                     {
                         "id": "6",
-                        "title": "Oferta en Librería",
-                        "description": "Compra dos libros y obtén el tercero gratis.",
+                        "title": "Oferta en Cursos Online",
+                        "description": "Compra dos cursos y obtén el tercero gratis.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://dummyimage.com/600x400/000/fff",
-                        "conditions": "Aplica en selecciones marcadas.",
+                        "imageURL": "https://example.com/education-promo.jpg",
+                        "conditions": "Aplica en cursos seleccionados.",
                         "cellType": "Timeline"
                     }
                 ]
@@ -124,34 +124,34 @@
         "date": "17/06/2024",
         "categories": [
             {
-                "id": 7,
-                "name": "Sushi",
-                "iconName": "sushi",
-                "color": "purple",
+                "id": 2,
+                "name": "Restaurantes",
+                "iconName": "fork.knife",
+                "colorString": "red",
                 "promotions": [
                     {
                         "id": "7",
                         "title": "Noche de Sushi",
                         "description": "Todas las órdenes de sushi con un 25% de descuento.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://dummyimage.com/600x400/000/fff",
+                        "imageURL": "https://example.com/sushi-promo.jpg",
                         "conditions": "No válido para llevar.",
                         "cellType": "Comparative"
                     }
                 ]
             },
             {
-                "id": 8,
-                "name": "Ropa",
-                "iconName": "tshirt",
-                "color": "orange",
+                "id": 5,
+                "name": "Compras",
+                "iconName": "bag.fill",
+                "colorString": "green",
                 "promotions": [
                     {
                         "id": "8",
                         "title": "Rebajas de Ropa",
                         "description": "Hasta un 50% de descuento en ropa seleccionada.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://dummyimage.com/600x400/000/fff",
+                        "imageURL": "https://example.com/clothing-promo.jpg",
                         "conditions": "Mientras duren las existencias.",
                         "cellType": "Category"
                     }
@@ -164,34 +164,34 @@
         "date": "18/06/2024",
         "categories": [
             {
-                "id": 9,
-                "name": "Happy Hour",
-                "iconName": "cocktail",
-                "color": "yellow",
+                "id": 4,
+                "name": "Entretenimiento",
+                "iconName": "ticket.fill",
+                "colorString": "purple",
                 "promotions": [
                     {
                         "id": "9",
                         "title": "Happy Hour Extendido",
                         "description": "Disfruta de nuestro happy hour extendido hasta las 9 PM.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://dummyimage.com/600x400/000/fff",
+                        "imageURL": "https://example.com/happy-hour-promo.jpg",
                         "conditions": "Disponible en todo el local.",
                         "cellType": "Countdown"
                     }
                 ]
             },
             {
-                "id": 10,
-                "name": "Electrónica",
-                "iconName": "tv",
-                "color": "cyan",
+                "id": 7,
+                "name": "Tecnología",
+                "iconName": "desktopcomputer",
+                "colorString": "blue",
                 "promotions": [
                     {
                         "id": "10",
                         "title": "Ofertas en Electrónica",
                         "description": "Grandes descuentos en artículos seleccionados de electrónica.",
                         "validUntil": "30/06/2024",
-                        "imageURL": "https://dummyimage.com/600x400/000/fff",
+                        "imageURL": "https://example.com/electronics-promo.jpg",
                         "conditions": "Ver términos en la tienda.",
                         "cellType": "Standard"
                     }
@@ -204,10 +204,10 @@
         "date": "19/06/2024",
         "categories": [
             {
-                "id": 11,
-                "name": "Cervezas Artesanales",
-                "iconName": "beer",
-                "color": "brown",
+                "id": 2,
+                "name": "Restaurantes",
+                "iconName": "fork.knife",
+                "colorString": "red",
                 "promotions": [
                     {
                         "id": "11",
@@ -221,10 +221,10 @@
                 ]
             },
             {
-                "id": 12,
-                "name": "Joyería",
-                "iconName": "gem",
-                "color": "pink",
+                "id": 5,
+                "name": "Compras",
+                "iconName": "bag.fill",
+                "colorString": "green",
                 "promotions": [
                     {
                         "id": "12",
@@ -244,10 +244,10 @@
         "date": "20/06/2024",
         "categories": [
             {
-                "id": 13,
-                "name": "Brunch",
+                "id": 2,
+                "name": "Restaurantes",
                 "iconName": "fork.knife",
-                "color": "red",
+                "colorString": "red",
                 "promotions": [
                     {
                         "id": "13",
@@ -261,10 +261,10 @@
                 ]
             },
             {
-                "id": 14,
-                "name": "Muebles",
-                "iconName": "sofa",
-                "color": "purple",
+                "id": 11,
+                "name": "Hogar",
+                "iconName": "house.fill",
+                "colorString": "yellow",
                 "promotions": [
                     {
                         "id": "14",
