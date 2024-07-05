@@ -7,6 +7,20 @@
 
 import Foundation
 
+enum CellType: String, Codable {
+    case standard = "Standard"
+    case carousel = "Carousel"
+    case compactHorizontal = "CompactHorizontal"
+    case grid = "Grid"
+    case featured = "Featured"
+    case collapsible = "Collapsible"
+    case timeline = "Timeline"
+    case comparative = "Comparative"
+    case category = "Category"
+    case countdown = "Countdown"
+}
+
+
 struct Promotion: Identifiable, Codable {
     var id: String
     var title: String
@@ -14,6 +28,7 @@ struct Promotion: Identifiable, Codable {
     var validUntil: String
     var imageURL: String
     var conditions: String
-    var category: String? = ""
-    var merchant: Merchant?
+    var categories: [Category]?
+    var cellType: CellType? = .standard
 }
+

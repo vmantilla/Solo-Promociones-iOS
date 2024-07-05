@@ -7,4 +7,5 @@ struct API {
 struct Endpoints {
     static let cities = "\(API.baseURL)/cities"
     static let anonymousUsers = "\(API.baseURL)/anonymous_users"
+    static let categories = "\(API.baseURL)/categories"
 }

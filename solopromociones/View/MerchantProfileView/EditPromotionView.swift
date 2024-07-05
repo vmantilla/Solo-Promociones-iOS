@@ -108,15 +108,3 @@ struct EditPromotionView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-struct EditPromotionView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            EditPromotionView(
-                viewModel: PromotionEditDetailViewModel(
-                    promotion: Promotion(id: "1", title: "Oferta Especial", description: "Descripción de la oferta especial", validUntil: "30/07/2024", imageURL: "https://example.com/image.jpg", conditions: "Aplican restricciones")
-                )
-            )
-        }
-    }
-}

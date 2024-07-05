@@ -1,22 +1,15 @@
-//
-//  CategoryButton.swift
-//  solopromociones
-//
-//  Created by RAVIT Admin on 24/06/24.
-//
-
 import SwiftUI
 import CachedAsyncImage
 
 struct CategoryButton: View {
-    let category: String
+    let category: Category
     let isSelected: Bool
     let useIcons: Bool // Flag to toggle between icons and web images
     let action: () -> Void
     
-    private func colorForCategory(_ category: String) -> Color {
+    private func colorForCategory(_ category: Category) -> Color {
         let colors: [Color] = [.red, .blue, .green, .orange, .purple, .pink]
-        let index = abs(category.hashValue) % colors.count
+        let index = abs(category.id.hashValue) % colors.count
         return colors[index]
     }
     
@@ -34,7 +27,7 @@ struct CategoryButton: View {
                     
                     VStack {
                         if useIcons {
-                            Image(systemName: iconForCategory(category))
+                            Image(systemName: category.iconName)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 40)
@@ -62,7 +55,7 @@ struct CategoryButton: View {
                             }
                         }
                         
-                        Text(category)
+                        Text(category.name)
                             .font(.caption2)
                             .foregroundColor(.primary)
                             .lineLimit(2)
@@ -75,22 +68,6 @@ struct CategoryButton: View {
             }
             .frame(height: 130) // Adjusted height
         }
-    }
-    
-    private func iconForCategory(_ category: String) -> String {
-        let icons = [
-            "fork.knife", "cup.and.saucer.fill", "ticket.fill", "bag.fill",
-            "sportscourt.fill", "desktopcomputer", "airplane", "book.fill",
-            "heart.fill", "house.fill", "music.note", "paintpalette.fill",
-            "scissors", "pawprint.fill", "dollarsign.circle.fill",
-            "gamecontroller.fill", "baby.carriage.fill", "figure.dance",
-            "car.fill", "bicycle", "camera.fill", "cart.fill", "flame.fill",
-            "film.fill", "gift.fill", "globe", "leaf.fill", "lightbulb.fill",
-            "medal.fill", "phone.fill", "star.fill", "sun.max.fill",
-            "theatermasks.fill", "tram.fill", "umbrella.fill", "video.fill",
-            "watch.fill", "wifi"
-        ]
-        return icons.randomElement() ?? "star.fill"
     }
     
     private func getRandomImageURL() -> String {

@@ -1,41 +1,51 @@
-//
-//  ColorUtils.swift
-//  solopromociones
-//
-//  Created by Ravit dev on 4/07/24.
-//
-
-import Foundation
 import SwiftUI
 
-func colorForCategory(_ category: String? = "") -> Color {
-    let colors: [String: Color] = [
-        "Comida": .red,
-        "Bebidas": .blue,
-        "Entretenimiento": .green,
-        "Compras": .orange,
-        "Deportes": .purple,
-        "Tecnología": .pink,
-        "Viajes": .yellow,
-        "Educación": .teal,
-        "Salud": .indigo,
-        "Hogar": .brown,
-        "Música": .cyan,
-        "Arte": .mint,
-        "Belleza": .gray,
-        "Mascotas": .black,
-        "Finanzas": .purple,
-        "Juegos": .orange,
-        "Bebés": .blue,
-        "Bailes": .pink
-    ]
-    
-    // Si la categoría tiene un color predefinido, lo usamos
-    if let categoryColor = colors[category ?? ""] {
-        return categoryColor
+extension Color {
+    init?(hex: String) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+
+        guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else {
+            return nil
+        }
+
+        self.init(
+            .sRGB,
+            red: Double((rgb & 0xFF0000) >> 16) / 255.0,
+            green: Double((rgb & 0x00FF00) >> 8) / 255.0,
+            blue: Double(rgb & 0x0000FF) / 255.0,
+            opacity: 1.0
+        )
     }
-    
-    // Si la categoría no tiene un color predefinido, seleccionamos un color aleatorio
-    let randomColors: [Color] = [.red, .blue, .green, .orange, .purple, .pink, .yellow, .teal, .indigo, .brown, .cyan, .mint, .gray, .black]
-    return randomColors.randomElement() ?? .gray
+
+    init?(colorString: String) {
+        // Mapeo de nombres de colores estándar a `Color` del sistema
+        let systemColors: [String: Color] = [
+            "red": .red,
+            "green": .green,
+            "blue": .blue,
+            "yellow": .yellow,
+            "orange": .orange,
+            "pink": .pink,
+            "purple": .purple,
+            "black": .black,
+            "white": .white,
+            "gray": .gray,
+            "brown": .brown,
+            "cyan": .cyan,
+            "clear": .clear
+        ]
+
+        let colorLowercased = colorString.lowercased()
+        
+        if let systemColor = systemColors[colorLowercased] {
+            self = systemColor
+        } else if let hexColor = Color(hex: colorString) {
+            self = hexColor
+        } else {
+            return nil
+        }
+    }
 }

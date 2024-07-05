@@ -39,7 +39,7 @@ struct ConfirmationView: View {
                     description: viewModel.description,
                     validUntil: viewModel.validUntil,
                     imageURL: viewModel.imageURL,
-                    conditions: viewModel.conditions
+                    conditions: viewModel.conditions, cellType: .standard
                 ),
                 layout: viewModel.selectedLayout
             )
@@ -132,7 +132,7 @@ struct ConfirmationView: View {
                 description: viewModel.description,
                 validUntil: viewModel.validUntil,
                 imageURL: viewModel.imageURL,
-                conditions: viewModel.conditions
+                conditions: viewModel.conditions, cellType: .standard
             )
             // Agregar la promoción a la vista de perfil
             // viewModel.addPromotion(newPromotion)

@@ -11,7 +11,7 @@ struct DayPromotion: Identifiable, Codable {
     var id: String { day }
     var day: String
     var date: String
-    var categories: [DayCategory]
+    var categories: [Category]
     
     var formattedDay: String {
         return day

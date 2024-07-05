@@ -61,7 +61,7 @@ class ConfirmationViewModel: ObservableObject {
             description: description,
             validUntil: validUntil,
             imageURL: selectedImage != nil ? saveImageToDocuments(image: selectedImage!)?.absoluteString ?? imageURL : imageURL,
-            conditions: conditions
+            conditions: conditions, cellType: .standard
         )
         addPromotionViewModel.profileViewModel.addPromotion(newPromotion)
     }

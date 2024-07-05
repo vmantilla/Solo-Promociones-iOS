@@ -157,7 +157,7 @@ class AddPromotionViewModel: ObservableObject {
             description: description,
             validUntil: endDate.formatted(date: .abbreviated, time: .omitted),
             imageURL: selectedImage != nil ? saveImageToDocuments(image: selectedImage!)?.absoluteString ?? imageURL : imageURL,
-            conditions: conditions
+            conditions: conditions, cellType: .standard
         )
         profileViewModel.addPromotion(newPromotion)
     }

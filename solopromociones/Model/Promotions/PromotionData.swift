@@ -8,6 +8,5 @@
 import Foundation
 
 struct PromotionData: Codable {
-    let promotions: [Promotion]
-    let categories: [String]
+    let sections: [PromotionSection]
 }

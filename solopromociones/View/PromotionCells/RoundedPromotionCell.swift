@@ -47,9 +47,3 @@ struct RoundedPromotionCell: View {
         .padding(.bottom, 5)
     }
 }
-
-struct RoundedPromotionCell_Previews: PreviewProvider {
-    static var previews: some View {
-        RoundedPromotionCell(promotion: Promotion(id: "1", title: "2x1 en Cocteles", description: "Disfruta de 2 cocteles por el precio de 1 en nuestro bar.", validUntil: "30/06/2024", imageURL: "https://dummyimage.com/600x400/000/fff", conditions: "Solo en barra."))
-    }
-}

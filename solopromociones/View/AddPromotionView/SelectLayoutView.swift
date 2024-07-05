@@ -20,7 +20,7 @@ struct SelectLayoutView: View {
                     description: viewModel.description,
                     validUntil: viewModel.endDate.formatted(date: .abbreviated, time: .omitted),
                     imageURL: viewModel.imageURL,
-                    conditions: viewModel.conditions
+                    conditions: viewModel.conditions, cellType: .standard
                 ),
                 layout: selectedLayout
             )

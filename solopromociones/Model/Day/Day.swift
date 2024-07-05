@@ -10,7 +10,7 @@ import Foundation
 struct Day: Identifiable {
     let id = UUID()
     let date: Date
-    var categories: [DayCategory]
+    var categories: [Category]
     
     var formattedDay: String {
         let formatter = DateFormatter()

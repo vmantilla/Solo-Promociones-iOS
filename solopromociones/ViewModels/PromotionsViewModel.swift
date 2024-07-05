@@ -5,6 +5,8 @@ class PromotionsViewModel: ObservableObject {
     @Published var days: [DayPromotion] = []
     @Published var selectedDayIndex = 0
     @Published var selectedDate = Date()
+    @Published var selectedCategory: Category? = nil
+    @Published var categories: [Category] = []
 
     private let calendar = Calendar.current
     private let dateFormatter: DateFormatter = {
@@ -15,10 +17,11 @@ class PromotionsViewModel: ObservableObject {
 
     init() {
         loadPromotions()
+        loadCategories()
     }
 
     func loadPromotions() {
-        guard let url = Bundle.main.url(forResource: "promotions", withExtension: "json"),
+        guard let url = Bundle.main.url(forResource: "daily_promotions", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
             print("Failed to load promotions data.")
             return
@@ -36,21 +39,34 @@ class PromotionsViewModel: ObservableObject {
             }
         }
     }
-
-    var allCategories: [String] {
-        Set(days.flatMap { $0.categories.map { $0.category } }).sorted()
+    
+    func loadCategories() {
+        guard let url = Bundle.main.url(forResource: "categories", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else {
+            print("Failed to load categories data.")
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        if let jsonData = try? decoder.decode([Category].self, from: data) {
+            self.categories = jsonData
+        }
     }
 
-    func hasPromotion(on date: Date, category: String?) -> Bool {
+    var allCategories: [Category] {
+        return categories
+    }
+
+    func hasPromotion(on date: Date, category: Category?) -> Bool {
         let dateString = dateFormatter.string(from: date)
         guard let dayPromotion = days.first(where: { $0.date == dateString }) else {
             return false
         }
 
         if let category = category {
-            return dayPromotion.categories.contains { $0.category == category && !$0.promotions.isEmpty }
+            return dayPromotion.categories.contains { $0.id == category.id && !($0.promotions?.isEmpty ?? false) }
         } else {
-            return dayPromotion.categories.contains { !$0.promotions.isEmpty }
+            return dayPromotion.categories.contains { !($0.promotions?.isEmpty ?? false) }
         }
     }
     
@@ -60,18 +76,26 @@ class PromotionsViewModel: ObservableObject {
             selectedDayIndex = index
             selectedDate = date
         } else {
-            // Si no hay promociones para esta fecha, podrías cargar datos adicionales aquí
-            // Por ahora, simplemente actualizamos la fecha seleccionada
             selectedDate = date
         }
     }
-}
 
-extension PromotionsViewModel {
+    func selectCategory(_ category: Category) {
+        selectedCategory = category
+    }
+    
     func resetToCurrentDay() {
         if let today = days.firstIndex(where: { Calendar.current.isDateInToday(dateFormatter.date(from: $0.date)!) }) {
             selectedDayIndex = today
             selectedDate = Date()
+        }
+    }
+
+    // Nueva función para filtrar promociones
+    func filteredPromotions(promotions: [Promotion]) -> [Promotion] {
+        promotions.filter { promotion in
+            let matchesCategory = selectedCategory == nil || promotion.categories?.contains { $0.name == selectedCategory?.name } ?? false
+            return matchesCategory
         }
     }
 }

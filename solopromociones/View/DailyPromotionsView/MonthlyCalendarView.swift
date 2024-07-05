@@ -4,7 +4,7 @@ struct MonthlyCalendarView: View {
     @Binding var selectedDate: Date
     @ObservedObject var viewModel: PromotionsViewModel
     @State private var currentMonth = Date()
-    @State private var selectedCategory: String?
+    @State private var selectedCategory: Category?
     @Environment(\.presentationMode) var presentationMode
     
     private let calendar = Calendar.current
@@ -17,68 +17,10 @@ struct MonthlyCalendarView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 15) {
-                // Category selection
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
-                        ForEach(viewModel.allCategories, id: \.self) { category in
-                            CategoryFilterButton(category: category,
-                                                 isSelected: selectedCategory == category, useIcons: true,
-                                                 action: {
-                                selectedCategory = (selectedCategory == category) ? nil : category
-                            })
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-                .padding(.top, 8)
-                
-                // Month navigation
-                HStack {
-                    Button(action: previousMonth) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.secondary)
-                    }
-                    Spacer()
-                    Text(dateFormatter.string(from: currentMonth))
-                        .font(.subheadline)
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Button(action: nextMonth) {
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .padding(.horizontal)
-                
-                // Weekday headers
-                HStack {
-                    ForEach(["D", "L", "M", "M", "J", "V", "S"], id: \.self) { day in
-                        Text(day)
-                            .frame(maxWidth: .infinity)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                
-                // Calendar grid
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 6) {
-                    ForEach(daysInMonth(), id: \.self) { date in
-                        if let date = date {
-                            DayCell(date: date,
-                                    isSelected: calendar.isDate(date, inSameDayAs: selectedDate),
-                                    isInCurrentMonth: calendar.isDate(date, equalTo: currentMonth, toGranularity: .month),
-                                    hasPromotion: viewModel.hasPromotion(on: date, category: selectedCategory))
-                                .onTapGesture {
-                                    selectedDate = date
-                                    viewModel.loadPromotionsForDate(date)
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                        } else {
-                            Color.clear
-                        }
-                    }
-                }
-                
+                categorySelectionView()
+                monthNavigationView()
+                weekdayHeaderView()
+                calendarGridView()
                 Spacer()
             }
             .padding()
@@ -86,6 +28,76 @@ struct MonthlyCalendarView: View {
             .navigationBarItems(trailing: Button("Cerrar") {
                 presentationMode.wrappedValue.dismiss()
             })
+        }
+    }
+    
+    @ViewBuilder
+    private func categorySelectionView() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(viewModel.allCategories) { category in
+                    CategoryFilterButton(category: category,
+                                         isSelected: selectedCategory == category,
+                                         action: {
+                        selectedCategory = (selectedCategory == category) ? nil : category
+                    })
+                }
+            }
+            .padding(.horizontal)
+        }
+        .padding(.top, 8)
+    }
+    
+    @ViewBuilder
+    private func monthNavigationView() -> some View {
+        HStack {
+            Button(action: previousMonth) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+            Text(dateFormatter.string(from: currentMonth))
+                .font(.subheadline)
+                .foregroundColor(.primary)
+            Spacer()
+            Button(action: nextMonth) {
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding(.horizontal)
+    }
+    
+    @ViewBuilder
+    private func weekdayHeaderView() -> some View {
+        HStack {
+            ForEach(["D", "L", "M", "M", "J", "V", "S"], id: \.self) { day in
+                Text(day)
+                    .frame(maxWidth: .infinity)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func calendarGridView() -> some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 6) {
+            ForEach(daysInMonth(), id: \.self) { date in
+                if let date = date {
+                    DayCell(date: date,
+                            isSelected: calendar.isDate(date, inSameDayAs: selectedDate),
+                            isInCurrentMonth: calendar.isDate(date, equalTo: currentMonth, toGranularity: .month),
+                            hasPromotion: viewModel.hasPromotion(on: date, category: selectedCategory))
+                        .onTapGesture {
+                            selectedDate = date
+                            viewModel.loadPromotionsForDate(date)
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                } else {
+                    Color.clear
+                }
+            }
         }
     }
     

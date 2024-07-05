@@ -1,144 +1,124 @@
 {
-  "promotions": [
+  "sections": [
     {
-      "id": "1",
-      "title": "50% de descuento en restaurantes",
-      "description": "Disfruta de la mitad de descuento en restaurantes seleccionados.",
-      "validUntil": "31/07/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "Válido de lunes a jueves. Máximo descuento de 20€.",
-      "category": "Restaurantes",
-      "isFeatured": true,
-      "isDailyDeal": false,
-      "isNearby": true,
-      "isPopular": true
+      "title": "Promociones destacadas",
+      "cellType": "Carousel",
+      "promotions": [
+        {
+          "id": "1",
+          "title": "50% de descuento en restaurantes",
+          "description": "Disfruta de la mitad de descuento en restaurantes seleccionados.",
+          "validUntil": "31/07/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "Válido de lunes a jueves. Máximo descuento de 20€.",
+          "category": "Restaurantes"
+        },
+        {
+          "id": "2",
+          "title": "2x1 en entradas de cine",
+          "description": "Compra una entrada y llévate otra gratis en cines participantes.",
+          "validUntil": "31/08/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "No acumulable con otras ofertas. No válido para estrenos.",
+          "category": "Entretenimiento"
+        }
+      ]
     },
     {
-      "id": "2",
-      "title": "2x1 en entradas de cine",
-      "description": "Compra una entrada y llévate otra gratis en cines participantes.",
-      "validUntil": "31/08/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "No acumulable con otras ofertas. No válido para estrenos.",
-      "category": "Entretenimiento",
-      "isFeatured": true,
-      "isDailyDeal": true,
-      "isNearby": false,
-      "isPopular": true
+      "title": "Ofertas del día",
+      "cellType": "Standard",
+      "promotions": [
+        {
+          "id": "3",
+          "title": "30% de descuento en moda",
+          "description": "Grandes descuentos en ropa y accesorios de marcas seleccionadas.",
+          "validUntil": "15/07/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "No aplicable a artículos ya rebajados.",
+          "category": "Moda"
+        },
+        {
+          "id": "4",
+          "title": "Oferta en electrónica",
+          "description": "Hasta 40% de descuento en productos electrónicos seleccionados.",
+          "validUntil": "30/06/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "Hasta agotar existencias. No acumulable con otras ofertas.",
+          "category": "Electrónica"
+        }
+      ]
     },
     {
-      "id": "3",
-      "title": "30% de descuento en moda",
-      "description": "Grandes descuentos en ropa y accesorios de marcas seleccionadas.",
-      "validUntil": "15/07/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "No aplicable a artículos ya rebajados.",
-      "category": "Moda",
-      "isFeatured": false,
-      "isDailyDeal": true,
-      "isNearby": true,
-      "isPopular": false
+      "title": "Cerca de ti",
+      "cellType": "CompactHorizontal",
+      "promotions": [
+        {
+          "id": "5",
+          "title": "Descuento en spa",
+          "description": "20% de descuento en tratamientos de spa y masajes.",
+          "validUntil": "31/07/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "Sujeto a disponibilidad. Reserva previa requerida.",
+          "category": "Salud y Belleza"
+        },
+        {
+          "id": "6",
+          "title": "Oferta en viajes",
+          "description": "15% de descuento en paquetes turísticos seleccionados.",
+          "validUntil": "30/09/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "Sujeto a disponibilidad. No válido en temporada alta.",
+          "category": "Viajes"
+        }
+      ]
     },
     {
-      "id": "4",
-      "title": "Oferta en electrónica",
-      "description": "Hasta 40% de descuento en productos electrónicos seleccionados.",
-      "validUntil": "30/06/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "Hasta agotar existencias. No acumulable con otras ofertas.",
-      "category": "Electrónica",
-      "isFeatured": true,
-      "isDailyDeal": false,
-      "isNearby": false,
-      "isPopular": true
+      "title": "Promociones populares",
+      "cellType": "Featured",
+      "promotions": [
+        {
+          "id": "7",
+          "title": "Descuento en deportes",
+          "description": "25% de descuento en equipamiento deportivo.",
+          "validUntil": "31/08/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "Válido solo en tiendas físicas. No acumulable con otras ofertas.",
+          "category": "Deportes"
+        },
+        {
+          "id": "8",
+          "title": "Oferta en libros",
+          "description": "Compra 2 libros y llévate el tercero gratis.",
+          "validUntil": "30/07/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "El libro gratis será el de menor valor. No aplicable a libros de texto.",
+          "category": "Entretenimiento"
+        }
+      ]
     },
     {
-      "id": "5",
-      "title": "Descuento en spa",
-      "description": "20% de descuento en tratamientos de spa y masajes.",
-      "validUntil": "31/07/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "Sujeto a disponibilidad. Reserva previa requerida.",
-      "category": "Salud y Belleza",
-      "isFeatured": false,
-      "isDailyDeal": true,
-      "isNearby": true,
-      "isPopular": false
-    },
-    {
-      "id": "6",
-      "title": "Oferta en viajes",
-      "description": "15% de descuento en paquetes turísticos seleccionados.",
-      "validUntil": "30/09/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "Sujeto a disponibilidad. No válido en temporada alta.",
-      "category": "Viajes",
-      "isFeatured": true,
-      "isDailyDeal": false,
-      "isNearby": false,
-      "isPopular": true
-    },
-    {
-      "id": "7",
-      "title": "Descuento en deportes",
-      "description": "25% de descuento en equipamiento deportivo.",
-      "validUntil": "31/08/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "Válido solo en tiendas físicas. No acumulable con otras ofertas.",
-      "category": "Deportes",
-      "isFeatured": false,
-      "isDailyDeal": true,
-      "isNearby": true,
-      "isPopular": false
-    },
-    {
-      "id": "8",
-      "title": "Oferta en libros",
-      "description": "Compra 2 libros y llévate el tercero gratis.",
-      "validUntil": "30/07/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "El libro gratis será el de menor valor. No aplicable a libros de texto.",
-      "category": "Entretenimiento",
-      "isFeatured": true,
-      "isDailyDeal": false,
-      "isNearby": true,
-      "isPopular": true
-    },
-    {
-      "id": "9",
-      "title": "Descuento en muebles",
-      "description": "Hasta 50% de descuento en muebles seleccionados.",
-      "validUntil": "31/08/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "No incluye gastos de envío. Montaje no incluido.",
-      "category": "Hogar",
-      "isFeatured": false,
-      "isDailyDeal": true,
-      "isNearby": false,
-      "isPopular": false
-    },
-    {
-      "id": "10",
-      "title": "Oferta en comida rápida",
-      "description": "Menú completo por solo 5€",
-      "validUntil": "30/06/2024",
-      "imageURL": "https://dummyimage.com/600x400/000/fff",
-      "conditions": "Válido solo de lunes a viernes. No acumulable con otras ofertas.",
-      "category": "Restaurantes",
-      "isFeatured": true,
-      "isDailyDeal": true,
-      "isNearby": true,
-      "isPopular": true
+      "title": "Todas las promociones",
+      "cellType": "Standard",
+      "promotions": [
+        {
+          "id": "9",
+          "title": "Descuento en muebles",
+          "description": "Hasta 50% de descuento en muebles seleccionados.",
+          "validUntil": "31/08/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "No incluye gastos de envío. Montaje no incluido.",
+          "category": "Hogar"
+        },
+        {
+          "id": "10",
+          "title": "Oferta en comida rápida",
+          "description": "Menú completo por solo 5€",
+          "validUntil": "30/06/2024",
+          "imageURL": "https://dummyimage.com/600x400/000/fff",
+          "conditions": "Válido solo de lunes a viernes. No acumulable con otras ofertas.",
+          "category": "Restaurantes"
+        }
+      ]
     }
-  ],
-  "categories": [
-    "Restaurantes",
-    "Entretenimiento",
-    "Moda",
-    "Electrónica",
-    "Salud y Belleza",
-    "Viajes",
-    "Deportes",
-    "Hogar"
   ]
 }

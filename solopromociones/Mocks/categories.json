@@ -1,0 +1,86 @@
+[
+    {
+        "id": 2,
+        "name": "Restaurantes",
+        "iconName": "fork.knife",
+        "colorString": "red"
+    },
+    {
+        "id": 3,
+        "name": "Cafeterías",
+        "iconName": "cup.and.saucer.fill",
+        "colorString": "brown"
+    },
+    {
+        "id": 4,
+        "name": "Entretenimiento",
+        "iconName": "ticket.fill",
+        "colorString": "purple"
+    },
+    {
+        "id": 5,
+        "name": "Compras",
+        "iconName": "bag.fill",
+        "colorString": "green"
+    },
+    {
+        "id": 6,
+        "name": "Deportes",
+        "iconName": "sportscourt.fill",
+        "colorString": "orange"
+    },
+    {
+        "id": 7,
+        "name": "Tecnología",
+        "iconName": "desktopcomputer",
+        "colorString": "blue"
+    },
+    {
+        "id": 8,
+        "name": "Viajes",
+        "iconName": "airplane",
+        "colorString": "cyan"
+    },
+    {
+        "id": 9,
+        "name": "Educación",
+        "iconName": "book.fill",
+        "colorString": "indigo"
+    },
+    {
+        "id": 10,
+        "name": "Salud y Belleza",
+        "iconName": "heart.fill",
+        "colorString": "pink"
+    },
+    {
+        "id": 11,
+        "name": "Hogar",
+        "iconName": "house.fill",
+        "colorString": "yellow"
+    },
+    {
+        "id": 12,
+        "name": "Música",
+        "iconName": "music.note",
+        "colorString": "purple"
+    },
+    {
+        "id": 13,
+        "name": "Arte",
+        "iconName": "paintpalette.fill",
+        "colorString": "orange"
+    },
+    {
+        "id": 14,
+        "name": "Mascotas",
+        "iconName": "pawprint.fill",
+        "colorString": "brown"
+    },
+    {
+        "id": 15,
+        "name": "Finanzas",
+        "iconName": "dollarsign.circle.fill",
+        "colorString": "green"
+    }
+]
