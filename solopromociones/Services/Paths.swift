@@ -1,7 +1,7 @@
 import Foundation
 
 struct API {
-    static let baseURL = "http://localhost:3001/api/v1"
+    static let baseURL = "http://192.168.20.35:3001/api/v1"
 }
 
 struct Endpoints {

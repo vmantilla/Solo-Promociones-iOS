@@ -18,7 +18,13 @@ struct DailyPromotionsView: View {
                 
                 CategoriesView(viewModel: viewModel)
                 
-                PromotionsView(viewModel: viewModel)
+                if isLoading {
+                    LoadingView()
+                } else if viewModel.promotions.isEmpty {
+                    EmptyPromotionsView()
+                } else {
+                    PromotionsView(viewModel: viewModel)
+                }
             }
             .navigationTitle("Promociones Diarias")
             .navigationBarTitleDisplayMode(.inline)
@@ -34,10 +40,6 @@ struct DailyPromotionsView: View {
                 Task {
                     await loadPromotionsForCurrentSelection()
                 }
-            }
-            
-            if isLoading {
-                LoadingView()
             }
         }
     }
@@ -108,5 +110,20 @@ struct DayButton: View {
             .cornerRadius(8)
         }
         .foregroundColor(isSelected ? .blue : .secondary)
+    }
+}
+
+struct EmptyPromotionsView: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            Text("No hay promociones disponibles.")
+                .font(.title2)
+                .foregroundColor(.secondary)
+                .padding()
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.systemBackground))
     }
 }
