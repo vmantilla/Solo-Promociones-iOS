@@ -72,43 +72,50 @@ struct HomeView: View {
     }
 
     private var headerSection: some View {
-        HStack(alignment: .bottom) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Buscar promociones en")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Buscar promociones en")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+            
+            HStack {
                 Button(action: { showCityPicker = true }) {
                     HStack {
                         Text(viewModel.selectedCity)
                             .font(.headline)
                             .fontWeight(.semibold)
+                            .lineLimit(1)
                         Image(systemName: "chevron.down")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                 }
-            }
-            Spacer()
-            Button(action: { showCategoryPicker = true }) {
-                HStack {
-                    if let category = viewModel.selectedCategory {
-                        Image(systemName: category.iconName)
-                            .foregroundColor(category.color)
-                        Text(category.name)
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                    } else {
-                        Text("Todas")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+                
+                Button(action: { showCategoryPicker = true }) {
+                    HStack {
+                        if let category = viewModel.selectedCategory {
+                            Image(systemName: category.iconName)
+                                .foregroundColor(category.color)
+                            Text(category.name)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .lineLimit(1)
+                        } else {
+                            Text("Todas")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                        }
+                        Image(systemName: "chevron.down")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
-                    Image(systemName: "chevron.down")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
                 }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
-        .padding(.bottom, 8)
+        .padding(.vertical, 8)
     }
 
     private var searchSection: some View {
